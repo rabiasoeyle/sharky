@@ -5,6 +5,7 @@ class MovableObject{
     height= 100;
     width= 150;
     imageCache = {};
+    currentImage = 0;
 
     loadImage(path){
     this.img = new Image();//new Image ist bereits vordefiniert und beschreibt einen image Tag <img>

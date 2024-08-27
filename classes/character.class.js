@@ -21,7 +21,7 @@ class Character extends MovableObject{
         '../img/Sharkie/IDLE/17.png',
         '../img/Sharkie/IDLE/18.png'
     ]
-    currentImage = 0;
+    // currentImage = 0;
     x = 50;
     y = 480 - this.height;
 
@@ -36,7 +36,7 @@ class Character extends MovableObject{
             let path = this.idleImages[i];
             this.img = this.imageCache[path];
             this.currentImage ++;
-        },1000)
+        },200)
     }
 
     jump(){
