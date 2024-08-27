@@ -6,6 +6,8 @@ class MovableObject{
     width= 150;
     imageCache = {};
     currentImage = 0;
+    speed = 0.16;
+    otherDirection = false;
 
     loadImage(path){
     this.img = new Image();//new Image ist bereits vordefiniert und beschreibt einen image Tag <img>
@@ -25,6 +27,8 @@ class MovableObject{
     }
 
     moveLeft(){
-
+        setInterval(()=>{
+            this.x -= this.speed;
+        },1000/60);
     }
 }
