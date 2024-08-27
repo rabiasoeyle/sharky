@@ -37,6 +37,37 @@ class Character extends MovableObject{
         'img/Sharkie/Swim/5.png',
         'img/Sharkie/Swim/6.png',
     ]
+    deadImagesPoisioned = [
+        'img/Sharkie/dead/Poisoned/1.png',
+        'img/Sharkie/dead/Poisoned/2.png',
+        'img/Sharkie/dead/Poisoned/3.png',
+        'img/Sharkie/dead/Poisoned/4.png',
+        'img/Sharkie/dead/Poisoned/5.png',
+        'img/Sharkie/dead/Poisoned/7.png',
+        'img/Sharkie/dead/Poisoned/9.png',
+        'img/Sharkie/dead/Poisoned/10.png',
+        'img/Sharkie/dead/Poisoned/11.png',
+        'img/Sharkie/dead/Poisoned/12.png',
+    ]
+    deadImagesElectro = [
+        'img/Sharkie/dead/Electro_shock/1.png',
+        'img/Sharkie/dead/Electro_shock/2.png',
+        'img/Sharkie/dead/Electro_shock/3.png',
+        'img/Sharkie/dead/Electro_shock/4.png',
+        'img/Sharkie/dead/Electro_shock/5.png',
+        'img/Sharkie/dead/Electro_shock/6.png',
+        'img/Sharkie/dead/Electro_shock/7.png',
+        'img/Sharkie/dead/Electro_shock/8.png',
+        'img/Sharkie/dead/Electro_shock/9.png',
+        'img/Sharkie/dead/Electro_shock/10.png',
+    ]
+    hurtImagesPoison = [
+        'img/Sharkie/Hurt/Poisoned/1.png',
+        'img/Sharkie/Hurt/Poisoned/2.png',
+        'img/Sharkie/Hurt/Poisoned/3.png',
+        'img/Sharkie/Hurt/Poisoned/4.png',
+        'img/Sharkie/Hurt/Poisoned/5.png',
+    ]
     x = 50;
     y = 480 - (this.height +50);
     world; 
@@ -45,7 +76,10 @@ class Character extends MovableObject{
     constructor(){
         super().loadImages(this.idleImages);
         this.loadImages(this.moveRightImages); 
-        this.loadImages(this.moveBackImages);       
+        this.loadImages(this.moveBackImages); 
+        this.loadImages(this.deadImagesPoisioned); 
+        this.loadImages(this.deadImagesElectro);
+        this.loadImages(this.hurtImagesPoison);     
         this.animate();
     }
 
@@ -84,6 +118,12 @@ class Character extends MovableObject{
         },1000/60)
         
             setInterval(() =>{
+                if(this.isHurt()){
+                    this.playAnimation(this.hurtImagesPoison);
+                }else
+                if(this.isDead()){
+                    this.playAnimation(this.deadImagesPoisioned);
+                }else
                 if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
                     this.playAnimation(this.moveRightImages)
                 }
@@ -93,7 +133,6 @@ class Character extends MovableObject{
             },200)
         
     }
-
 
     jump(){
 
