@@ -1,8 +1,9 @@
 class Pufferfish extends MovableObject{
     width= 60;
     height= 60; 
-    x = 220 + Math.random()*500;
-    y = 480 - this.height-50;
+    x = 220 + Math.random()*2000;
+    // y = 480 - this.height-50;
+    y = 50 + Math.random()*350;
     swimImages=[
         'img/Enemy/Pufferfish/Swim/1swim1.png',
         'img/Enemy/Pufferfish/Swim/1swim2.png',

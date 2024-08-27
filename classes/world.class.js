@@ -12,6 +12,18 @@ class World{
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
+        this.checkCollisions();
+
+    }
+
+    checkCollisions(){
+        setInterval(()=>{
+            this.level.enemies.forEach((enemy)=>{
+                if(this.character.isColliding(enemy)){
+                    console.log('Alarm Alarm')
+                }
+            })
+        },1000)
     }
 
     setWorld(){
@@ -40,20 +52,28 @@ class World{
     addToMap(mo){
         if(mo.img && mo.img.complete){
             if(mo.otherDirection){
-                this.ctx.save();
-                this.ctx.translate(mo.width, 0);
-                this.ctx.scale(-1,1);
-                mo.x = mo.x * -1; 
-                //mit translate wird das bild umgedreht, aber auch der startwert der x-achse wechselt seiten,
-                //um dies anzupassen wird * -1 gerechnet
+                this.flipImage(mo);
             }
-            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
-        //zuerst wird das img eingefügt, dann die position auf x und y achse und dann höhe und breite.
-        if(mo.otherDirection){
-            this.ctx.restore();
-            mo.x = mo.x * -1
+            mo.drawP(this.ctx);
+            mo.drawBorder(this.ctx);
+            if(mo.otherDirection){
+            this.flipImageBack(mo)  
+            }
+            // isColliding(mo);
         }
-        }
-        
+    }
+
+    flipImage(mo){
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1,1);
+        mo.x = mo.x * -1; 
+        //mit translate wird das bild umgedreht, aber auch der startwert der x-achse wechselt seiten,
+        //um dies anzupassen wird * -1 gerechnet
+    }
+
+    flipImageBack(mo){
+        this.ctx.restore();
+        mo.x = mo.x * -1
     }
 }

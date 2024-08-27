@@ -1,6 +1,6 @@
 class Character extends MovableObject{
-    height= 300;
-    width=200;
+    height= 100;
+    width=150;
     idleImages=[
         '../img/Sharkie/IDLE/1.png',
         '../img/Sharkie/IDLE/2.png',
@@ -20,20 +20,6 @@ class Character extends MovableObject{
         '../img/Sharkie/IDLE/16.png',
         '../img/Sharkie/IDLE/17.png',
         '../img/Sharkie/IDLE/18.png',
-        'img/Sharkie/Long_IDLE/I1.png',
-        'img/Sharkie/Long_IDLE/I2.png',
-        'img/Sharkie/Long_IDLE/I3.png',
-        'img/Sharkie/Long_IDLE/I4.png',
-        'img/Sharkie/Long_IDLE/I5.png',
-        'img/Sharkie/Long_IDLE/I6.png',
-        'img/Sharkie/Long_IDLE/I7.png',
-        'img/Sharkie/Long_IDLE/I8.png',
-        'img/Sharkie/Long_IDLE/I9.png',
-        'img/Sharkie/Long_IDLE/I10.png',
-        'img/Sharkie/Long_IDLE/I11.png',
-        'img/Sharkie/Long_IDLE/I12.png',
-        'img/Sharkie/Long_IDLE/I13.png',
-        'img/Sharkie/Long_IDLE/I14.png',
     ]
     moveRightImages = [
         'img/Sharkie/Swim/1.png',
@@ -52,7 +38,7 @@ class Character extends MovableObject{
         'img/Sharkie/Swim/6.png',
     ]
     x = 50;
-    y = 480 - this.height;
+    y = 480 - (this.height +50);
     world; 
     swimmingSound = new Audio ('./audio/idle.mp3')
 
@@ -84,23 +70,21 @@ class Character extends MovableObject{
                 this.world.camera_x = 0 - this.x +50
             }
             if(this.world.keyboard.up || this.world.keyboard.down){
-                if(this.world.keyboard.up && this.y > -100){
+                if(this.world.keyboard.up && this.y > 0){
                     this.y -= this.speed*30;
                     this.otherDirection = false;
                     this.swimmingSound.play();
                 }
-                if(this.world.keyboard.down && this.y < 250){
-                    this.y += this.speed*30;
+                if(this.world.keyboard.down && this.y < 380){
+                    this.y += this.speed *30;
                     this.otherDirection = false;
                     this.swimmingSound.play();
                 }
             }
-            
-            
-            
         },1000/60)
+        
             setInterval(() =>{
-                if(this.world.keyboard.right||this.world.keyboard.left){
+                if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
                     this.playAnimation(this.moveRightImages)
                 }
                 else{
