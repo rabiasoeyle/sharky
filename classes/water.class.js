@@ -1,7 +1,7 @@
 class Water extends MovableObject{
     y= 0;
     constructor(){
-        super().loadImage('../img/3.Background/Layers/5.Water/L1.png');
+        super().loadImage('../img/Background/Layers/Water/L1.png');
         this.x = 0;
         this.width=720;
         this.height=480;

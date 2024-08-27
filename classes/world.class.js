@@ -9,9 +9,9 @@ class World{
         new Water(),
     ]
     background =[
-        new BackgroundObjects('../img/3.Background/Layers/3.Fondo1/L1.png', 0),
-        new BackgroundObjects('../img/3.Background/Layers/3.Fondo1/D1.png', 0),
-        new BackgroundObjects('../img/3.Background/Layers/2.Floor/D1.png', 0),
+        new BackgroundObjects('../img/Background/Layers/Fondo1/L1.png', 0),
+        new BackgroundObjects('../img/Background/Layers/Fondo1/D1.png', 0),
+        new BackgroundObjects('../img/Background/Layers/Floor/D1.png', 0),
     ]
     ctx;//context
     canvas;
@@ -38,7 +38,10 @@ class World{
     }
 
     addToMap(mo){
-        this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+        if(mo.img && mo.img.complete){
+            this.ctx.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
         //zuerst wird das img eingefügt, dann die position auf x und y achse und dann höhe und breite.
+        }
+        
     }
 }
