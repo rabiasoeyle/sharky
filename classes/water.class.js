@@ -1,6 +1,6 @@
 class Water extends MovableObject{
     y= 0;
-    speed = 1;
+    speed = 0.25;
     constructor(path, x){
         super().loadImage(path);
         this.x = x;

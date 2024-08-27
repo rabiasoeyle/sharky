@@ -19,7 +19,21 @@ class Character extends MovableObject{
         '../img/Sharkie/IDLE/15.png',
         '../img/Sharkie/IDLE/16.png',
         '../img/Sharkie/IDLE/17.png',
-        '../img/Sharkie/IDLE/18.png'
+        '../img/Sharkie/IDLE/18.png',
+        'img/Sharkie/Long_IDLE/I1.png',
+        'img/Sharkie/Long_IDLE/I2.png',
+        'img/Sharkie/Long_IDLE/I3.png',
+        'img/Sharkie/Long_IDLE/I4.png',
+        'img/Sharkie/Long_IDLE/I5.png',
+        'img/Sharkie/Long_IDLE/I6.png',
+        'img/Sharkie/Long_IDLE/I7.png',
+        'img/Sharkie/Long_IDLE/I8.png',
+        'img/Sharkie/Long_IDLE/I9.png',
+        'img/Sharkie/Long_IDLE/I10.png',
+        'img/Sharkie/Long_IDLE/I11.png',
+        'img/Sharkie/Long_IDLE/I12.png',
+        'img/Sharkie/Long_IDLE/I13.png',
+        'img/Sharkie/Long_IDLE/I14.png',
     ]
     moveRightImages = [
         'img/Sharkie/Swim/1.png',
@@ -53,37 +67,49 @@ class Character extends MovableObject{
     
         setInterval(()=>{
             // Stoppe den Sound nur, wenn keine Bewegung erfolgt
-            if (!this.world.keyboard.right && !this.world.keyboard.left) {
+            if (!this.world.keyboard.right && !this.world.keyboard.left && !this.world.keyboard.up && !this.world.keyboard.down) {
                 this.swimmingSound.pause();
             }
-            if(this.world.keyboard.right && this.x < this.world.level.levelEnd_x){
+            if(this.world.keyboard.right || this.world.keyboard.left){
+                if(this.world.keyboard.right && this.x < this.world.level.levelEnd_x){
                 this.x += this.speed*30;
                 this.otherDirection = false;
                 this.swimmingSound.play();
+                }
+                if(this.world.keyboard.left && this.x > 0){
+                    this.x -= this.speed*30;
+                    this.otherDirection = true;
+                    this.swimmingSound.play();
+                }
+                this.world.camera_x = 0 - this.x +50
             }
-            if(this.world.keyboard.left && this.x > 0){
-                this.x -= this.speed*30;
-                this.otherDirection = true;
-                this.swimmingSound.play();
+            if(this.world.keyboard.up || this.world.keyboard.down){
+                if(this.world.keyboard.up && this.y > -100){
+                    this.y -= this.speed*30;
+                    this.otherDirection = false;
+                    this.swimmingSound.play();
+                }
+                if(this.world.keyboard.down && this.y < 250){
+                    this.y += this.speed*30;
+                    this.otherDirection = false;
+                    this.swimmingSound.play();
+                }
             }
-            this.world.camera_x = 0 - this.x +50
+            
+            
             
         },1000/60)
             setInterval(() =>{
                 if(this.world.keyboard.right||this.world.keyboard.left){
-                    let i = this.currentImage % this.moveRightImages.length;
-                    let path = this.moveRightImages[i];
-                    this.img = this.imageCache[path];
-                    this.currentImage ++;}
-                else{
-                    let i = this.currentImage % this.idleImages.length;
-                    let path = this.idleImages[i];
-                    this.img = this.imageCache[path];
-                    this.currentImage ++;
+                    this.playAnimation(this.moveRightImages)
                 }
-            },100)
+                else{
+                    this.playAnimation(this.idleImages)
+                }
+            },200)
         
     }
+
 
     jump(){
 
