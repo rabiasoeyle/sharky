@@ -5,7 +5,7 @@ class World{
     canvas;
     keyboard;
     camera_x = 0;
-    statusbar = [new Heart()];
+    statusbar = [new Heart(), new Coins(), new Poison()];
     throwable = [];
 
     constructor(canvas, keyboard){
@@ -36,7 +36,7 @@ class World{
             this.level.enemies.forEach((enemy)=>{
                 if(this.character.isColliding(enemy)){
                     this.character.hit();
-                    this.statusbar.heart.setPercentage(this.character.energy);
+                    this.statusbar[0].setPercentage(this.character.energy);
                 }
             })
     }
@@ -44,6 +44,7 @@ class World{
     setWorld(){
         this.character.world = this; 
         //damit der charakter auf die variablen, die in der game.js der world übergeben werden zugreufen kann, z.B. keypress
+        // this.endboss.world = this;
     }
 
     draw(){
@@ -53,7 +54,7 @@ class World{
         this.addObjectToMap(this.level.background);
         this.addObjectToMap(this.level.enemies);
         this.ctx.translate(-this.camera_x, 0);//stop camera before statusbar
-        this.addToMap(this.statusbar);
+        this.addObjectToMap(this.statusbar);
         // this.addToMap(this.statusbar.coins);
         // this.addToMap(this.statusbar.poison);
         this.ctx.translate(this.camera_x, 0);//start camera after statusbar

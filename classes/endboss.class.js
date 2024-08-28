@@ -30,16 +30,25 @@ class Endboss extends MovableObject{
     width= 400;
     y=-20;
     x = 2900;
-
+    hadFirstContact = false;
     constructor(){
         super().loadImages(this.introduceEndboss);
         this.loadImages(this.floating);
         this.animateIntro();
     }
     animateIntro(){
-        // this.playAnimation(this.introduceEndboss);
+        let i = 0;
         setInterval(() =>{
-            this.playAnimation(this.floating);
+            if(i<10){
+                this.playAnimation(this.introduceEndboss);
+            }else{
+                this.playAnimation(this.floating);
+            }
+            i++;
+            // if(world.character.x > 2400 && !this.hadFirstContact){
+            //     i=0;
+            //     this.hadFirstContact=true;
+            // }
         },200)
     }
 }

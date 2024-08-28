@@ -18,7 +18,7 @@ class Heart extends Statusbar{
         this.heartPercentage = heartPercentage;
         let path = this.heartImage[this.resolveHeartImageIndex()];
         this.img = this.imageCache[path];
-    }
+    } 
 
     resolveHeartImageIndex(){
         if(this.heartPercentage == 100){

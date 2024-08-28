@@ -131,7 +131,6 @@ class Character extends MovableObject{
                     this.playAnimation(this.idleImages)
                 }
             },200)
-        
     }
 
     jump(){
