@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/img/Sharkie/IDLE/1.png">
+    <link rel="icon" type="image/x-icon" href="img/Sharkie/IDLE/1.png">
     <title>Sharkie</title>
     <script type="text/javascript" src="./classes/world.class.js"></script>
     <script type="text/javascript" src="./classes/drawable.class.js"></script>
@@ -26,9 +26,16 @@
     <script type="text/javascript" src="./js/game.js"></script>
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onload=" init()">
+<body onload="init()">
     <h1>Sharkie</h1>
-    <canvas id="canvas"width="720" height="480">
+    <div id="startPage" class="start-page">
+        <div>
+            <img class="sharkie"src="img/Sharkie/Attack/Bubble trap/op2/1.png">
+            <img class="final-enemy"src="img/Enemy/FinalEnemy/Attack/1.png">
+        </div>
+        <button class="button"onclick="start()">Start Level</button>
+    </div>
+    <canvas id="canvas"width="720" height="480" class="d-none">
 
     </canvas>
 </body>

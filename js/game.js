@@ -47,7 +47,14 @@ document.addEventListener('keyup', (event)=>{
 )
 
 function init(){
+   
+}
+
+function start(){ 
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    let start = document.getElementById('startPage');
+    start.classList.add('d-none');
+    canvas.classList.remove('d-none');
 }
     

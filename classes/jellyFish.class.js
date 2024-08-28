@@ -4,10 +4,10 @@ class Jellyfish extends MovableObject{
     x = 200 + Math.random()*500;
     y = 480 - this.height;
     swimImage = [
-        '../img/Enemy/Jellyfish/Super-dangerous/Pink1.png',
-        '../img/Enemy/Jellyfish/Super-dangerous/Pink2.png',
-        '../img/Enemy/Jellyfish/Super-dangerous/Pink3.png',
-        '../img/Enemy/Jellyfish/Super-dangerous/Pink4.png'
+        'img/Enemy/Jellyfish/Super-dangerous/Pink1.png',
+        'img/Enemy/Jellyfish/Super-dangerous/Pink2.png',
+        'img/Enemy/Jellyfish/Super-dangerous/Pink3.png',
+        'img/Enemy/Jellyfish/Super-dangerous/Pink4.png'
     ]
     // currentImage = 0;
 

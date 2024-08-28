@@ -5,12 +5,52 @@ body{
     justify-content: center;
     background-image: url("img/Background/Layers/Water/D1.png");
     font-family:'Luckiest', Arial, Helvetica, sans-serif;
-    height:90vh;
 }
 canvas{
     background-color:black;
+    display:block;
 }
 h1{
     font-size: 50px;
     text-shadow: 2px,2px,2px
+}
+.start-page{
+    width:720px;
+    height:480px;
+    background-image: url("img/Background/Layers/Water/D1.png");
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.d-none{
+    display:none;
+}
+.sharkie{
+    width:150px;
+    height:150px;
+}
+.final-enemy{
+    width:350px;
+    height:300px;
+}
+.button{
+    border-radius: 10px;
+    border-color: blue;
+    color:bisque;
+    background-color: blue;
+}
+@media only screen and (max-width:720px){
+    canvas{
+        width:100%;
+    }
+}
+
+@media only screen and (max-height:480px){
+    canvas{
+        height:95vH;
+    }
+    h1{
+        display:none;
+    }
 }
