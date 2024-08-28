@@ -12,6 +12,14 @@ class Heart extends Statusbar{
     constructor(){
         super();
         this.loadImages(this.heartImage);
-        this.setPercentage(this.heartImage, this.percentage);
+        // this.setPercentageHeart();
     }
+
+    // setPercentageHeart(percentage){
+    //     this.percentage = percentage;
+    //     // this.coinPercentage = coinPercentage;
+    //     // this.poisonPercentage = poisonPercentage;
+    //     let path = this.heartImage[this.resolveImageIndex()];
+    //     this.img = this.imageCache[path];
+    // }
 }

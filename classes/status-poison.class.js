@@ -12,6 +12,6 @@ class Poison extends Statusbar{
     constructor(){
         super();
         this.loadImages(this.poisonImage);
-        this.setPercentage(this.poisonImage, this.percentage);
+        // this.setPercentage(this.poisonImage, this.percentage);
     }
 }
