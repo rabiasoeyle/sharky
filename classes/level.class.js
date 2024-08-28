@@ -2,6 +2,8 @@ class Level{
     enemies;
     water;
     background;
+    poison;
+    coins;
     levelEnd_x = 2880;
     
     constructor(enemies, water, background){

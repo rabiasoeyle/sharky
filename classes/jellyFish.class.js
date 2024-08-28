@@ -9,7 +9,6 @@ class Jellyfish extends MovableObject{
         'img/Enemy/Jellyfish/Super-dangerous/Pink3.png',
         'img/Enemy/Jellyfish/Super-dangerous/Pink4.png'
     ]
-    // currentImage = 0;
 
     constructor(){
         super().loadImages(this.swimImage);

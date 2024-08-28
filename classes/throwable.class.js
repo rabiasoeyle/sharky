@@ -13,19 +13,24 @@ class ThrowableObject extends MovableObject{
         'img/Marcadores/Posión/Animada/7.png',
         'img/Marcadores/Posión/Animada/8.png',
     ]
+    poisonBubbles = [
+        'img/Sharkie/Attack/Bubble trap/PoisonedBubble.png',
+
+    ]
 
     constructor(x,y){
         super();
         this.x = x;
         this.y = y;
         this.loadImages(this.poisonImages);
+        this.loadImages(this.poisonBubbles)
         this.animate();
         this.throw();
     }
 
     animate(){
         setInterval(() =>{
-            this.playAnimation(this.poisonImages);
+            this.playAnimation(this.poisonBubbles);
         },200)
     }
 

@@ -68,6 +68,16 @@ class Character extends MovableObject{
         'img/Sharkie/Hurt/Poisoned/4.png',
         'img/Sharkie/Hurt/Poisoned/5.png',
     ]
+    bulbAttack = [
+        'img/Sharkie/Attack/Bubble trap/For Whale/1.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/2.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/3.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/4.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/5.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/6.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/7.png',
+        'img/Sharkie/Attack/Bubble trap/For Whale/8.png',
+    ]
     x = 50;
     y = 480 - (this.height +50);
     world; 
@@ -79,7 +89,8 @@ class Character extends MovableObject{
         this.loadImages(this.moveBackImages); 
         this.loadImages(this.deadImagesPoisioned); 
         this.loadImages(this.deadImagesElectro);
-        this.loadImages(this.hurtImagesPoison);     
+        this.loadImages(this.hurtImagesPoison); 
+        this.loadImages(this.bulbAttack);    
         this.animate();
     }
 
@@ -118,6 +129,10 @@ class Character extends MovableObject{
         },1000/60)
         
             setInterval(() =>{
+                if(this.world.keyboard.d){
+                    this.otherDirection = false;
+                    this.playAnimation(this.bulbAttack);
+                }else
                 if(this.isHurt()){
                     this.playAnimation(this.hurtImagesPoison);
                 }else
@@ -130,7 +145,7 @@ class Character extends MovableObject{
                 else{
                     this.playAnimation(this.idleImages)
                 }
-            },200)
+            },100)
     }
 
     jump(){

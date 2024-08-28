@@ -27,8 +27,8 @@ class World{
 
     checkThrowableObject(){
         if(this.keyboard.d == true){
-            let poisonBulb = new ThrowableObject(this.character.x +50 , this.character.y +50)
-            this.throwable.push(poisonBulb)
+            let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +75)
+            this.throwable.push(poisonBulb);
         }
     }
 
