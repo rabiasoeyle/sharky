@@ -3,7 +3,14 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-image: url("img/Background/Layers/Water/D1.png");
+    font-family:'Luckiest', Arial, Helvetica, sans-serif;
+    height:90vh;
 }
 canvas{
     background-color:black;
+}
+h1{
+    font-size: 50px;
+    text-shadow: 2px,2px,2px
 }

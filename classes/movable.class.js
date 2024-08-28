@@ -1,28 +1,24 @@
-class MovableObject{
-    x = 100;
-    y = 250;
-    img;
-    height= 100;
-    width= 150;
-    imageCache = {};
-    currentImage = 0;
+class MovableObject extends DrawableObject{
     speed = 0.16;
+    speedY =0.04;
     otherDirection = false;
     energy = 100;
     lastHit = 0;
+    acceleration = 4.5;
 
-    loadImage(path){
-    this.img = new Image();//new Image ist bereits vordefiniert und beschreibt einen image Tag <img>
-    this.img.src = path;
+    applyGravity(){
+        setInterval(()=>{
+            if( this.isAboveGround()|| this.speedY > 0){
+                this.y -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+        }, 1000 / 16);
     }
 
-    loadImages(array){
-        array.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        })
+    isAboveGround(){
+        return this.y <400;
     }
+
 
     moveRight(){
         console.log('Moving right');
@@ -39,22 +35,6 @@ class MovableObject{
                     let path = images[i];
                     this.img = this.imageCache[path];
                     this.currentImage ++;
-    }
-
-    drawP(ctx){
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        //zuerst wird das img eingefügt, dann die position auf x und y achse und dann höhe und breite.
-    }
-
-    drawBorder(ctx){
-        if(this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish){
-            //es werden nur die border für sharkie und die fische gezeichnet
-            ctx.beginPath();
-            ctx.lineWidth = "2";
-            ctx.strokeStyle = "blue";
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        } 
     }
     
     isColliding(mo){

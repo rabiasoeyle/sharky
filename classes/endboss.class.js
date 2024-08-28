@@ -29,11 +29,11 @@ class Endboss extends MovableObject{
     height = 500;
     width= 400;
     y=-20;
+    x = 2900;
 
     constructor(){
         super().loadImages(this.introduceEndboss);
         this.loadImages(this.floating);
-        this.x = 600;
         this.animateIntro();
     }
     animateIntro(){

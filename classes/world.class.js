@@ -4,7 +4,9 @@ class World{
     ctx;//context
     canvas;
     keyboard;
-    camera_x = 0
+    camera_x = 0;
+    statusbar = new Statusbar();
+    throwable = [];
 
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
@@ -12,18 +14,31 @@ class World{
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
+        this.checkAll();
 
     }
 
-    checkCollisions(){
+    checkAll(){
         setInterval(()=>{
+           this.checkCollisions();
+           this.checkThrowableObject();
+        },100)
+    }
+
+    checkThrowableObject(){
+        if(this.keyboard.d == true){
+            let poisonBulb = new ThrowableObject(this.character.x +50 , this.character.y +50)
+            this.throwable.push(poisonBulb)
+        }
+    }
+
+    checkCollisions(){
             this.level.enemies.forEach((enemy)=>{
                 if(this.character.isColliding(enemy)){
                     this.character.hit();
+                    this.statusbar.setPercentage(this.character.energy);
                 }
             })
-        },100)
     }
 
     setWorld(){
@@ -37,6 +52,10 @@ class World{
         this.addObjectToMap(this.level.water);
         this.addObjectToMap(this.level.background);
         this.addObjectToMap(this.level.enemies);
+        this.ctx.translate(-this.camera_x, 0);//stop camera before statusbar
+        this.addToMap(this.statusbar);
+        this.ctx.translate(this.camera_x, 0);//start camera after statusbar
+        this.addObjectToMap(this.throwable);
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
