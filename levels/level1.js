@@ -37,6 +37,31 @@ let level1 = new Level(
         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 2880),
         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 2880),
         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 2880),
+    ],
+    [
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
+    ],
+    [
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
+        new CollectableCoins(),
     ]
-
 );

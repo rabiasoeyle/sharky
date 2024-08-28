@@ -53,10 +53,10 @@ class World{
         this.addObjectToMap(this.level.water);
         this.addObjectToMap(this.level.background);
         this.addObjectToMap(this.level.enemies);
+        this.addObjectToMap(this.level.poisons);
+        this.addObjectToMap(this.level.coins);
         this.ctx.translate(-this.camera_x, 0);//stop camera before statusbar
         this.addObjectToMap(this.statusbar);
-        // this.addToMap(this.statusbar.coins);
-        // this.addToMap(this.statusbar.poison);
         this.ctx.translate(this.camera_x, 0);//start camera after statusbar
         this.addObjectToMap(this.throwable);
         this.addToMap(this.character);
