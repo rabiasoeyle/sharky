@@ -22,7 +22,8 @@ class World{
         setInterval(()=>{
            this.checkCollisions();
            this.checkCollisionsWCoins();
-           this.checkCollisionsWPoison()
+           this.checkCollisionsWPoison();
+           this.checkCollisionsWPoisonAndEnemy();
            this.checkThrowableObject();
         },100)
     }
@@ -58,6 +59,17 @@ checkCollisionsWPoison(){
             this.deletePoisonFromMap(index);
         }
     })
+}
+checkCollisionsWPoisonAndEnemy() {
+    this.throwable.forEach((poison, poisonIndex) => {
+        this.level.enemies.forEach((enemy, enemyIndex) => {
+            if (poison.isColliding(enemy)) {
+                console.log('Kollision erkannt!');  // Debug-Log, um die Kollision zu überprüfen
+                this.level.enemies.splice(enemyIndex, 1);  // Entfernt den getroffenen Feind
+                this.throwable.splice(poisonIndex, 1);  // Entfernt das Giftobjekt nach der Kollision
+            }
+        });
+    });
 }
 deleteCoinFromMap(index) {
     this.level.coins.splice(index, 1); // Entfernt die Münze aus dem Array
