@@ -21,6 +21,8 @@ class World{
     checkAll(){
         setInterval(()=>{
            this.checkCollisions();
+           this.checkCollisionsWCoins();
+           this.checkCollisionsWPoison()
            this.checkThrowableObject();
         },100)
     }
@@ -40,6 +42,28 @@ class World{
                 }
             })
     }
+    checkCollisionsWCoins(){
+        this.level.coins.forEach((coin, index)=>{
+            if(this.character.isColliding(coin)){
+                this.statusbar[1].setAmountCoins(1);
+                this.deleteCoinFromMap(index);
+            }
+        })
+}
+checkCollisionsWPoison(){
+    this.level.poisons.forEach((poison, index)=>{
+        if(this.character.isColliding(poison)){
+            this.statusbar[2].setAmountPoison(1);
+            this.deletePoisonFromMap(index);
+        }
+    })
+}
+deleteCoinFromMap(index) {
+    this.level.coins.splice(index, 1); // Entfernt die Münze aus dem Array
+}
+deletePoisonFromMap(index) {
+    this.level.poisons.splice(index, 1); // Entfernt die Münze aus dem Array
+}
 
     setWorld(){
         this.character.world = this; 

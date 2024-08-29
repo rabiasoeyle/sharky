@@ -7,15 +7,18 @@ class Heart extends Statusbar{
         'img/Marcadores/orange/80_heart.png',
         'img/Marcadores/orange/100_heart.png',
     ];
-    percentage = 100;
+    heartPercentage;
 
     constructor(){
         super().loadImages(this.heartImage);
         this.setPercentage();
+        this.heartPercentage = 100;
+        let path = this.heartImage[this.resolveHeartImageIndex()];
+        this.img = this.imageCache[path];
     }
 
-    setPercentage(heartPercentage){
-        this.heartPercentage = heartPercentage;
+    setPercentage(energy){
+        this.heartPercentage = energy;
         let path = this.heartImage[this.resolveHeartImageIndex()];
         this.img = this.imageCache[path];
     } 
@@ -23,13 +26,13 @@ class Heart extends Statusbar{
     resolveHeartImageIndex(){
         if(this.heartPercentage == 100){
             return 5;
-        }else if (this.heartPercentage > 80){
+        }else if (this.heartPercentage >= 80){
             return 4;
-        }else if (this.heartPercentage > 60){
+        }else if (this.heartPercentage >= 60){
             return 3;
-        }else if (this.heartPercentage > 40){
+        }else if (this.heartPercentage >= 40){
             return 2;
-        }else if (this.heartPercentage > 20){
+        }else if (this.heartPercentage >= 20){
             return 1;
         }else{
             return 0;}

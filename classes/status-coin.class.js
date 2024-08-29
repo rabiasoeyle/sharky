@@ -7,32 +7,34 @@ class Coins extends Statusbar{
         'img/Marcadores/orange/80_coin.png',
         'img/Marcadores/orange/100_coin.png',
     ]
-    coinsPercentage = 0;
+    coinsAmount;
     y=90;
     constructor(){
         super();
         this.loadImages(this.coinsImage); 
         this.setAmountCoins();
+        this.coinsAmount = 0;
     }
     setAmountCoins(amount){
-        this.coinPercentage = amount * 20;
-        if(this.coinPercentage >= 100){
-            this.coinPercentage = 100;
+        this.coinsAmount += amount * 10;
+        if(this.coinsAmount >= 100){
+            this.coinsAmount = 100;
         }
+        console.log('coins:'+this.coinsAmount)
         let path = this.coinsImage[this.resolveCoinsImageIndex()];
         this.img = this.imageCache[path];
     }
 
     resolveCoinsImageIndex(){
-        if(this.coinPercentage == 100){
+        if(this.coinsAmount == 100){
             return 5;
-        }else if (this.coinPercentage > 80){
+        }else if (this.coinsAmount >= 80){
             return 4;
-        }else if (this.coinPercentage > 60){
+        }else if (this.coinsAmount >= 60){
             return 3;
-        }else if (this.coinPercentage > 40){
+        }else if (this.coinsAmount >= 40){
             return 2;
-        }else if (this.coinPercentage > 20){
+        }else if (this.coinsAmount >= 20){
             return 1;
         }else{
             return 0;}

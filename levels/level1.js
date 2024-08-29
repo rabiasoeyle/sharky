@@ -48,6 +48,8 @@ let level1 = new Level(
         new CollectablePoison(),
         new CollectablePoison(),
         new CollectablePoison(),
+        new CollectablePoison(),
+        new CollectablePoison(),
     ],
     [
         new CollectableCoins(),
@@ -55,9 +57,7 @@ let level1 = new Level(
         new CollectableCoins(),
         new CollectableCoins(),
         new CollectableCoins(),
-        new CollectableCoins(),
-        new CollectableCoins(),
-        new CollectableCoins(),
+
         new CollectableCoins(),
         new CollectableCoins(),
         new CollectableCoins(),
