@@ -25,9 +25,17 @@ class World{
            this.checkCollisionsWPoison();
            this.checkCollisionsWPoisonAndEnemy();
            this.checkThrowableObject();
+           this.checkLivingCharacter();
         },100)
     }
-
+    checkLivingCharacter(){
+        if(this.character.energy == 0){
+            this.gameOver();
+        }
+    }
+    gameOver(){
+        console.log('Game Over')
+    }
     checkThrowableObject(){
         if(this.keyboard.d == true && this.statusbar[2].poisonPercentage > 0){
                 let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
@@ -36,7 +44,7 @@ class World{
                 this.statusbar[2].deletePoisonAmount(1);
         }
         this.throwable.forEach((poisonBulb, index) => {
-            if (poisonBulb.y >= 400 || ((poisonBulb.x - poisonBulb.startX) >= 600)) {
+            if (poisonBulb.y >= 480 || ((poisonBulb.x - poisonBulb.startX) >= 600)) {
                 this.throwable.splice(index, 1);  // Giftbirne aus dem Array entfernen
             }})
     }
@@ -44,28 +52,38 @@ class World{
     checkCollisionsWPoisonAndEnemy() {
     this.throwable.forEach((poison, poisonIndex) => {
         this.level.enemies.forEach((enemy, enemyIndex) => {
-            if (poison.isColliding(enemy)) {
-                console.log('Kollision erkannt!');  // Debug-Log, um die Kollision zu überprüfen
-                if(enemy.type == "endboss" && enemy.livePoints > 0){
-                    enemy.livePoints -=1;
-                    this.hurtEnemy();
-                }else if(enemy.type == "jellyfish"){
-                    this.hurtEnemy();
+            if (poison.isColliding(enemy)){
+                if(enemy.livePoints > 0) {
+                    if(enemy.type == "endboss"){
+                        enemy.livePoints -= 1;
+                        this.level.enemies[enemyIndex].hurtBossEnemy();
+                    }else if(enemy.type == "jellyfish"){
+                        enemy.livePoints -= 1;
+                    }else if(enemy.type == "pufferfish"){
+                        enemy.livePoints -= 1;
+                    }this.throwable.splice(poisonIndex, 1); 
+                }if(enemy.livePoints == 0){
+                    if(enemy.type == "jellyfish"){
+                        this.level.enemies[enemyIndex].jellyIsDead()
+                        setTimeout(() => {
+                            this.level.enemies.splice(enemyIndex, 1);
+                        }, 1000); 
+                    }else if(enemy.type == "pufferfish"){
+                            this.level.enemies[enemyIndex].pufferIsDead()
+                            setTimeout(() => {
+                                this.level.enemies.splice(enemyIndex, 1);
+                            }, 1000); 
+                    }else if(enemy.type == "endboss"){
+                            this.level.enemies[enemyIndex].endBossIsDead();
+                            this.gameEnds();
+                    }
+                   
                 }
-                else{
-                 this.level.enemies.splice(enemyIndex, 1);  // Entfernt den getroffenen Feind
-                
-                }
-                this.throwable.splice(poisonIndex, 1);  // Entfernt das Giftobjekt nach der Kollision   
-                
-            }
-        });
-    });
-}
-
-hurtEnemy(){
-    console.log('big enemy');
-}
+            this.throwable.splice(poisonIndex, 1);
+    }})})};
+    gameEnds(){
+        console.log('won');
+    }
     checkCollisions(){
             this.level.enemies.forEach((enemy)=>{
                 if(enemy.type == "pufferfish"){

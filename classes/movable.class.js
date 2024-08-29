@@ -89,4 +89,17 @@ class MovableObject extends DrawableObject{
     isDead(){
         return this.energy == 0;
     }
+    jellyIsDead(){
+        return this.livePoints = 0;
+    }
+    pufferIsDead(){
+        return this.livePoints = 0;
+    }
+    endBossIsDead(){
+        return this.livePoints = 0;
+    }
+    hurtBossEnemy(){
+        console.log('big enemy');
+    }
+
 }

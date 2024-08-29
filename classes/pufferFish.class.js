@@ -11,21 +11,30 @@ class Pufferfish extends MovableObject{
         'img/Enemy/Pufferfish/Swim/1swim4.png',
         'img/Enemy/Pufferfish/Swim/1swim5.png'
     ];
+    deadPoison = [
+        'img/Enemy/Pufferfish/DIE/2.2.png',
+        'img/Enemy/Pufferfish/DIE/2.3.png',
+        'img/Enemy/Pufferfish/DIE/2.png',
+    ]
     type;
-    livePoints = 0;
+    livePoints = 1;
     
     constructor(){
         super().loadImages(this.swimImages);
+        this.loadImages(this.deadPoison);
         this.speed = 0.16 + Math.random() *0.25;//damit die Fische unterschiedlich schnell laufen
         this.animateSwim();
         this.type = "pufferfish"
-        this.livePoints = 0;
+        this.livePoints = 1;
     }
     animateSwim(){
         this.moveLeft();
         setInterval(() =>{
-            this.playAnimation(this.swimImages);
-        },200)
+            if(this.livePoints == 0){
+                this.playAnimation(this.deadPoison);
+            }else{
+                this.playAnimation(this.swimImages);
+    }},200)
     }
    
 }
