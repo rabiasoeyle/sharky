@@ -53,8 +53,18 @@ class MovableObject extends DrawableObject{
     }
 
     hit(){
-        this.energy -= 5;
+        this.energy -= 2;
         console.log('Alarm Alarm', this.energy)
+                    if(this.energy <= 0){
+                        this.energy = 0;
+                        this.isDead();
+                    }else{
+                        this.lastHit = new Date().getTime();
+                    }
+    }
+    hitByJelly(){
+        this.energy -= 5;
+        console.log('Alarm Jelly', this.energy)
                     if(this.energy <= 0){
                         this.energy = 0;
                         this.isDead();

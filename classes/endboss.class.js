@@ -31,10 +31,14 @@ class Endboss extends MovableObject{
     y=-20;
     x = 2900;
     hadFirstContact = false;
+    type;
+    livePoints = 2;
     constructor(){
         super().loadImages(this.introduceEndboss);
         this.loadImages(this.floating);
         this.animateIntro();
+        this.type = "endboss";
+        this.livePoints=2;
     }
     animateIntro(){
         let i = 0;

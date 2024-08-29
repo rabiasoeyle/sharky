@@ -30,18 +30,56 @@ class World{
 
     checkThrowableObject(){
         if(this.keyboard.d == true && this.statusbar[2].poisonPercentage > 0){
-                let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +75)
+                let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
+                poisonBulb.startX = poisonBulb.x;
                 this.throwable.push(poisonBulb);
                 this.statusbar[2].deletePoisonAmount(1);
         }
+        this.throwable.forEach((poisonBulb, index) => {
+            if (poisonBulb.y >= 400 || ((poisonBulb.x - poisonBulb.startX) >= 600)) {
+                this.throwable.splice(index, 1);  // Giftbirne aus dem Array entfernen
+            }})
     }
+   
+    checkCollisionsWPoisonAndEnemy() {
+    this.throwable.forEach((poison, poisonIndex) => {
+        this.level.enemies.forEach((enemy, enemyIndex) => {
+            if (poison.isColliding(enemy)) {
+                console.log('Kollision erkannt!');  // Debug-Log, um die Kollision zu überprüfen
+                if(enemy.type == "endboss" && enemy.livePoints > 0){
+                    enemy.livePoints -=1;
+                    this.hurtEnemy();
+                }else if(enemy.type == "jellyfish"){
+                    this.hurtEnemy();
+                }
+                else{
+                 this.level.enemies.splice(enemyIndex, 1);  // Entfernt den getroffenen Feind
+                
+                }
+                this.throwable.splice(poisonIndex, 1);  // Entfernt das Giftobjekt nach der Kollision   
+                
+            }
+        });
+    });
+}
 
+hurtEnemy(){
+    console.log('big enemy');
+}
     checkCollisions(){
             this.level.enemies.forEach((enemy)=>{
-                if(this.character.isColliding(enemy)){
+                if(enemy.type == "pufferfish"){
+                    if(this.character.isColliding(enemy)){
                     this.character.hit();
                     this.statusbar[0].setPercentage(this.character.energy);
+                    }
+                }else if(enemy.type == "jellyfish"){
+                    if(this.character.isColliding(enemy)){
+                        this.character.hitByJelly();
+                        this.statusbar[0].setPercentage(this.character.energy);
+                        }
                 }
+                
             })
     }
     checkCollisionsWCoins(){
@@ -60,17 +98,7 @@ checkCollisionsWPoison(){
         }
     })
 }
-checkCollisionsWPoisonAndEnemy() {
-    this.throwable.forEach((poison, poisonIndex) => {
-        this.level.enemies.forEach((enemy, enemyIndex) => {
-            if (poison.isColliding(enemy)) {
-                console.log('Kollision erkannt!');  // Debug-Log, um die Kollision zu überprüfen
-                this.level.enemies.splice(enemyIndex, 1);  // Entfernt den getroffenen Feind
-                this.throwable.splice(poisonIndex, 1);  // Entfernt das Giftobjekt nach der Kollision
-            }
-        });
-    });
-}
+
 deleteCoinFromMap(index) {
     this.level.coins.splice(index, 1); // Entfernt die Münze aus dem Array
 }

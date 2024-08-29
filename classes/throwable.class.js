@@ -31,14 +31,14 @@ class ThrowableObject extends MovableObject{
         setInterval(() =>{
             this.playAnimation(this.poisonBubbles);
         },200)
+        
     }
 
     throw(){
-        this.speedY = 30;
-        this.applyGravity();
+        // this.speedY = 0;
+        // this.applyGravity();
         setInterval(()=>{
             this.x +=10; 
         },25);
-        
     }
 }
