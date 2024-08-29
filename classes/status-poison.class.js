@@ -23,6 +23,14 @@ class Poison extends Statusbar{
         let path = this.poisonImage[this.resolvePoisonImageIndex()];
         this.img = this.imageCache[path];
     }
+    deletePoisonAmount(amount){
+        this.poisonPercentage -= amount * 10;
+        if(this.poisonPercentage < 0){
+            this.poisonPercentage = 0;
+        }
+        let path = this.poisonImage[this.resolvePoisonImageIndex()];
+        this.img = this.imageCache[path];
+    }
 
     resolvePoisonImageIndex(){
         if(this.poisonPercentage == 100){
@@ -38,4 +46,6 @@ class Poison extends Statusbar{
         }else{
             return 0;}
     }
+
+    
 }

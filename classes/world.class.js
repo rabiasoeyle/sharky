@@ -31,6 +31,7 @@ class World{
         if(this.keyboard.d == true && this.statusbar[2].poisonPercentage > 0){
                 let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +75)
                 this.throwable.push(poisonBulb);
+                this.statusbar[2].deletePoisonAmount(1);
         }
     }
 
