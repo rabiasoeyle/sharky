@@ -7,7 +7,7 @@ class Coins extends Statusbar{
         'img/Marcadores/orange/80_coin.png',
         'img/Marcadores/orange/100_coin.png',
     ]
-    coinsAmount;
+    coinsAmount = 0;
     y=90;
     constructor(){
         super();
@@ -20,7 +20,6 @@ class Coins extends Statusbar{
         if(this.coinsAmount >= 100){
             this.coinsAmount = 100;
         }
-        console.log('coins:'+this.coinsAmount)
         let path = this.coinsImage[this.resolveCoinsImageIndex()];
         this.img = this.imageCache[path];
     }

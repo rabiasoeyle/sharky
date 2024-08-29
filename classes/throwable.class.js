@@ -15,7 +15,6 @@ class ThrowableObject extends MovableObject{
     ]
     poisonBubbles = [
         'img/Sharkie/Attack/Bubble trap/PoisonedBubble.png',
-
     ]
 
     constructor(x,y){

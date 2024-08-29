@@ -129,7 +129,7 @@ class Character extends MovableObject{
         },1000/60)
         
             setInterval(() =>{
-                if(this.world.keyboard.d){
+                if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
                     this.otherDirection = false;
                     this.playAnimation(this.bulbAttack);
                 }else

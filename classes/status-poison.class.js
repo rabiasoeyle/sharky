@@ -7,7 +7,7 @@ class Poison extends Statusbar{
         'img/Marcadores/orange/80_poison.png',
         'img/Marcadores/orange/100_poison.png',
     ];
-    poisonPercentage;
+    poisonPercentage = 0;
     y= 50;
     constructor(){
         super();
