@@ -5,6 +5,7 @@ class MovableObject extends DrawableObject{
     energy = 100;
     lastHit = 0;
     acceleration = 4.5;
+    lastHitJelly = 0;
 
     applyGravity(){
         setInterval(()=>{
@@ -69,12 +70,18 @@ class MovableObject extends DrawableObject{
                         this.energy = 0;
                         this.isDead();
                     }else{
-                        this.lastHit = new Date().getTime();
+                        this.lastHitJelly = new Date().getTime();
                     }
     }
 
     isHurt(){
         let timepassed = new Date().getTime() - this.lastHit; //Difference in Miliseconds
+        timepassed = timepassed /1000; //change to seconds
+        return timepassed < 1; //when 2 seconds are passed, then isHurt() is true
+    }
+
+    isHurtByJelly(){
+        let timepassed = new Date().getTime() - this.lastHitJelly; //Difference in Miliseconds
         timepassed = timepassed /1000; //change to seconds
         return timepassed < 1; //when 2 seconds are passed, then isHurt() is true
     }

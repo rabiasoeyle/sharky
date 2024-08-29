@@ -78,6 +78,12 @@ class Character extends MovableObject{
         'img/Sharkie/Attack/Bubble trap/For Whale/7.png',
         'img/Sharkie/Attack/Bubble trap/For Whale/8.png',
     ]
+    hurtImageElectro =[
+        'img/Sharkie/Hurt/Electric-shock/1.png',
+        'img/Sharkie/Hurt/Electric-shock/2.png',
+        'img/Sharkie/Hurt/Electric-shock/3.png',
+    ]
+
     x = 50;
     y = 480 - (this.height +50);
     world; 
@@ -90,7 +96,8 @@ class Character extends MovableObject{
         this.loadImages(this.deadImagesPoisioned); 
         this.loadImages(this.deadImagesElectro);
         this.loadImages(this.hurtImagesPoison); 
-        this.loadImages(this.bulbAttack);    
+        this.loadImages(this.bulbAttack);   
+        this.loadImages(this.hurtImageElectro); 
         this.animate();
     }
 
@@ -135,6 +142,9 @@ class Character extends MovableObject{
                 }else
                 if(this.isHurt()){
                     this.playAnimation(this.hurtImagesPoison);
+                }else
+                if(this.isHurtByJelly()){
+                    this.playAnimation(this.hurtImageElectro);
                 }else
                 if(this.isDead()){
                     this.playAnimation(this.deadImagesPoisioned);
