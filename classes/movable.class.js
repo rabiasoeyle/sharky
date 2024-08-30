@@ -44,14 +44,6 @@ class MovableObject extends DrawableObject{
             this.x < mo.x &&
             this.y < mo.y + mo.height
     }
-    isCollidingEnemy(otherObject) {
-        return (
-            this.x + this.width > otherObject.x &&
-            this.x < otherObject.x + otherObject.width &&
-            this.y + this.height > otherObject.y &&
-            this.y < otherObject.y + otherObject.height
-        );
-    }
 
     hit(){
         this.energy -= 2;

@@ -40,6 +40,8 @@ class Endboss extends MovableObject{
     hadFirstContact = false;
     type;
     livePoints = 3;
+    winSound=new Audio ('audio/win.mp3');
+
     constructor(){
         super().loadImages(this.introduceEndboss);
         this.loadImages(this.floating);
@@ -55,6 +57,7 @@ class Endboss extends MovableObject{
                 this.playAnimation(this.introduceEndboss);
             }else if(this.livePoints == 0){
                 this.playAnimation(this.deadBoss);
+                this.winSound.play();
            }else{
                 this.playAnimation(this.floating);
             }

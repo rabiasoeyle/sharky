@@ -1,7 +1,7 @@
 class Jellyfish extends MovableObject{
     width= 100;
     height= 160;
-    x = 600 + Math.random()*2800;
+    x = 600 + Math.random()*2400;
     y = 50 + Math.random()*200;
 
     swimImage = [

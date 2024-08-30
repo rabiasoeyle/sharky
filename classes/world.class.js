@@ -7,6 +7,9 @@ class World{
     camera_x = 0;
     statusbar = [new Heart(), new Coins(), new Poison()];
     throwable = [];
+    throwSound = new Audio('audio/shot.mp3');
+    coinSound = new Audio('audio/coin-earned.mp3');
+    poisonSound = new Audio('audio/poison-earned.mp3');
 
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
@@ -41,6 +44,7 @@ class World{
                 let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
                 poisonBulb.startX = poisonBulb.x;
                 this.throwable.push(poisonBulb);
+                this.throwSound.play();
                 this.statusbar[2].deletePoisonAmount(1);
         }
         this.throwable.forEach((poisonBulb, index) => {
@@ -104,6 +108,7 @@ class World{
         this.level.coins.forEach((coin, index)=>{
             if(this.character.isColliding(coin)){
                 this.statusbar[1].setAmountCoins(1);
+                this.coinSound.play();
                 this.deleteCoinFromMap(index);
             }
         })
@@ -112,6 +117,7 @@ checkCollisionsWPoison(){
     this.level.poisons.forEach((poison, index)=>{
         if(this.character.isColliding(poison)){
             this.statusbar[2].setAmountPoison(1);
+            this.poisonSound.play();
             this.deletePoisonFromMap(index);
         }
     })
@@ -164,7 +170,6 @@ deletePoisonFromMap(index) {
             if(mo.otherDirection){
             this.flipImageBack(mo)  
             }
-            // isColliding(mo);
         }
     }
 

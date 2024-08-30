@@ -1,6 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let intervalIds= [];
 
 document.addEventListener('keydown', (event)=>{
     if(event.keyCode == 37){

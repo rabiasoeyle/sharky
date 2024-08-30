@@ -87,7 +87,9 @@ class Character extends MovableObject{
     x = 50;
     y = 480 - (this.height +50);
     world; 
-    swimmingSound = new Audio ('./audio/idle.mp3')
+    swimmingSound = new Audio ('audio/idle.mp3');
+    looseSound=new Audio('audio/loose.mp3');
+    hurtSound = new Audio('audio/hurt.mp3');
 
     constructor(){
         super().loadImages(this.idleImages);
@@ -134,20 +136,24 @@ class Character extends MovableObject{
                 }
             }
         },1000/60)
+        // intervalIds.push(this.soundCharacter);
         
-            setInterval(() =>{
+        setInterval(() =>{
                 if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
                     this.otherDirection = false;
                     this.playAnimation(this.bulbAttack);
                 }else
                 if(this.isHurt()){
                     this.playAnimation(this.hurtImagesPoison);
+                    this.hurtSound.play();
                 }else
                 if(this.isHurtByJelly()){
                     this.playAnimation(this.hurtImageElectro);
+                    this.hurtSound.play();
                 }else
                 if(this.isDead()){
                     this.playAnimation(this.deadImagesPoisioned);
+                    this.looseSound.play();
                 }else
                 if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
                     this.playAnimation(this.moveRightImages)
@@ -156,5 +162,6 @@ class Character extends MovableObject{
                     this.playAnimation(this.idleImages)
                 }
             },100)
+        // intervalIds.push(this.characterImgs);
     }
 }
