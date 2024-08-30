@@ -26,11 +26,6 @@ class MovableObject extends DrawableObject{
         return this.y <400;
     }
 
-
-    moveRight(){
-        console.log('Moving right');
-    }
-
     moveLeft(){
         setInterval(()=>{
             this.x -= this.speed;

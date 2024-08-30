@@ -136,7 +136,7 @@ class Character extends MovableObject{
         //     }
         // },1000/60)
         // intervalIds.push(this.id);
-        console.log('world:', this.world);  // Zeigt die Welt-Instanz an
+        // console.log('world:', this.world);  // Zeigt die Welt-Instanz an
         // if (this.world) {
         //     console.log('Hat die Welt setStoppableInterval:', typeof this.world.setStoppableInterval);
         // }

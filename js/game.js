@@ -52,7 +52,7 @@ function gameOver(){
     let end = document.getElementById('loseGame');
     end.classList.remove('d-none');
     canvas.classList.add('d-none');
-    intervalIds.forEach(clearInterval);
+    intervalIds.forEach((id)=>clearInterval(id));
 }
 
 function init(){

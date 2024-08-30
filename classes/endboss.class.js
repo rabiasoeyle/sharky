@@ -74,10 +74,10 @@ class Endboss extends MovableObject{
                 this.playAnimation(this.floating);
             }
             i++;
-            // if(world.character.x > 2400 && !this.hadFirstContact){
-            //     i=0;
-            //     this.hadFirstContact=true;
-            // }
+            if(this.world.character.x > 2400 && !this.hadFirstContact){
+                i=0;
+                this.hadFirstContact=true;
+            }
         },200)
         // intervalIds.push(this.endBoss);
     }

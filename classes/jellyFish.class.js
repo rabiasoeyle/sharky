@@ -37,12 +37,14 @@ class Jellyfish extends MovableObject{
 
     animate(){
         this.moveLeft();
-        setInterval(() =>{
-            if(this.livePoints == 0){
+        setStoppableInterval(() => this.showSwimmingJelly(), 200);
+    }
+    
+    showSwimmingJelly(){
+         if(this.livePoints == 0){
                  this.playAnimation(this.deadPink);
-            }else{
+        }else{
                 this.playAnimation(this.swimImage);
-            }
-        },200)
+        }
     }
 }

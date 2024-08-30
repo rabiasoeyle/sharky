@@ -35,12 +35,15 @@ class Pufferfish extends MovableObject{
     }
     animateSwim(){
         this.moveLeft();
-        setInterval(() =>{
-            if(this.livePoints == 0){
-                this.playAnimation(this.deadPoison);
-            }else{
-                this.playAnimation(this.swimImages);
-    }},200)
+        setStoppableInterval(() => this.showSwimmingFish(), 200);
+    }
+
+    showSwimmingFish(){
+        if(this.livePoints == 0){
+            this.playAnimation(this.deadPoison);
+        }else{
+            this.playAnimation(this.swimImages);
+        }
     }
    
 }

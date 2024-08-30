@@ -20,8 +20,9 @@ class CollectablePoison extends MovableObject{
         this.animate();
     }
     animate(){
-        setInterval(() =>{
-            this.playAnimation(this.poisonImages);
-        },200)
+        setStoppableInterval(() => this.showPoisons(), 200);
+    }
+    showPoisons(){
+        this.playAnimation(this.poisonImages);
     }
 }
