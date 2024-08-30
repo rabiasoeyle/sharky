@@ -29,14 +29,14 @@ class Character extends MovableObject{
         'img/Sharkie/Swim/5.png',
         'img/Sharkie/Swim/6.png',
     ]
-    moveBackImages = [
-        'img/Sharkie/Swim/1.png',
-        'img/Sharkie/Swim/2.png',
-        'img/Sharkie/Swim/3.png',
-        'img/Sharkie/Swim/4.png',
-        'img/Sharkie/Swim/5.png',
-        'img/Sharkie/Swim/6.png',
-    ]
+    // moveBackImages = [
+    //     'img/Sharkie/Swim/1.png',
+    //     'img/Sharkie/Swim/2.png',
+    //     'img/Sharkie/Swim/3.png',
+    //     'img/Sharkie/Swim/4.png',
+    //     'img/Sharkie/Swim/5.png',
+    //     'img/Sharkie/Swim/6.png',
+    // ]
     deadImagesPoisioned = [
         'img/Sharkie/dead/Poisoned/1.png',
         'img/Sharkie/dead/Poisoned/2.png',
@@ -90,11 +90,17 @@ class Character extends MovableObject{
     swimmingSound = new Audio ('audio/idle.mp3');
     looseSound=new Audio('audio/loose.mp3');
     hurtSound = new Audio('audio/hurt.mp3');
+    offset={
+        right:0,
+        left:0,
+        top:0,
+        bottom:0,
+    }
 
     constructor(){
         super().loadImages(this.idleImages);
         this.loadImages(this.moveRightImages); 
-        this.loadImages(this.moveBackImages); 
+        // this.loadImages(this.moveBackImages); 
         this.loadImages(this.deadImagesPoisioned); 
         this.loadImages(this.deadImagesElectro);
         this.loadImages(this.hurtImagesPoison); 
@@ -144,12 +150,14 @@ class Character extends MovableObject{
                     this.playAnimation(this.bulbAttack);
                 }else
                 if(this.isHurt()){
-                    this.playAnimation(this.hurtImagesPoison);
                     this.hurtSound.play();
+                    this.playAnimation(this.hurtImagesPoison);
+                    
                 }else
                 if(this.isHurtByJelly()){
-                    this.playAnimation(this.hurtImageElectro);
                     this.hurtSound.play();
+                    this.playAnimation(this.hurtImageElectro);
+                    
                 }else
                 if(this.isDead()){
                     this.playAnimation(this.deadImagesPoisioned);

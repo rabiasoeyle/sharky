@@ -18,6 +18,12 @@ class Pufferfish extends MovableObject{
     ]
     type;
     livePoints = 1;
+    offset={
+        right:0,
+        left:0,
+        top:0,
+        bottom:0,
+    }
     
     constructor(){
         super().loadImages(this.swimImages);

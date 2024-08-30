@@ -28,17 +28,16 @@ class World{
            this.checkCollisionsWPoison();
            this.checkCollisionsWPoisonAndEnemy();
            this.checkThrowableObject();
-           this.checkLivingCharacter();
+           if (this.checkLivingCharacter()) {
+            gameOver();
+        }
         },100)
     }
+
     checkLivingCharacter(){
-        if(this.character.energy == 0){
-            this.gameOver();
-        }
+        return this.character.energy == 0
     }
-    gameOver(){
-        console.log('Game Over')
-    }
+    
     checkThrowableObject(){
         if(this.keyboard.d == true && this.statusbar[2].poisonPercentage > 0){
                 let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)

@@ -16,7 +16,13 @@ class ThrowableObject extends MovableObject{
     poisonBubbles = [
         'img/Sharkie/Attack/Bubble trap/PoisonedBubble.png',
     ]
-
+    offset={
+        right:0,
+        left:0,
+        top:0,
+        bottom:0,
+    }
+    
     constructor(x,y){
         super();
         this.x = x;

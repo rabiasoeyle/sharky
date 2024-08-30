@@ -33,6 +33,12 @@ class Endboss extends MovableObject{
         'img/Enemy/FinalEnemy/Dead/Mesadetrabajo2copia9.png',
         'img/Enemy/FinalEnemy/Dead/Mesadetrabajo2copia10.png',
     ]
+    hurtBoss=[
+        'img/Enemy/FinalEnemy/Hurt/1.png',
+        'img/Enemy/FinalEnemy/Hurt/2.png',
+        'img/Enemy/FinalEnemy/Hurt/3.png',
+        'img/Enemy/FinalEnemy/Hurt/4.png',
+    ]
     height = 500;
     width= 400;
     y=-20;
@@ -41,11 +47,17 @@ class Endboss extends MovableObject{
     type;
     livePoints = 3;
     winSound=new Audio ('audio/win.mp3');
-
+    offset={
+        right:0,
+        left:0,
+        top:150,
+        bottom:100,
+    }
     constructor(){
         super().loadImages(this.introduceEndboss);
         this.loadImages(this.floating);
         this.loadImages(this.deadBoss);
+        this.loadImages(this.hurtBoss);
         this.animateIntro();
         this.type = "endboss";
         this.livePoints=3;

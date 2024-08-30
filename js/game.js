@@ -47,6 +47,14 @@ document.addEventListener('keyup', (event)=>{
 }
 )
 
+function gameOver(){
+    canvas = document.getElementById('canvas');
+    let end = document.getElementById('loseGame');
+    end.classList.remove('d-none');
+    canvas.classList.add('d-none');
+    clearInterval(this.gameLoop);
+}
+
 function init(){
    
 }
@@ -58,4 +66,4 @@ function start(){
     start.classList.add('d-none');
     canvas.classList.remove('d-none');
 }
-    
+  

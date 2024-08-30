@@ -23,7 +23,6 @@
     <script type="text/javascript" src="./classes/status-coin.class.js"></script>
     <script type="text/javascript" src="./classes/status-heart.class.js"></script>
     <script type="text/javascript" src="./classes/status-poison.class.js"></script>
-
     <script type="text/javascript" src="./levels/level1.js"></script>
     <script type="text/javascript" src="./levels/level2.js"></script>
     <script type="text/javascript" src="./js/game.js"></script>
@@ -32,14 +31,28 @@
 <body onload="init()">
     <h1>Sharkie</h1>
     <div id="startPage" class="start-page">
-        <div>
+        <div class ="sharkie-and-enemy">
             <img class="sharkie"src="img/Sharkie/Attack/Bubble trap/op2/1.png">
-            <img class="final-enemy"src="img/Enemy/FinalEnemy/Attack/1.png">
+            <div class="enemies-div">
+                <img class="jelly-enemy" src="img/Enemy/Jellyfish/Super-dangerous/Pink1.png">
+                <img class="puffer-enemy" src="img/Enemy/Pufferfish/Swim/1swim1.png">
+                <img class="final-enemy"src="img/Enemy/FinalEnemy/Attack/1.png">
+            </div>
         </div>
         <button class="button"onclick="start()">Start Level</button>
     </div>
     <canvas id="canvas"width="720" height="480" class="d-none">
-
     </canvas>
+    <div id="wonGame" class="won-game-page d-none">
+        <h2>You won the game!</h2>
+        <img src="">
+        <img class="enemy-lose"src="img/Enemy/FinalEnemy/Dead/Mesadetrabajo2copia10.png">
+        <button class="button" onclick="start()">Play next Level</button>
+    </div>
+    <div id="loseGame" class="lose-game-page d-none">
+        <h2>Your enemies won...</h2>
+        <h3>Do you want to try again?</h3>
+        <button class="button" onclick="start()">Try Again</button>
+    </div>
 </body>
 </html>

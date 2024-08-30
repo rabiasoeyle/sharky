@@ -1,3 +1,0 @@
-const status = new Statusbar(
-    
-)

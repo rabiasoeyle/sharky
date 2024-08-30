@@ -10,6 +10,13 @@ class CollectableCoins extends MovableObject{
         'img/Marcadores/Coins/3.png',
         'img/Marcadores/Coins/4.png',
     ];
+    offset={
+        right:0,
+        left:0,
+        top:0,
+        bottom:0,
+    }
+    
     constructor(){
         super().loadImages(this.coinImages);
         this.animate();

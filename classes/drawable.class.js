@@ -26,7 +26,7 @@ class DrawableObject {
         }
 
         drawBorder(ctx){
-            if(this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish || this instanceof Endboss || this instanceof CollectablePoison || this instanceof CollectableCoins){
+            if(this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish || this instanceof Endboss || this instanceof CollectablePoison || this instanceof CollectableCoins || this instanceof ThrowableObject){
                 //es werden nur die border für sharkie und die fische gezeichnet
                 ctx.beginPath();
                 ctx.lineWidth = "2";
