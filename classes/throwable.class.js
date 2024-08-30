@@ -34,10 +34,11 @@ class ThrowableObject extends MovableObject{
     }
 
     animate(){
-        setInterval(() =>{
-            this.playAnimation(this.poisonBubbles);
-        },200)
-        
+        setStoppableInterval(() => this.showThrownPoison(), 100);
+    }
+    
+    showThrownPoison(){
+        this.playAnimation(this.poisonBubbles);
     }
 
     throw(){

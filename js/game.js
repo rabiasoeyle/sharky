@@ -52,7 +52,7 @@ function gameOver(){
     let end = document.getElementById('loseGame');
     end.classList.remove('d-none');
     canvas.classList.add('d-none');
-    clearInterval(this.gameLoop);
+    intervalIds.forEach(clearInterval);
 }
 
 function init(){
@@ -61,9 +61,16 @@ function init(){
 
 function start(){ 
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    world = new World(canvas, keyboard, intervalIds);
     let start = document.getElementById('startPage');
     start.classList.add('d-none');
     canvas.classList.remove('d-none');
 }
-  
+
+function restart(){
+    location.reload();
+}
+function setStoppableInterval(fn,time){
+    this.id = setInterval(fn, time);
+    intervalIds.push(id);
+}

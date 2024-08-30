@@ -1,3 +1,5 @@
+// import World from "world.class.js"
+
 class CollectableCoins extends MovableObject{
     
     x = 220 + Math.random()*2000;
@@ -21,9 +23,21 @@ class CollectableCoins extends MovableObject{
         super().loadImages(this.coinImages);
         this.animate();
     }
+    // animate(){
+    //     if (this.world && typeof this.world.setStoppableInterval === 'function') {
+    //         this.world.setStoppableInterval(() => this.showCoins(), 200);
+    //     } else {
+    //         console.error('setStoppableInterval ist nicht verfügbar oder this.world ist undefined');
+    //     }
+    //     setStoppableInterval(() => this.showCoins(), 200);
+    // }
+    // showCoins(){
+    //     this.playAnimation(this.coinImages);
+    // }
     animate(){
         setInterval(() =>{
             this.playAnimation(this.coinImages);
         },200)
     }
+    
 }

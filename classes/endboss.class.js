@@ -64,7 +64,7 @@ class Endboss extends MovableObject{
     }
     animateIntro(){
         let i = 0;
-        setInterval(() =>{
+        this.endBoss = setInterval(() =>{
             if(i<10){
                 this.playAnimation(this.introduceEndboss);
             }else if(this.livePoints == 0){
@@ -79,5 +79,6 @@ class Endboss extends MovableObject{
             //     this.hadFirstContact=true;
             // }
         },200)
+        // intervalIds.push(this.endBoss);
     }
 }

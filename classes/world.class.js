@@ -1,5 +1,5 @@
 class World{
-    character = new Character();
+    character;
     level = level1;
     ctx;//context
     canvas;
@@ -10,15 +10,36 @@ class World{
     throwSound = new Audio('audio/shot.mp3');
     coinSound = new Audio('audio/coin-earned.mp3');
     poisonSound = new Audio('audio/poison-earned.mp3');
+    id;
+    // intervalIds = [];
 
     constructor(canvas, keyboard){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        
+        this.intervalIds = intervalIds;
+        this.setStoppableInterval = (fn, time) => {
+            let id = setInterval(fn, time);
+            this.intervalIds.push(id);
+            return id;
+        };
+        this.character = new Character();
         this.draw();
         this.setWorld();
         this.checkAll();
+        console.log('World initialisiert:', this);
+    }
 
+    setWorld(){
+        this.character.world = this; 
+        //damit der charakter auf die variablen, die in der game.js der world übergeben werden zugreifen kann, z.B. keypress
+        this.level.enemies.forEach(enemy => {
+            enemy.world = this;
+        });
+        // Für CollectableCoins
+        this.level.coins.forEach(coin => {coin.world = this;});
+        this.throwable.world = this;
     }
 
     checkAll(){
@@ -129,12 +150,6 @@ deletePoisonFromMap(index) {
     this.level.poisons.splice(index, 1); // Entfernt die Münze aus dem Array
 }
 
-    setWorld(){
-        this.character.world = this; 
-        //damit der charakter auf die variablen, die in der game.js der world übergeben werden zugreufen kann, z.B. keypress
-        // this.endboss.world = this;
-    }
-
     draw(){
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height); 
         this.ctx.translate(this.camera_x, 0);
@@ -185,4 +200,8 @@ deletePoisonFromMap(index) {
         this.ctx.restore();
         mo.x = mo.x * -1
     }
+    // setStoppableInterval(fn,time){
+    //     this.id = setInterval(fn, time);
+    //     intervalIds.push(id);
+    // }
 }
