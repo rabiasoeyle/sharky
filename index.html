@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body onload="init()">
+    <div id = "fullscreen">
     <h1>Sharkie</h1>
     <div id="startPage" class="start-page">
         <div class ="sharkie-and-enemy">
@@ -59,13 +60,14 @@
     <div id="wonGame" class="won-game-page d-none">
         <h2>You won the game!</h2>
         <img src="">
-        <img class="enemy-lose"src="img/Enemy/FinalEnemy/Dead/Mesadetrabajo2copia10.png">
+        <img class="final-enemy"src="img/Enemy/FinalEnemy/Dead/Mesadetrabajo2copia10.png">
         <button class="button" onclick="start()">Play next Level</button>
     </div>
     <div id="loseGame" class="lose-game-page d-none">
         <h2>Your enemies won...</h2>
         <h3>Do you want to try again?</h3>
-        <button class="button" onclick="restart()">Try Again</button>
+        <button class="button" onclick="start()">Try Again</button>
     </div>
+</div>
 </body>
 </html>

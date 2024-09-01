@@ -80,6 +80,7 @@ class World{
     coinSound = new Audio('audio/coin-earned.mp3');
     poisonSound = new Audio('audio/poison-earned.mp3');
     id;
+
     // intervalIds = [];
 
     constructor(canvas, keyboard){
@@ -111,8 +112,13 @@ class World{
     }
 
     checkAll(){
-        setInterval(()=>{
-           this.checkCollisions();
+        setStoppableInterval(() => this.checkAllAnimation(), 100);
+        // setInterval(()=>{
+           
+        // },100)
+    }
+    checkAllAnimation(){
+        this.checkCollisions();
            this.checkCollisionsWCoins();
            this.checkCollisionsWPoison();
            this.checkCollisionsWPoisonAndEnemy();
@@ -120,9 +126,7 @@ class World{
            if (this.checkLivingCharacter()) {
             gameOver();
         }
-        },100)
     }
-
     checkLivingCharacter(){
         return this.character.energy <= 0
     }
@@ -148,7 +152,8 @@ class World{
                 if(enemy.livePoints > 0) {
                     if(enemy.type == "endboss"){
                         enemy.livePoints -= 1;
-                        this.level.enemies[enemyIndex].hurtBossEnemy();
+                        this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
+                        this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
                     }else if(enemy.type == "jellyfish"){
                         enemy.livePoints -= 1;
                     }else if(enemy.type == "pufferfish"){
@@ -167,31 +172,47 @@ class World{
                             }, 1000); 
                     }else if(enemy.type == "endboss"){
                             this.level.enemies[enemyIndex].endBossIsDead();
-                            this.gameEnds();
+                        setTimeout(gameEnds,500)
                     }
                    
                 }
             this.throwable.splice(poisonIndex, 1);
     }})})};
-    gameEnds(){
-        console.log('won');
-    }
+   
     checkCollisions(){
             this.level.enemies.forEach((enemy)=>{
-                if(enemy.type == "pufferfish"){
+                if(enemy.type == "pufferfish"){ 
+                    if(this.character.isColliding(enemy) && this.character.finAttack){
+                        //diese if abfragen funktionieren noch nicht ganz, aber der Ansatz soll sein,
+                        //dass wenn auf space gesdrückt und der Gegner attackiert wird,
+                        // der Gegner verletzt ist.
+                        enemy.livePoints -= 1;
+                    }else
                     if(this.character.isColliding(enemy)){
                     this.character.hit();
                     this.statusbar[0].setPercentage(this.character.energy);
                     }
+                   
                 }else if(enemy.type == "jellyfish"){
+                    if(this.character.isColliding(enemy) && this.character.finAttack){
+                        enemy.livePoints -= 1;
+                    }else
                     if(this.character.isColliding(enemy)){
                         this.character.hitByJelly();
                         this.statusbar[0].setPercentage(this.character.energy);
                         }
-                }
+                }else if(enemy.type == "endboss"){
+                    if(this.character.isColliding(enemy) && this.character.finAttack){
+                        enemy.livePoints -= 1;
+                    }else
+                    if(this.character.isColliding(enemy)){
+                        this.character.hitByEndboss();
+                        this.statusbar[0].setPercentage(this.character.energy);
+                    }
                 
-            })
+            }})
     }
+
     checkCollisionsWCoins(){
         this.level.coins.forEach((coin, index)=>{
             if(this.character.isColliding(coin)){
@@ -201,6 +222,7 @@ class World{
             }
         })
 }
+
 checkCollisionsWPoison(){
     this.level.poisons.forEach((poison, index)=>{
         if(this.character.isColliding(poison)){

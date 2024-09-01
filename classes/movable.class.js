@@ -12,14 +12,20 @@ class MovableObject extends DrawableObject{
         top:0,
         bottom:0,
     }
-
+    lastHitAtBoss=0;
+    livePointsBoss = 3;
+    enemyHurted = false;
+    lassHitFromBoss=0;
+    
     applyGravity(){
-        setInterval(()=>{
-            if( this.isAboveGround()|| this.speedY > 0){
+        setStoppableInterval(() => this.applyGravityAnimation(), 1000/60);
+    }
+
+    applyGravityAnimation(){
+        if( this.isAboveGround()|| this.speedY > 0){
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-        }, 1000 / 16);
     }
 
     isAboveGround(){
@@ -27,11 +33,13 @@ class MovableObject extends DrawableObject{
     }
 
     moveLeft(){
-        setInterval(()=>{
-            this.x -= this.speed;
-        },1000/60);
+        setStoppableInterval(() => this.moveLeftAnimation(), 1000/60);
     }
-    
+
+    moveLeftAnimation(){
+         this.x -= this.speed;
+    }
+
     playAnimation(images){
         let i = this.currentImage % images.length;
                     let path = images[i];
@@ -67,6 +75,17 @@ class MovableObject extends DrawableObject{
                     }
     }
 
+    hitByEndboss(){
+        this.energy -=20;
+        console.log('Boss attacks', this.energy);
+        if(this.energy <= 0){
+            this.energy = 0;
+            this.isDead();
+        }else{
+            this.lastHitFromBoss = new Date().getTime();
+        }
+    }
+
     isHurt(){
         let timepassed = new Date().getTime() - this.lastHit; //Difference in Miliseconds
         timepassed = timepassed /1000; //change to seconds
@@ -79,20 +98,39 @@ class MovableObject extends DrawableObject{
         return timepassed < 1; //when 2 seconds are passed, then isHurt() is true
     }
 
+    isHurtByBoss(){
+        let timepassed = new Date().getTime() - this.lastHitFromBoss; //Difference in Miliseconds
+        timepassed = timepassed /1000; //change to seconds
+        return timepassed < 1; //when 2 seconds are passed, then isHurt() is true
+    }
+
     isDead(){
         return this.energy == 0;
     }
+
     jellyIsDead(){
         return this.livePoints = 0;
     }
+
     pufferIsDead(){
         return this.livePoints = 0;
     }
+
     endBossIsDead(){
         return this.livePoints = 0;
     }
-    hurtBossEnemy(){
-        console.log('big enemy');
+
+    hurtBossEnemy(time){
+        this.lastHitAtBoss = time
+        console.log('test'+this.lastHitAtBoss);
+        let timepassed = new Date().getTime() - this.lastHitAtBoss;
+        timepassed = timepassed/1000;
+        if(timepassed < 1){
+            this.setLivePointsHurtedEnemy()
+        }
+    }
+    setLivePointsHurtedEnemy(){
+        return this.enemyHurted;
     }
 
 }

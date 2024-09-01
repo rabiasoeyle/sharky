@@ -2,6 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let intervalIds= [];
+let attack = false;
 
 document.addEventListener('keydown', (event)=>{
     if(event.keyCode == 37){
@@ -16,7 +17,7 @@ document.addEventListener('keydown', (event)=>{
     if(event.keyCode == 40){
         keyboard.down = true;
     }
-    if(event.keyCode == 32){
+    if(event.keyCode == 32){//leertaste
         keyboard.space = true;
     }
     if(event.keyCode == 68){
@@ -53,6 +54,16 @@ function gameOver(){
     end.classList.remove('d-none');
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
+    intervalIds = []
+}
+function gameEnds(){
+    console.log('won');
+    canvas = document.getElementById('canvas');
+    let end = document.getElementById('wonGame');
+    end.classList.remove('d-none');
+    canvas.classList.add('d-none');
+    intervalIds.forEach((id)=>clearInterval(id));
+    intervalIds = [];
 }
 
 function init(){
@@ -65,6 +76,10 @@ function start(){
     let start = document.getElementById('startPage');
     start.classList.add('d-none');
     canvas.classList.remove('d-none');
+    let end = document.getElementById('loseGame');
+    end.classList.add('d-none');
+    let won = document.getElementById('wonGame');
+    won.classList.add('d-none');
 }
 
 function restart(){
@@ -74,3 +89,25 @@ function setStoppableInterval(fn,time){
     this.id = setInterval(fn, time);
     intervalIds.push(id);
 }
+function fullscreen(){
+    let fullscreen = document.getElementById('fullscreen');
+    enterFullscreen(fullscreen);
+}
+
+function enterFullscreen(element) {
+    if(element.requestFullscreen) {
+      element.requestFullscreen();
+    } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+      element.msRequestFullscreen();
+    } else if(element.webkitRequestFullscreen) {  // iOS Safari
+      element.webkitRequestFullscreen();
+    }
+  }
+
+  function exitFullscreen() {
+    if(document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if(document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    }
+  }

@@ -19,10 +19,10 @@ class Pufferfish extends MovableObject{
     type;
     livePoints = 1;
     offset={
-        right:0,
-        left:0,
-        top:0,
-        bottom:0,
+        right:5,
+        left:5,
+        top:5,
+        bottom:10,
     }
     
     constructor(){

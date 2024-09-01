@@ -76,6 +76,15 @@ class Character extends MovableObject{
         'img/Sharkie/Hurt/Electric-shock/2.png',
         'img/Sharkie/Hurt/Electric-shock/3.png',
     ]
+    sharkieAttack = [
+        'img/Sharkie/Attack/Fin slap/1.png',
+        'img/Sharkie/Attack/Fin slap/2.png',
+        'img/Sharkie/Attack/Fin slap/3.png',
+        'img/Sharkie/Attack/Fin slap/4.png',
+        'img/Sharkie/Attack/Fin slap/5.png',
+        'img/Sharkie/Attack/Fin slap/6.png',
+        'img/Sharkie/Attack/Fin slap/7.png',
+    ]
 
     x = 50;
     y = 480 - (this.height +50);
@@ -84,11 +93,12 @@ class Character extends MovableObject{
     looseSound=new Audio('audio/loose.mp3');
     hurtSound = new Audio('audio/hurt.mp3');
     offset={
-        right:0,
-        left:0,
-        top:0,
-        bottom:0,
+        right:10,
+        left:10,
+        top:20,
+        bottom:20,
     }
+    finAttack = false;// dies ist eine Idee um die atacke auch als Atacke aufnehmen zu lassen
 
     constructor(){
         super().loadImages(this.idleImages);
@@ -98,79 +108,13 @@ class Character extends MovableObject{
         this.loadImages(this.hurtImagesPoison); 
         this.loadImages(this.bulbAttack);   
         this.loadImages(this.hurtImageElectro); 
+        this.loadImages(this.sharkieAttack);
         this.animate();
     }
 
     animate(){
-
         setStoppableInterval(() => this.animateSwimmingSound(), 1000/60);
-        // this.id = setInterval(()=>{
-        //     // Stoppe den Sound nur, wenn keine Bewegung erfolgt
-        //     if (!this.world.keyboard.right && !this.world.keyboard.left && !this.world.keyboard.up && !this.world.keyboard.down) {
-        //         this.swimmingSound.pause();
-        //     }
-        //     if(this.world.keyboard.right || this.world.keyboard.left){
-        //         if(this.world.keyboard.right && this.x < this.world.level.levelEnd_x){
-        //         this.x += this.speed*30;
-        //         this.otherDirection = false;
-        //         this.swimmingSound.play();
-        //         }
-        //         if(this.world.keyboard.left && this.x > 0){
-        //             this.x -= this.speed*30;
-        //             this.otherDirection = true;
-        //             this.swimmingSound.play();
-        //         }
-        //         this.world.camera_x = 0 - this.x +50
-        //     }
-        //     if(this.world.keyboard.up || this.world.keyboard.down){
-        //         if(this.world.keyboard.up && this.y > 0){
-        //             this.y -= this.speed*30;
-        //             this.otherDirection = false;
-        //             this.swimmingSound.play();
-        //         }
-        //         if(this.world.keyboard.down && this.y < 380){
-        //             this.y += this.speed *30;
-        //             this.otherDirection = false;
-        //             this.swimmingSound.play();
-        //         }
-        //     }
-        // },1000/60)
-        // intervalIds.push(this.id);
-        // console.log('world:', this.world);  // Zeigt die Welt-Instanz an
-        // if (this.world) {
-        //     console.log('Hat die Welt setStoppableInterval:', typeof this.world.setStoppableInterval);
-        // }
-        // if (this.world && typeof this.world.setStoppableInterval === 'function') {
         setStoppableInterval(() => this.animateSituation(), 100);
-        // } else {
-        //     console.error('setStoppableInterval() nicht gefunden oder this.world ist undefined');
-        // }
-                // if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
-                //     this.otherDirection = false;
-                //     this.playAnimation(this.bulbAttack);
-                // }else
-                // if(this.isHurt()){
-                //     this.hurtSound.play();
-                //     this.playAnimation(this.hurtImagesPoison);
-                    
-                // }else
-                // if(this.isHurtByJelly()){
-                //     this.hurtSound.play();
-                //     this.playAnimation(this.hurtImageElectro);
-                    
-                // }else
-                // if(this.isDead()){
-                //     this.playAnimation(this.deadImagesPoisioned);
-                //     this.looseSound.play();
-                // }else
-                // if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
-                //     this.playAnimation(this.moveRightImages)
-                // }
-                // else{
-                //     this.playAnimation(this.idleImages)
-                // }
-            // },100)
-        // this.world.intervalIds.push(this.character);
     }
     animateSwimmingSound(){
         // Stoppe den Sound nur, wenn keine Bewegung erfolgt
@@ -208,26 +152,36 @@ class Character extends MovableObject{
         if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
             this.otherDirection = false;
             this.playAnimation(this.bulbAttack);
+            this.finAttack = false;
         }else
         if(this.isHurt()){
             this.hurtSound.play();
             this.playAnimation(this.hurtImagesPoison);
+            this.finAttack = false;
             
         }else
-        if(this.isHurtByJelly()){
+        if(this.world.keyboard.space){
+            this.playAnimation(this.sharkieAttack);
+            this.finAttack = true;
+            
+        } else if(this.isHurtByJelly()){
             this.hurtSound.play();
             this.playAnimation(this.hurtImageElectro);
+            this.finAttack = false;
             
         }else
         if(this.isDead()){
             this.playAnimation(this.deadImagesPoisioned);
             this.looseSound.play();
+            this.finAttack = false;
         }else
         if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
             this.playAnimation(this.moveRightImages)
+            this.finAttack = false;
         }
         else{
             this.playAnimation(this.idleImages)
+            this.finAttack = false;
         }
     }
 }

@@ -39,6 +39,14 @@ class Endboss extends MovableObject{
         'img/Enemy/FinalEnemy/Hurt/3.png',
         'img/Enemy/FinalEnemy/Hurt/4.png',
     ]
+    attackBoss = [
+        'img/Enemy/FinalEnemy/Attack/1.png',
+        'img/Enemy/FinalEnemy/Attack/2.png',
+        'img/Enemy/FinalEnemy/Attack/3.png',
+        'img/Enemy/FinalEnemy/Attack/4.png',
+        'img/Enemy/FinalEnemy/Attack/5.png',
+        'img/Enemy/FinalEnemy/Attack/6.png',
+    ]
     height = 500;
     width= 400;
     y=-20;
@@ -58,6 +66,7 @@ class Endboss extends MovableObject{
         this.loadImages(this.floating);
         this.loadImages(this.deadBoss);
         this.loadImages(this.hurtBoss);
+        this.loadImages(this.attackBoss);
         this.animateIntro();
         this.type = "endboss";
         this.livePoints=3;
@@ -65,20 +74,25 @@ class Endboss extends MovableObject{
     animateIntro(){
         let i = 0;
         this.endBoss = setInterval(() =>{
-            if(i<10){
+            if(i<7){
                 this.playAnimation(this.introduceEndboss);
-            }else if(this.livePoints == 0){
+            }else 
+            if(this.livePoints == 0){
                 this.playAnimation(this.deadBoss);
                 this.winSound.play();
-           }else{
+           }else if(this.setLivePointsHurtedEnemy()){
+                this.playAnimation(this.hurtBoss);
+            }else if(this.hadFirstContact && i>=50){
+                this.playAnimation(this.attackBoss);
+                this.moveLeft();
+            }else{
                 this.playAnimation(this.floating);
+            }if(this.world.character.x > 2260 && !this.hadFirstContact){
+                i=0;
+                this.hadFirstContact=true
             }
             i++;
-            if(this.world.character.x > 2400 && !this.hadFirstContact){
-                i=0;
-                this.hadFirstContact=true;
-            }
         },200)
-        // intervalIds.push(this.endBoss);
+        intervalIds.push(this.endBoss);
     }
 }

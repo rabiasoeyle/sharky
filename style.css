@@ -38,9 +38,14 @@ h1{
 }
 .button{
     border-radius: 10px;
-    border-color: blue;
     color:bisque;
     background-color: rgb(218, 39, 72);
+    cursor: pointer;
+    width: 100px;
+    padding:8px;
+}
+.button:hover{
+    scale: 1.3;
 }
 .jelly-enemy{
     width:100px;
