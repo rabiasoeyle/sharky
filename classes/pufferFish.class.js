@@ -2,7 +2,6 @@ class Pufferfish extends MovableObject{
     width= 60;
     height= 60; 
     x = 420 + Math.random()*2000;
-    // y = 480 - this.height-50;
     y = 50 + Math.random()*350;
     swimImages=[
         'img/Enemy/Pufferfish/Swim/1swim1.png',
@@ -21,7 +20,7 @@ class Pufferfish extends MovableObject{
     offset={
         right:5,
         left:5,
-        top:5,
+        top:10,
         bottom:10,
     }
     

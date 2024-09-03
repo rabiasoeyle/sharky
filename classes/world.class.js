@@ -180,7 +180,7 @@ class World{
     }})})};
    
     checkCollisions(){
-            this.level.enemies.forEach((enemy)=>{
+            this.level.enemies.forEach((enemy, enemyIndex)=>{
                 if(enemy.type == "pufferfish"){ 
                     if(this.character.isColliding(enemy) && this.character.finAttack){
                         //diese if abfragen funktionieren noch nicht ganz, aber der Ansatz soll sein,
@@ -210,7 +210,22 @@ class World{
                         this.statusbar[0].setPercentage(this.character.energy);
                     }
                 
-            }})
+            }if(enemy.livePoints == 0){
+                if(enemy.type == "jellyfish"){
+                    this.level.enemies[enemyIndex].jellyIsDead()
+                    setTimeout(() => {
+                        this.level.enemies.splice(enemyIndex, 1);
+                    }, 1000); 
+                }else if(enemy.type == "pufferfish"){
+                        this.level.enemies[enemyIndex].pufferIsDead()
+                        setTimeout(() => {
+                            this.level.enemies.splice(enemyIndex, 1);
+                        }, 1000); 
+                }else if(enemy.type == "endboss"){
+                        this.level.enemies[enemyIndex].endBossIsDead();
+                    setTimeout(gameEnds,500)
+                }}
+        })
     }
 
     checkCollisionsWCoins(){

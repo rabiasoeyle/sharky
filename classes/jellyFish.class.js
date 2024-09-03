@@ -23,7 +23,7 @@ class Jellyfish extends MovableObject{
     offset={
         right:10,
         left:10,
-        top:0,
+        top:10,
         bottom:10,
     }
     

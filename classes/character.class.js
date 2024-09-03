@@ -96,7 +96,7 @@ class Character extends MovableObject{
         right:10,
         left:10,
         top:20,
-        bottom:20,
+        bottom:30,
     }
     finAttack = false;// dies ist eine Idee um die atacke auch als Atacke aufnehmen zu lassen
 
@@ -152,12 +152,12 @@ class Character extends MovableObject{
         if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
             this.otherDirection = false;
             this.playAnimation(this.bulbAttack);
-            this.finAttack = false;
+            // this.finAttack = false;
         }else
         if(this.isHurt()){
             this.hurtSound.play();
             this.playAnimation(this.hurtImagesPoison);
-            this.finAttack = false;
+            // this.finAttack = false;
             
         }else
         if(this.world.keyboard.space){
@@ -167,17 +167,17 @@ class Character extends MovableObject{
         } else if(this.isHurtByJelly()){
             this.hurtSound.play();
             this.playAnimation(this.hurtImageElectro);
-            this.finAttack = false;
+            // this.finAttack = false;
             
         }else
         if(this.isDead()){
             this.playAnimation(this.deadImagesPoisioned);
             this.looseSound.play();
-            this.finAttack = false;
+            // this.finAttack = false;
         }else
         if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
             this.playAnimation(this.moveRightImages)
-            this.finAttack = false;
+            // this.finAttack = false;
         }
         else{
             this.playAnimation(this.idleImages)

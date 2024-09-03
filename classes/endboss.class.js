@@ -57,7 +57,7 @@ class Endboss extends MovableObject{
     winSound=new Audio ('audio/win.mp3');
     offset={
         right:0,
-        left:0,
+        left:50,
         top:150,
         bottom:100,
     }
