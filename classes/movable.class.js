@@ -38,7 +38,7 @@ class MovableObject extends DrawableObject{
     }
 
     moveLeftAnimation(){
-         this.x -= this.speed;
+        this.x -= this.speed;
     }
     flyAway(){
         setStoppableInterval(() => this.flyAwayAnimation(), 1000/60);

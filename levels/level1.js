@@ -5,6 +5,8 @@ let level1 = new Level(
         new Pufferfish(),
         new Endboss(),
         new Jellyfish(),
+        new Jellyfish(),
+        new Jellyfish(),
         
     ],
     [
@@ -46,7 +48,7 @@ let level1 = new Level(
         new CollectablePoison(),
         new CollectablePoison(),
         new CollectablePoison(),
-        new CollectablePoison(),
+
         new CollectablePoison(),
         new CollectablePoison(),
         new CollectablePoison(),

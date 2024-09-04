@@ -3,6 +3,8 @@ let world;
 let keyboard = new Keyboard();
 // let intervalIds= [];
 let attack = false;
+let levelNumber = 1;
+levelRow = `level${levelNumber}`
 
 document.addEventListener('keydown', (event)=>{
     if(event.keyCode == 37){
@@ -56,6 +58,7 @@ function gameOver(){
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = []
 }
+
 function gameEnds(){
     console.log('won');
     canvas = document.getElementById('canvas');
@@ -64,6 +67,8 @@ function gameEnds(){
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = [];
+    levelNumber ++;
+    levelRow = `level${levelNumber}`
 }
 
 function init(){
@@ -72,7 +77,13 @@ function init(){
 
 function start(){ 
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard, intervalIds);
+    if(levelRow == "level1"){
+        levelRow = level1;
+    }else if(levelRow == "level2"){
+        levelRow = level2;
+        levelNumber = 1;
+    }
+    world = new World(canvas, keyboard, levelRow);
     let start = document.getElementById('startPage');
     start.classList.add('d-none');
     canvas.classList.remove('d-none');
@@ -82,13 +93,10 @@ function start(){
     won.classList.add('d-none');
 }
 
-function restart(){
-    location.reload();
-}
-// function setStoppableInterval(fn,time){
-//     this.id = setInterval(fn, time);
-//     intervalIds.push(id);
+// function restart(){
+//     location.reload();
 // }
+
 function fullscreen(){
     let fullscreen = document.getElementById('fullscreen');
     enterFullscreen(fullscreen);

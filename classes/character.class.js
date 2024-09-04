@@ -109,6 +109,7 @@ class Character extends MovableObject{
         this.loadImages(this.bulbAttack);   
         this.loadImages(this.hurtImageElectro); 
         this.loadImages(this.sharkieAttack);
+        this.x = 50;
         this.animate();
     }
 

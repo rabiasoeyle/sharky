@@ -9,6 +9,8 @@ class World{
             new Endboss(),
             new Jellyfish(),
             new Jellyfish(),
+            new Jellyfish(),
+            
         ],
         [
             new Water('img/Background/Layers/Water/L1.png', 0),
@@ -49,7 +51,7 @@ class World{
             new CollectablePoison(),
             new CollectablePoison(),
             new CollectablePoison(),
-            new CollectablePoison(),
+    
             new CollectablePoison(),
             new CollectablePoison(),
             new CollectablePoison(),
@@ -80,20 +82,15 @@ class World{
     coinSound = new Audio('audio/coin-earned.mp3');
     poisonSound = new Audio('audio/poison-earned.mp3');
     id;
+    // intervalIds=[];
 
-    // intervalIds = [];
 
-    constructor(canvas, keyboard){
+
+    constructor(canvas, keyboard, levelRow){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        
-        // this.intervalIds = intervalIds;
-        // this.setStoppableInterval = (fn, time) => {
-        //     let id = setInterval(fn, time);
-        //     this.intervalIds.push(id);
-        //     return id;
-        // };
+        // this.level = levelRow;
         this.character = new Character();
         this.draw();
         this.setWorld();
@@ -113,10 +110,8 @@ class World{
 
     checkAll(){
         setStoppableInterval(() => this.checkAllAnimation(), 100);
-        // setInterval(()=>{
-           
-        // },100)
     }
+
     checkAllAnimation(){
         this.checkCollisions();
         this.checkCollisionsWCoins();
@@ -127,6 +122,7 @@ class World{
             setTimeout(gameOver,2000)
         }
     }
+
     checkLivingCharacter(){
         return this.character.energy <= 0
     }
