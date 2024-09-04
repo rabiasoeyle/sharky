@@ -96,7 +96,7 @@ class Character extends MovableObject{
         right:10,
         left:10,
         top:20,
-        bottom:30,
+        bottom:10,
     }
     finAttack = false;// dies ist eine Idee um die atacke auch als Atacke aufnehmen zu lassen
 

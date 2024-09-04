@@ -21,10 +21,10 @@ class Jellyfish extends MovableObject{
     type;
     livePoints = 2;
     offset={
-        right:10,
-        left:10,
-        top:10,
-        bottom:10,
+        right:20,
+        left:20,
+        top:15,
+        bottom:15,
     }
     
     constructor(){
