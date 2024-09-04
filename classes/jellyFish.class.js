@@ -43,6 +43,7 @@ class Jellyfish extends MovableObject{
     showSwimmingJelly(){
          if(this.livePoints == 0){
                  this.playAnimation(this.deadPink);
+                 this.flyAway();
         }else{
                 this.playAnimation(this.swimImage);
         }

@@ -12,12 +12,6 @@
         
             constructor(){
                 super();
-                // this.loadImages(this.poisonImage);
-                // this.loadImages(this.heartImage);
-                // this.loadImages(this.coinsImage);  
-                // this.setPercentage();
-                // this.setAmountPoison();
-                // this.setAmountCoins();
             }       
 
         }

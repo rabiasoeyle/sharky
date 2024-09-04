@@ -2,9 +2,6 @@
 class World{
     character;
     level = new Level(
-        // [
-        //     new Character(),
-        // ]
         [
             new Pufferfish(),
             new Pufferfish(),
@@ -127,7 +124,7 @@ class World{
         this.checkCollisionsWPoisonAndEnemy();
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
-            gameOver();
+            setTimeout(gameOver,2000)
         }
     }
     checkLivingCharacter(){
@@ -167,12 +164,12 @@ class World{
                             this.level.enemies[enemyIndex].jellyIsDead()
                             setTimeout(() => {
                                 this.level.enemies.splice(enemyIndex, 1);
-                            }, 1000); 
+                            }, 2000); 
                         }else if(enemy.type == "pufferfish"){
                                 this.level.enemies[enemyIndex].pufferIsDead()
                                 setTimeout(() => {
                                     this.level.enemies.splice(enemyIndex, 1);
-                                }, 1000); 
+                                }, 2000); 
                         }else if(enemy.type == "endboss"){
                                 this.level.enemies[enemyIndex].endBossIsDead();
                             setTimeout(gameEnds,500)
@@ -224,12 +221,12 @@ class World{
                 this.level.enemies[enemyIndex].jellyIsDead()
                 setTimeout(() => {
                     this.level.enemies.splice(enemyIndex, 1);
-                }, 1000); 
+                }, 2000); 
             }else if(enemy.type == "pufferfish"){
                     this.level.enemies[enemyIndex].pufferIsDead()
                     setTimeout(() => {
                         this.level.enemies.splice(enemyIndex, 1);
-                    }, 1000); 
+                    }, 2000); 
             }else if(enemy.type == "endboss"){
                     this.level.enemies[enemyIndex].endBossIsDead();
                 setTimeout(gameEnds,500)

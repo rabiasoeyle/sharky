@@ -169,6 +169,11 @@ class Character extends MovableObject{
             this.playAnimation(this.hurtImageElectro);
             // this.finAttack = false;
             
+        }else if(this.isHurtByBoss()){
+            this.hurtSound.play();
+            this.playAnimation(this.hurtImageElectro);
+            // this.finAttack = false;
+            
         }else
         if(this.isDead()){
             this.playAnimation(this.deadImagesPoisioned);

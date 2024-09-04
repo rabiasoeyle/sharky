@@ -1,6 +1,7 @@
 class MovableObject extends DrawableObject{
     speed = 0.16;
     speedY =0.04;
+    flySpeed = 4;
     otherDirection = false;
     energy = 100;
     lastHit = 0;
@@ -38,6 +39,13 @@ class MovableObject extends DrawableObject{
 
     moveLeftAnimation(){
          this.x -= this.speed;
+    }
+    flyAway(){
+        setStoppableInterval(() => this.flyAwayAnimation(), 1000/60);
+    }
+    flyAwayAnimation(){
+        this.x += this.flySpeed;
+        this.y -= this.flySpeed +2;
     }
 
     playAnimation(images){

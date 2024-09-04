@@ -40,6 +40,7 @@ class Pufferfish extends MovableObject{
     showSwimmingFish(){
         if(this.livePoints == 0){
             this.playAnimation(this.deadPoison);
+            this.flyAway();
         }else{
             this.playAnimation(this.swimImages);
         }
