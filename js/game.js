@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let intervalIds= [];
+// let intervalIds= [];
 let attack = false;
 
 document.addEventListener('keydown', (event)=>{
@@ -85,10 +85,10 @@ function start(){
 function restart(){
     location.reload();
 }
-function setStoppableInterval(fn,time){
-    this.id = setInterval(fn, time);
-    intervalIds.push(id);
-}
+// function setStoppableInterval(fn,time){
+//     this.id = setInterval(fn, time);
+//     intervalIds.push(id);
+// }
 function fullscreen(){
     let fullscreen = document.getElementById('fullscreen');
     enterFullscreen(fullscreen);

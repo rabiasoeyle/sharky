@@ -1,6 +1,10 @@
+
 class World{
     character;
     level = new Level(
+        // [
+        //     new Character(),
+        // ]
         [
             new Pufferfish(),
             new Pufferfish(),
@@ -8,7 +12,6 @@ class World{
             new Endboss(),
             new Jellyfish(),
             new Jellyfish(),
-            
         ],
         [
             new Water('img/Background/Layers/Water/L1.png', 0),
@@ -88,12 +91,12 @@ class World{
         this.canvas = canvas;
         this.keyboard = keyboard;
         
-        this.intervalIds = intervalIds;
-        this.setStoppableInterval = (fn, time) => {
-            let id = setInterval(fn, time);
-            this.intervalIds.push(id);
-            return id;
-        };
+        // this.intervalIds = intervalIds;
+        // this.setStoppableInterval = (fn, time) => {
+        //     let id = setInterval(fn, time);
+        //     this.intervalIds.push(id);
+        //     return id;
+        // };
         this.character = new Character();
         this.draw();
         this.setWorld();
@@ -119,11 +122,11 @@ class World{
     }
     checkAllAnimation(){
         this.checkCollisions();
-           this.checkCollisionsWCoins();
-           this.checkCollisionsWPoison();
-           this.checkCollisionsWPoisonAndEnemy();
-           this.checkThrowableObject();
-           if (this.checkLivingCharacter()) {
+        this.checkCollisionsWCoins();
+        this.checkCollisionsWPoison();
+        this.checkCollisionsWPoisonAndEnemy();
+        this.checkThrowableObject();
+        if (this.checkLivingCharacter()) {
             gameOver();
         }
     }
@@ -133,11 +136,11 @@ class World{
     
     checkThrowableObject(){
         if(this.keyboard.d == true && this.statusbar[2].poisonPercentage > 0){
-                let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
-                poisonBulb.startX = poisonBulb.x;
-                this.throwable.push(poisonBulb);
-                this.throwSound.play();
-                this.statusbar[2].deletePoisonAmount(1);
+            let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
+            poisonBulb.startX = poisonBulb.x;
+            this.throwable.push(poisonBulb);
+            this.throwSound.play();
+            this.statusbar[2].deletePoisonAmount(1);
         }
         this.throwable.forEach((poisonBulb, index) => {
             if (poisonBulb.y >= 480 || ((poisonBulb.x - poisonBulb.startX) >= 600)) {
@@ -146,37 +149,36 @@ class World{
     }
    
     checkCollisionsWPoisonAndEnemy() {
-    this.throwable.forEach((poison, poisonIndex) => {
-        this.level.enemies.forEach((enemy, enemyIndex) => {
-            if (poison.isColliding(enemy)){
-                if(enemy.livePoints > 0) {
-                    if(enemy.type == "endboss"){
-                        enemy.livePoints -= 1;
-                        this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
-                        this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
-                    }else if(enemy.type == "jellyfish"){
-                        enemy.livePoints -= 1;
-                    }else if(enemy.type == "pufferfish"){
-                        enemy.livePoints -= 1;
-                    }this.throwable.splice(poisonIndex, 1); 
-                }if(enemy.livePoints == 0){
-                    if(enemy.type == "jellyfish"){
-                        this.level.enemies[enemyIndex].jellyIsDead()
-                        setTimeout(() => {
-                            this.level.enemies.splice(enemyIndex, 1);
-                        }, 1000); 
-                    }else if(enemy.type == "pufferfish"){
-                            this.level.enemies[enemyIndex].pufferIsDead()
+        this.throwable.forEach((poison, poisonIndex) => {
+            this.level.enemies.forEach((enemy, enemyIndex) => {
+                if(poison.isColliding(enemy)){
+                    if(enemy.livePoints > 0) {
+                        if(enemy.type == "endboss"){
+                            enemy.livePoints -= 1;
+                            this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
+                            this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
+                        }else if(enemy.type == "jellyfish"){
+                            enemy.livePoints -= 1;
+                        }else if(enemy.type == "pufferfish"){
+                            enemy.livePoints -= 1;
+                        }this.throwable.splice(poisonIndex, 1); 
+                    }if(enemy.livePoints == 0){
+                        if(enemy.type == "jellyfish"){
+                            this.level.enemies[enemyIndex].jellyIsDead()
                             setTimeout(() => {
                                 this.level.enemies.splice(enemyIndex, 1);
                             }, 1000); 
-                    }else if(enemy.type == "endboss"){
-                            this.level.enemies[enemyIndex].endBossIsDead();
-                        setTimeout(gameEnds,500)
+                        }else if(enemy.type == "pufferfish"){
+                                this.level.enemies[enemyIndex].pufferIsDead()
+                                setTimeout(() => {
+                                    this.level.enemies.splice(enemyIndex, 1);
+                                }, 1000); 
+                        }else if(enemy.type == "endboss"){
+                                this.level.enemies[enemyIndex].endBossIsDead();
+                            setTimeout(gameEnds,500)
+                        }
                     }
-                   
-                }
-            this.throwable.splice(poisonIndex, 1);
+                this.throwable.splice(poisonIndex, 1);
     }})})};
    
     checkCollisions(){
@@ -187,6 +189,7 @@ class World{
                         //dass wenn auf space gesdrückt und der Gegner attackiert wird,
                         // der Gegner verletzt ist.
                         enemy.livePoints -= 1;
+                        this.checkIfDead(enemy, enemyIndex);
                     }else
                     if(this.character.isColliding(enemy)){
                     this.character.hit();
@@ -196,38 +199,44 @@ class World{
                 }else if(enemy.type == "jellyfish"){
                     if(this.character.isColliding(enemy) && this.character.finAttack){
                         enemy.livePoints -= 1;
+                        this.checkIfDead(enemy, enemyIndex);
                     }else
                     if(this.character.isColliding(enemy)){
                         this.character.hitByJelly();
                         this.statusbar[0].setPercentage(this.character.energy);
-                        }
+                    }
                 }else if(enemy.type == "endboss"){
                     if(this.character.isColliding(enemy) && this.character.finAttack){
                         enemy.livePoints -= 1;
+                        this.checkIfDead(enemy, enemyIndex);
                     }else
                     if(this.character.isColliding(enemy)){
                         this.character.hitByEndboss();
                         this.statusbar[0].setPercentage(this.character.energy);
                     }
                 
-            }if(enemy.livePoints == 0){
-                if(enemy.type == "jellyfish"){
-                    this.level.enemies[enemyIndex].jellyIsDead()
+            }
+        })
+    }
+    checkIfDead(enemy, enemyIndex){
+        if(enemy.livePoints == 0){
+            if(enemy.type == "jellyfish"){
+                this.level.enemies[enemyIndex].jellyIsDead()
+                setTimeout(() => {
+                    this.level.enemies.splice(enemyIndex, 1);
+                }, 1000); 
+            }else if(enemy.type == "pufferfish"){
+                    this.level.enemies[enemyIndex].pufferIsDead()
                     setTimeout(() => {
                         this.level.enemies.splice(enemyIndex, 1);
                     }, 1000); 
-                }else if(enemy.type == "pufferfish"){
-                        this.level.enemies[enemyIndex].pufferIsDead()
-                        setTimeout(() => {
-                            this.level.enemies.splice(enemyIndex, 1);
-                        }, 1000); 
-                }else if(enemy.type == "endboss"){
-                        this.level.enemies[enemyIndex].endBossIsDead();
-                    setTimeout(gameEnds,500)
-                }}
-        })
+            }else if(enemy.type == "endboss"){
+                    this.level.enemies[enemyIndex].endBossIsDead();
+                setTimeout(gameEnds,500)
+            }else{
+                
+            }}
     }
-
     checkCollisionsWCoins(){
         this.level.coins.forEach((coin, index)=>{
             if(this.character.isColliding(coin)){
@@ -305,8 +314,4 @@ deletePoisonFromMap(index) {
         this.ctx.restore();
         mo.x = mo.x * -1
     }
-    // setStoppableInterval(fn,time){
-    //     this.id = setInterval(fn, time);
-    //     intervalIds.push(id);
-    // }
 }
