@@ -51,6 +51,14 @@ document.addEventListener('keyup', (event)=>{
     }
 }
 )
+function helpOverlay(){
+    let overlay = document.getElementById('helpOverlay');
+    if (overlay.style.display == "none") {
+        overlay.style.display = "flex";
+      } else {
+        overlay.style.display = "none";
+      }
+}
 function muteSound(){
     isMuted = !isMuted;
     let muteButton = document.getElementById('muteButton');
@@ -76,7 +84,9 @@ function handleMute() {
 function gameOver(){
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
-    end.classList.remove('d-none');
+    setTimeout(()=>{
+       end.classList.remove('d-none'); 
+    },500)
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = []
@@ -86,16 +96,14 @@ function gameEnds(){
     console.log('won');
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
-    end.classList.remove('d-none');
+    setTimeout(()=>{
+        end.classList.remove('d-none'); 
+     },500)
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = [];
     levelNumber ++;
     levelRow = `level${levelNumber}`
-}
-
-function init(){
- 
 }
 
 function start(){ 
@@ -142,36 +150,35 @@ function enterFullscreen(element) {
     }
   }
 
-  function exitFullscreen() {
+function exitFullscreen() {
     if(document.exitFullscreen) {
       document.exitFullscreen();
     } else if(document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-  }
+}
 
 
-  function moveLeft(isPressed) {
+function moveLeft(isPressed) {
     keyboard.left = isPressed;
 }
 
 function moveRight(isPressed) {
     keyboard.right = isPressed;
 }
+
 function moveUp(isPressed) {
     keyboard.up = isPressed;
 }
+
 function moveDown(isPressed) {
     keyboard.down = isPressed;
 }
+
 function throwPoison(isPressed) {
     keyboard.d = isPressed;
 }
+
 function moveSpace(isPressed) {
     keyboard.space = isPressed;
-}
-
-function jump() {
-    keyboard.up = true;
-    setTimeout(() => keyboard.up = false, 200);  // Setzt das Springen nach kurzer Zeit zurück
 }

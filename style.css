@@ -60,89 +60,147 @@ h1{
     display:flex;
     justify-content: space-around;
 }
-.mute-button{
+.responsive-buttons{
     position: absolute;
-    top: 16vh;
-    right: 10vh;  
     z-index: 10;  
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    /* padding-top: 10px; */
+    background-color: rgba(0, 0, 0, 0.0);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display:none;
+}
+.responsive-buttons img{
+    width:40px;
+    height:40px;
+    padding-top: 10px;
+}
+.help-button{
+    position: absolute;
+    z-index: 10;  
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    top: 16vh;
+    right: 16vW; 
+    background-color: rgba(0, 0, 0, 0.3); 
+}
+.help-overlay{
+    width:720px;
+    height:450px;
+    position: absolute;
+    z-index: 11;  
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    top: 24vh;
+    right: 16vW; 
+    background-color: rgba(0, 0, 0, 0.3);
+    display: none;
+}
+.help-overlay img{
+    max-width:300px;
+    height:40px;
+}
+.mute-button{
+    top: 16vh;
+    right: 10vW; 
+    background-color: rgba(0, 0, 0, 0.3);
+    display:block;
 }
 .touch-button-left{
-    position: absolute;
-    top: 30vh;
-    right: 10vh;  
-    z-index: 10;  
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; 
+    top: 80vh;
+    left: 10vW;   
 }
 .touch-button-right{
-    position: absolute;
-    top: 24vh;
-    right: 10vh;  
-    z-index: 10;  
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; 
+    top: 80vh;
+    right: 10vW;  
 }
 .touch-button-up{
-    position: absolute;
-    top: 24vh;
-    right: 24vh;  
-    z-index: 10;  
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; 
+    top: 80vh;
+    right: 16vW;   
 }
 .touch-button-down{
-    position: absolute;
-    top: 24vh;
-    right: 14vh;  
-    z-index: 10;  
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer; 
+    top: 80vh;
+    left:16vW;
 }
 .touch-button-poison{
+    top: 80vh;
+    right: 22vW;  
+}
+.touch-button-space{
     position: absolute;
-    top: 24vh;
-    right: 40vh;  
     z-index: 10;  
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.0);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    top: 80vh;
+    left:22vW;
+    display:none;
+}
+.touch-button-space img{
+    width:300px;
+    height:40px;
+}
+.change-view-overlay{
+    display: none;
+    z-index:11;
+    position: absolute;
+    right:0;
+    left:0;
+    top:0;
+    bottom:0;
+    background-color:rgba(0, 0, 0, 0.5);
+    width:100vW;
+    height:100vH;
+    color:white;
+    justify-content: center;
+    align-items: center;
+}
+.won-game-page{
+    background-image: url("img/Botones/Tittles/Youwin/Mesadetrabajo1.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 780px;
+    height: 450px;
 }
 @media only screen and (max-width:720px){
     canvas{
         width:100%;
     }
+    .responsive-buttons{
+        display: block;
+    }
+    .touch-button-space{
+        display:block;
+    }
 }
-
+@media (max-width:640px){
+    .change-view-overlay{
+        display:flex;
+    }
+}
 @media only screen and (max-height:480px){
     canvas{
         height:95vH;
     }
     h1{
         display:none;
+    }
+    .responsive-buttons{
+        display: block;
+    }
+    .touch-button-space{
+        display:block;
     }
 }

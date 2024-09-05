@@ -32,7 +32,7 @@
     
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onload="init()">
+<body>
     <div id = "fullscreen">
     <h1>Sharkie</h1>
     <div id="startPage" class="start-page">
@@ -48,18 +48,29 @@
     </div>
     <div id="canvasParent"class="d-none">
         <canvas id="canvas"width="720" height="480"></canvas>
-        <button class="mute-button"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
-        <button id="leftButton" class="touch-button-left " ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)">Left</button>
-    <button id="rightButton" class="touch-button-right" ontouchstart="moveRight(true)" ontouchend="moveRight(false)">Right</button>
-    <button id="upButton" class="touch-button-up " ontouchstart="moveUp(true)" ontouchend="moveUp(false)">Up</button>
-    <button id="downButton" class="touch-button-down" ontouchstart="moveDown(true)" ontouchend="moveDown(false)">Down</button>
-    <button id="attackWPoisonButton" class="touch-button-poison" ontouchstart="throwPoison(true)" ontouchend="throwPoison(false)">Jump</button>
-    <button id="spaceButton" class="touch-button-space" ontouchstart="moveSpace(true)" ontouchend="moveSpace(false)">Space</button>
+        <button class="mute-button responsive-buttons"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
+        <button class="help-button"id="helpButton" type="button" onclick="helpOverlay()">?</button>
+        
+        <button id="leftButton" class="touch-button-left responsive-buttons" ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)">
+            <img src="img/Botones/Key/arrowkeys-left.png">
+        </button>
+        <button id="rightButton " class="touch-button-right responsive-buttons" ontouchstart="moveRight(true)" ontouchend="moveRight(false)">
+            <img src="img/Botones/Key/arrowkeys-right.png" alt="right">
+        </button>
+        <button id="upButton" class="touch-button-up responsive-buttons" ontouchstart="moveUp(true)" ontouchend="moveUp(false)">
+            <img src="img/Botones/Key/arrowkeys-up.png" alt="up">
+        </button>
+        <button id="downButton" class="touch-button-down responsive-buttons" ontouchstart="moveDown(true)" ontouchend="moveDown(false)">
+            <img src="img/Botones/Key/arrowkeys-down.png" alt="down">
+        </button>
+        <button id="attackWPoisonButton" class="touch-button-poison responsive-buttons" ontouchstart="throwPoison(true)" ontouchend="throwPoison(false)">
+            <img src="img/Botones/Key/Dkey.png" alt="poison">
+        </button>
+        <button id="spaceButton" class="touch-button-space " ontouchstart="moveSpace(true)" ontouchend="moveSpace(false)">
+            <img src="img/Botones/Key/SpaceBarkey.png" alt="space">
+        </button>
     </div>
     <div id="wonGame" class="won-game-page d-none">
-        <h2>You won the game!</h2>
-        <img src="">
-        <img class="final-enemy"src="img/Enemy/FinalEnemy/Dead/Mesadetrabajo2copia10.png">
         <button class="button" onclick="start()">Play next Level</button>
     </div>
     <div id="loseGame" class="lose-game-page d-none">
@@ -67,6 +78,13 @@
         <h3>Do you want to try again?</h3>
         <button class="button" onclick="start()">Try Again</button>
     </div>
+    
+<div class="change-view-overlay">Please turn your device!</div>
+<div class="help-overlay"style="display: none;" id="helpOverlay">
+    <img src="img/Botones/Key/Dkey.png" alt="attack with d">
+    <img src="img/Botones/Key/arrowkeys.png" alt="swim">
+    <img src="img/Botones/Key/SpaceBarkey.png" alt="attack with space">
+</div>
 </div>
 </body>
 </html>
