@@ -1,7 +1,7 @@
-let level1;
-function initLevel1(){
-    level1 = null;
-level1 = new Level(
+let level3;
+function initLevel3(){
+    level3 = null;
+level3 = new Level(
     [
         new Endboss(),
         new Pufferfish(),

@@ -72,6 +72,66 @@ h1{
     border-radius: 5px;
     cursor: pointer;
 }
+.touch-button-left{
+    position: absolute;
+    top: 30vh;
+    right: 10vh;  
+    z-index: 10;  
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+.touch-button-right{
+    position: absolute;
+    top: 24vh;
+    right: 10vh;  
+    z-index: 10;  
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+.touch-button-up{
+    position: absolute;
+    top: 24vh;
+    right: 24vh;  
+    z-index: 10;  
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+.touch-button-down{
+    position: absolute;
+    top: 24vh;
+    right: 14vh;  
+    z-index: 10;  
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+.touch-button-poison{
+    position: absolute;
+    top: 24vh;
+    right: 40vh;  
+    z-index: 10;  
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 @media only screen and (max-width:720px){
     canvas{
         width:100%;

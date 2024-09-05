@@ -52,17 +52,14 @@ document.addEventListener('keyup', (event)=>{
 }
 )
 function muteSound(){
-    isMuted = !isMuted; // Schaltet zwischen true und false um
-    // Aktualisiere den Button-Text basierend auf dem Mute-Zustand
+    isMuted = !isMuted;
     let muteButton = document.getElementById('muteButton');
     muteButton.innerText = isMuted ? 'Unmute' : 'Mute';
-    // Alle Sounds stumm schalten oder wieder abspielen
     handleMute();
 }
 
 function handleMute() {
     let allSounds = [
-        // Liste aller Sound-Objekte, z.B.:
         world.throwSound,
         world.coinSound,
         world.poisonSound,
@@ -70,7 +67,6 @@ function handleMute() {
         world.character.swimmingSound,
         world.character.looseSound,
         world.level.enemies[0].winSound,
-        // und andere Sound-Objekte
     ];
     allSounds.forEach(sound => {
         sound.muted = isMuted;
@@ -105,8 +101,20 @@ function init(){
 function start(){ 
     canvasParent = document.getElementById('canvasParent');
     canvas = document.getElementById('canvas');
-    levelRow = `level${levelNumber}`
-    if(levelRow == "level1"){
+    levelRow = `level${levelNumber}`,
+    selectLevel();
+    world = new World(canvas, keyboard, levelRow);
+    let start = document.getElementById('startPage');
+    start.classList.add('d-none');
+    canvasParent.classList.remove('d-none');
+    let end = document.getElementById('loseGame');
+    end.classList.add('d-none');
+    let won = document.getElementById('wonGame');
+    won.classList.add('d-none');
+}
+
+function selectLevel(){
+  if(levelRow == "level1"){
         initLevel1();
         levelRow = level1;
     }else if(levelRow == "level2"){
@@ -117,14 +125,6 @@ function start(){
         levelRow = level3;
         levelNumber = 1;
     }
-    world = new World(canvas, keyboard, levelRow);
-    let start = document.getElementById('startPage');
-    start.classList.add('d-none');
-    canvasParent.classList.remove('d-none');
-    let end = document.getElementById('loseGame');
-    end.classList.add('d-none');
-    let won = document.getElementById('wonGame');
-    won.classList.add('d-none');
 }
 
 function fullscreen(){
@@ -149,3 +149,29 @@ function enterFullscreen(element) {
       document.webkitExitFullscreen();
     }
   }
+
+
+  function moveLeft(isPressed) {
+    keyboard.left = isPressed;
+}
+
+function moveRight(isPressed) {
+    keyboard.right = isPressed;
+}
+function moveUp(isPressed) {
+    keyboard.up = isPressed;
+}
+function moveDown(isPressed) {
+    keyboard.down = isPressed;
+}
+function throwPoison(isPressed) {
+    keyboard.d = isPressed;
+}
+function moveSpace(isPressed) {
+    keyboard.space = isPressed;
+}
+
+function jump() {
+    keyboard.up = true;
+    setTimeout(() => keyboard.up = false, 200);  // Setzt das Springen nach kurzer Zeit zurück
+}

@@ -19,6 +19,7 @@
     <script type="text/javascript" src="./classes/level.class.js"></script> 
     <script type="text/javascript" src="./levels/level1.js"></script>
     <script type="text/javascript" src="./levels/level2.js"></script>
+    <script type="text/javascript" src="./levels/level3.js"></script>
     <script type="text/javascript" src="./classes/world.class.js"></script>
     <script type="text/javascript" src="./classes/keyboard.class.js"></script>  
     <script type="text/javascript" src="./js/game.js"></script>
@@ -48,6 +49,12 @@
     <div id="canvasParent"class="d-none">
         <canvas id="canvas"width="720" height="480"></canvas>
         <button class="mute-button"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
+        <button id="leftButton" class="touch-button-left " ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)">Left</button>
+    <button id="rightButton" class="touch-button-right" ontouchstart="moveRight(true)" ontouchend="moveRight(false)">Right</button>
+    <button id="upButton" class="touch-button-up " ontouchstart="moveUp(true)" ontouchend="moveUp(false)">Up</button>
+    <button id="downButton" class="touch-button-down" ontouchstart="moveDown(true)" ontouchend="moveDown(false)">Down</button>
+    <button id="attackWPoisonButton" class="touch-button-poison" ontouchstart="throwPoison(true)" ontouchend="throwPoison(false)">Jump</button>
+    <button id="spaceButton" class="touch-button-space" ontouchstart="moveSpace(true)" ontouchend="moveSpace(false)">Space</button>
     </div>
     <div id="wonGame" class="won-game-page d-none">
         <h2>You won the game!</h2>
