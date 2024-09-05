@@ -79,7 +79,8 @@ class Endboss extends MovableObject{
             }else 
             if(this.livePoints == 0){
                 this.playAnimation(this.deadBoss);
-                this.winSound.play();
+                if(isMuted == false){
+                this.winSound.play();}
             }else if(this.setLivePointsHurtedEnemy()){
                 this.playAnimation(this.hurtBoss);
             }else if(this.hadFirstContact && i>=50){

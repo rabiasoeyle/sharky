@@ -1,77 +1,6 @@
 
 class World{
     character;
-    // level = new Level(
-    //     [
-    //         new Pufferfish(),
-    //         new Pufferfish(),
-    //         new Pufferfish(),
-    //         new Endboss(),
-    //         new Jellyfish(),
-    //         new Jellyfish(),
-    //         new Jellyfish(),
-            
-    //     ],
-    //     [
-    //         new Water('img/Background/Layers/Water/L1.png', 0),
-    //         new Water('img/Background/Layers/Water/L1.png',718),
-    //         new Water('img/Background/Layers/Water/L1.png',718*2),
-    //         new Water('img/Background/Layers/Water/L1.png',718*3),
-    //         new Water('img/Background/Layers/Water/L1.png',718*4),
-    //         new Water('img/Background/Layers/Water/L1.png',718*5),
-    //     ],
-    //     [
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', -720),
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', -720),
-    //         new BackgroundObjects('img/Background/Layers/Floor/D2.png', -720),
-    
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 0),
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 0),
-    //         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 0),
-    
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', 720),
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', 720),
-    //         new BackgroundObjects('img/Background/Layers/Floor/D2.png', 720),
-    
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 1440),
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 1440),
-    //         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 1440),
-    
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', 2160),
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', 2160),
-    //         new BackgroundObjects('img/Background/Layers/Floor/D2.png', 2160),
-    
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 2880),
-    //         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 2880),
-    //         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 2880),
-    //     ],
-    //     [
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //         new CollectablePoison(),
-    //     ],
-    //     [
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //         new CollectableCoins(),
-    //     ]
-    // );
     level;
     ctx;//context
     canvas;
@@ -83,7 +12,7 @@ class World{
     coinSound = new Audio('audio/coin-earned.mp3');
     poisonSound = new Audio('audio/poison-earned.mp3');
     id;
-    soundSymbol = new Sound();
+    // soundSymbol = new Sound();
 
 
 
@@ -133,7 +62,8 @@ class World{
             let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
             poisonBulb.startX = poisonBulb.x;
             this.throwable.push(poisonBulb);
-            this.throwSound.play();
+            if(isMuted == false){
+            this.throwSound.play();}
             this.statusbar[2].deletePoisonAmount(1);
         }
         this.throwable.forEach((poisonBulb, index) => {
@@ -240,7 +170,8 @@ class World{
         this.level.coins.forEach((coin, index)=>{
             if(this.character.isColliding(coin)){
                 this.statusbar[1].setAmountCoins(1);
-                this.coinSound.play();
+                if(isMuted == false){
+                this.coinSound.play();}
                 this.deleteCoinFromMap(index);
             }
         })
@@ -250,7 +181,8 @@ checkCollisionsWPoison(){
     this.level.poisons.forEach((poison, index)=>{
         if(this.character.isColliding(poison)){
             this.statusbar[2].setAmountPoison(1);
-            this.poisonSound.play();
+            if(isMuted == false){
+            this.poisonSound.play();}
             this.deletePoisonFromMap(index);
         }
     })
@@ -273,7 +205,7 @@ deletePoisonFromMap(index) {
         this.addObjectToMap(this.level.coins);
         this.ctx.translate(-this.camera_x, 0);//stop camera before statusbar
         this.addObjectToMap(this.statusbar);
-        this.addToMap(this.soundSymbol);
+        // this.addToMap(this.soundSymbol);
         this.ctx.translate(this.camera_x, 0);//start camera after statusbar
         this.addObjectToMap(this.throwable);
         this.addToMap(this.character);

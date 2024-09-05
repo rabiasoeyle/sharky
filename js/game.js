@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-// let intervalIds= [];
+let isMuted = false;
 let attack = false;
 let levelNumber = 1;
 let levelRow = `level${levelNumber}`
@@ -51,21 +51,44 @@ document.addEventListener('keyup', (event)=>{
     }
 }
 )
+function muteSound(){
+    isMuted = !isMuted; // Schaltet zwischen true und false um
+    // Aktualisiere den Button-Text basierend auf dem Mute-Zustand
+    let muteButton = document.getElementById('muteButton');
+    muteButton.innerText = isMuted ? 'Unmute' : 'Mute';
+    // Alle Sounds stumm schalten oder wieder abspielen
+    handleMute();
+}
+
+function handleMute() {
+    let allSounds = [
+        // Liste aller Sound-Objekte, z.B.:
+        world.throwSound,
+        world.coinSound,
+        world.poisonSound,
+        world.character.hurtSound,
+        world.character.swimmingSound,
+        world.character.looseSound,
+        world.level.enemies[0].winSound,
+        // und andere Sound-Objekte
+    ];
+    allSounds.forEach(sound => {
+        sound.muted = isMuted;
+    });
+}
 
 function gameOver(){
-    canvas = document.getElementById('canvas');
+    canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
     end.classList.remove('d-none');
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = []
-    // level1 =[];
-    // level2 =[];
 }
 
 function gameEnds(){
     console.log('won');
-    canvas = document.getElementById('canvas');
+    canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
     end.classList.remove('d-none');
     canvas.classList.add('d-none');
@@ -76,12 +99,11 @@ function gameEnds(){
 }
 
 function init(){
-   document.getElementById('stopButton').addEventListener('click', () => {
-    document.querySelectorAll('audio').forEach(el => el.pause());
-});
+ 
 }
 
 function start(){ 
+    canvasParent = document.getElementById('canvasParent');
     canvas = document.getElementById('canvas');
     levelRow = `level${levelNumber}`
     if(levelRow == "level1"){
@@ -98,16 +120,12 @@ function start(){
     world = new World(canvas, keyboard, levelRow);
     let start = document.getElementById('startPage');
     start.classList.add('d-none');
-    canvas.classList.remove('d-none');
+    canvasParent.classList.remove('d-none');
     let end = document.getElementById('loseGame');
     end.classList.add('d-none');
     let won = document.getElementById('wonGame');
     won.classList.add('d-none');
 }
-
-// function restart(){
-//     location.reload();
-// }
 
 function fullscreen(){
     let fullscreen = document.getElementById('fullscreen');

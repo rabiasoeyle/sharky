@@ -3,10 +3,10 @@ function initLevel1(){
     level1 = null;
 level1 = new Level(
     [
-        new Pufferfish(),
-        new Pufferfish(),
-        new Pufferfish(),
         new Endboss(),
+        new Pufferfish(),
+        new Pufferfish(),
+        new Pufferfish(),
         new Jellyfish(),
         new Jellyfish(),
         new Jellyfish(),

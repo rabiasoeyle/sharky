@@ -45,8 +45,10 @@
         </div>
         <button class="button"onclick="start()">Start Level</button>
     </div>
-    <canvas id="canvas"width="720" height="480" class="d-none">
-    </canvas>
+    <div id="canvasParent"class="d-none">
+        <canvas id="canvas"width="720" height="480"></canvas>
+        <button class="mute-button"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
+    </div>
     <div id="wonGame" class="won-game-page d-none">
         <h2>You won the game!</h2>
         <img src="">
@@ -57,9 +59,6 @@
         <h2>Your enemies won...</h2>
         <h3>Do you want to try again?</h3>
         <button class="button" onclick="start()">Try Again</button>
-    </div>
-    <div>
-        <input id="stopButton" type="button" value="Stop All Audio" />
     </div>
 </div>
 </body>

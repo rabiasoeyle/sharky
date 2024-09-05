@@ -2,10 +2,10 @@ let level2;
 function initLevel2(){
 level2 = new Level(
     [
-        new Pufferfish(),
-        new Pufferfish(),
-        new Pufferfish(),
         new Endboss(),
+        new Pufferfish(),
+        new Pufferfish(),
+        new Pufferfish(),
         new Jellyfish(),
         new Pufferfish(),
         new Pufferfish(),

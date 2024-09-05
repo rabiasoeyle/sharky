@@ -126,12 +126,16 @@ class Character extends MovableObject{
             if(this.world.keyboard.right && this.x < this.world.level.levelEnd_x){
             this.x += this.speed*30;
             this.otherDirection = false;
-            this.swimmingSound.play();
+            if(isMuted == false){
+               this.swimmingSound.play(); 
+            }
+            
             }
             if(this.world.keyboard.left && this.x > 0){
                 this.x -= this.speed*30;
                 this.otherDirection = true;
-                this.swimmingSound.play();
+                if(isMuted == false){
+                this.swimmingSound.play();}
             }
             this.world.camera_x = 0 - this.x +50
         }
@@ -139,12 +143,14 @@ class Character extends MovableObject{
             if(this.world.keyboard.up && this.y > 0){
                 this.y -= this.speed*30;
                 this.otherDirection = false;
-                this.swimmingSound.play();
+                if(isMuted == false){
+                this.swimmingSound.play();}
             }
             if(this.world.keyboard.down && this.y < 380){
                 this.y += this.speed *30;
                 this.otherDirection = false;
-                this.swimmingSound.play();
+                if(isMuted == false){
+                this.swimmingSound.play();}
             }
         }
     }
@@ -156,7 +162,8 @@ class Character extends MovableObject{
             // this.finAttack = false;
         }else
         if(this.isHurt()){
-            this.hurtSound.play();
+            if(isMuted == false){
+            this.hurtSound.play();}
             this.playAnimation(this.hurtImagesPoison);
             // this.finAttack = false;
             
@@ -166,19 +173,22 @@ class Character extends MovableObject{
             this.finAttack = true;
             
         } else if(this.isHurtByJelly()){
-            this.hurtSound.play();
+            if(isMuted == false){
+            this.hurtSound.play();}
             this.playAnimation(this.hurtImageElectro);
             // this.finAttack = false;
             
         }else if(this.isHurtByBoss()){
-            this.hurtSound.play();
+            if(isMuted == false){
+            this.hurtSound.play();}
             this.playAnimation(this.hurtImageElectro);
             // this.finAttack = false;
             
         }else
         if(this.isDead()){
             this.playAnimation(this.deadImagesPoisioned);
-            this.looseSound.play();
+            if(isMuted == false){
+            this.looseSound.play();}
             // this.finAttack = false;
         }else
         if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
