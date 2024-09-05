@@ -1,4 +1,6 @@
-let level2 = new Level(
+let level2;
+function initLevel2(){
+level2 = new Level(
     [
         new Pufferfish(),
         new Pufferfish(),
@@ -92,3 +94,4 @@ let level2 = new Level(
         new CollectableCoins(),
     ]
 );
+}

@@ -4,7 +4,9 @@ let keyboard = new Keyboard();
 // let intervalIds= [];
 let attack = false;
 let levelNumber = 1;
-levelRow = `level${levelNumber}`
+let levelRow = `level${levelNumber}`
+
+
 
 document.addEventListener('keydown', (event)=>{
     if(event.keyCode == 37){
@@ -57,6 +59,8 @@ function gameOver(){
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = []
+    // level1 =[];
+    // level2 =[];
 }
 
 function gameEnds(){
@@ -72,15 +76,23 @@ function gameEnds(){
 }
 
 function init(){
-   
+   document.getElementById('stopButton').addEventListener('click', () => {
+    document.querySelectorAll('audio').forEach(el => el.pause());
+});
 }
 
 function start(){ 
     canvas = document.getElementById('canvas');
+    levelRow = `level${levelNumber}`
     if(levelRow == "level1"){
+        initLevel1();
         levelRow = level1;
     }else if(levelRow == "level2"){
-        levelRow = level2;
+        initLevel2();
+        levelRow = level2 
+    }else if(levelRow == "level3"){
+        initLevel3();
+        levelRow = level3;
         levelNumber = 1;
     }
     world = new World(canvas, keyboard, levelRow);

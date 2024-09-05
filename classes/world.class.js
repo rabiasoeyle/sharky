@@ -1,77 +1,78 @@
 
 class World{
     character;
-    level = new Level(
-        [
-            new Pufferfish(),
-            new Pufferfish(),
-            new Pufferfish(),
-            new Endboss(),
-            new Jellyfish(),
-            new Jellyfish(),
-            new Jellyfish(),
+    // level = new Level(
+    //     [
+    //         new Pufferfish(),
+    //         new Pufferfish(),
+    //         new Pufferfish(),
+    //         new Endboss(),
+    //         new Jellyfish(),
+    //         new Jellyfish(),
+    //         new Jellyfish(),
             
-        ],
-        [
-            new Water('img/Background/Layers/Water/L1.png', 0),
-            new Water('img/Background/Layers/Water/L1.png',718),
-            new Water('img/Background/Layers/Water/L1.png',718*2),
-            new Water('img/Background/Layers/Water/L1.png',718*3),
-            new Water('img/Background/Layers/Water/L1.png',718*4),
-            new Water('img/Background/Layers/Water/L1.png',718*5),
-        ],
-        [
-            new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', -720),
-            new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', -720),
-            new BackgroundObjects('img/Background/Layers/Floor/D2.png', -720),
+    //     ],
+    //     [
+    //         new Water('img/Background/Layers/Water/L1.png', 0),
+    //         new Water('img/Background/Layers/Water/L1.png',718),
+    //         new Water('img/Background/Layers/Water/L1.png',718*2),
+    //         new Water('img/Background/Layers/Water/L1.png',718*3),
+    //         new Water('img/Background/Layers/Water/L1.png',718*4),
+    //         new Water('img/Background/Layers/Water/L1.png',718*5),
+    //     ],
+    //     [
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', -720),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', -720),
+    //         new BackgroundObjects('img/Background/Layers/Floor/D2.png', -720),
     
-            new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 0),
-            new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 0),
-            new BackgroundObjects('img/Background/Layers/Floor/D1.png', 0),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 0),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 0),
+    //         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 0),
     
-            new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', 720),
-            new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', 720),
-            new BackgroundObjects('img/Background/Layers/Floor/D2.png', 720),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', 720),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', 720),
+    //         new BackgroundObjects('img/Background/Layers/Floor/D2.png', 720),
     
-            new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 1440),
-            new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 1440),
-            new BackgroundObjects('img/Background/Layers/Floor/D1.png', 1440),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 1440),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 1440),
+    //         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 1440),
     
-            new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', 2160),
-            new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', 2160),
-            new BackgroundObjects('img/Background/Layers/Floor/D2.png', 2160),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', 2160),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/D2.png', 2160),
+    //         new BackgroundObjects('img/Background/Layers/Floor/D2.png', 2160),
     
-            new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 2880),
-            new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 2880),
-            new BackgroundObjects('img/Background/Layers/Floor/D1.png', 2880),
-        ],
-        [
-            new CollectablePoison(),
-            new CollectablePoison(),
-            new CollectablePoison(),
-            new CollectablePoison(),
-            new CollectablePoison(),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/L1.png', 2880),
+    //         new BackgroundObjects('img/Background/Layers/Fondo1/D1.png', 2880),
+    //         new BackgroundObjects('img/Background/Layers/Floor/D1.png', 2880),
+    //     ],
+    //     [
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
     
-            new CollectablePoison(),
-            new CollectablePoison(),
-            new CollectablePoison(),
-            new CollectablePoison(),
-            new CollectablePoison(),
-        ],
-        [
-            new CollectableCoins(),
-            new CollectableCoins(),
-            new CollectableCoins(),
-            new CollectableCoins(),
-            new CollectableCoins(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //         new CollectablePoison(),
+    //     ],
+    //     [
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
     
-            new CollectableCoins(),
-            new CollectableCoins(),
-            new CollectableCoins(),
-            new CollectableCoins(),
-            new CollectableCoins(),
-        ]
-    );
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //         new CollectableCoins(),
+    //     ]
+    // );
+    level;
     ctx;//context
     canvas;
     keyboard;
@@ -82,7 +83,7 @@ class World{
     coinSound = new Audio('audio/coin-earned.mp3');
     poisonSound = new Audio('audio/poison-earned.mp3');
     id;
-    // intervalIds=[];
+    soundSymbol = new Sound();
 
 
 
@@ -90,7 +91,7 @@ class World{
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        // this.level = levelRow;
+        this.level = levelRow
         this.character = new Character();
         this.draw();
         this.setWorld();
@@ -154,20 +155,25 @@ class World{
                             enemy.livePoints -= 1;
                         }else if(enemy.type == "pufferfish"){
                             enemy.livePoints -= 1;
-                        }this.throwable.splice(poisonIndex, 1); 
-                    }if(enemy.livePoints == 0){
+                        }
+                        this.throwable.splice(poisonIndex, 1); 
+                    }
+                    
+                    
+                    if(enemy.livePoints == 0){
                         if(enemy.type == "jellyfish"){
-                            this.level.enemies[enemyIndex].jellyIsDead()
+                            // this.level.enemies[enemyIndex].jellyIsDead()
                             setTimeout(() => {
                                 this.level.enemies.splice(enemyIndex, 1);
                             }, 2000); 
                         }else if(enemy.type == "pufferfish"){
-                                this.level.enemies[enemyIndex].pufferIsDead()
-                                setTimeout(() => {
-                                    this.level.enemies.splice(enemyIndex, 1);
-                                }, 2000); 
+                                // this.level.enemies[enemyIndex].pufferIsDead()
+                            setTimeout(() => {
+                                this.level.enemies.splice(enemyIndex, 1);
+                            }, 2000); 
                         }else if(enemy.type == "endboss"){
                                 this.level.enemies[enemyIndex].endBossIsDead();
+                            this.levelNumber ++;    
                             setTimeout(gameEnds,500)
                         }
                     }
@@ -267,6 +273,7 @@ deletePoisonFromMap(index) {
         this.addObjectToMap(this.level.coins);
         this.ctx.translate(-this.camera_x, 0);//stop camera before statusbar
         this.addObjectToMap(this.statusbar);
+        this.addToMap(this.soundSymbol);
         this.ctx.translate(this.camera_x, 0);//start camera after statusbar
         this.addObjectToMap(this.throwable);
         this.addToMap(this.character);
