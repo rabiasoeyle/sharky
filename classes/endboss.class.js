@@ -88,9 +88,9 @@ class Endboss extends MovableObject{
                 this.moveLeft();
             }else{
                 this.playAnimation(this.floating)
-        //  }if(this.world.character.x > 2260 && !this.hadFirstContact){
-        //      i=0;
-        //      this.hadFirstContact=true
+         }if(this.world.character.x > 2260 && !this.hadFirstContact){
+             i=0;
+             this.hadFirstContact=true
             }
             i++;
         },200)

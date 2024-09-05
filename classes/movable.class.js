@@ -64,7 +64,7 @@ class MovableObject extends DrawableObject{
 
     hit(){
         this.energy -= 2;
-        console.log('Alarm Alarm', this.energy)
+        // console.log('Alarm Alarm', this.energy)
                     if(this.energy <= 0){
                         this.energy = 0;
                         this.isDead();
@@ -74,7 +74,7 @@ class MovableObject extends DrawableObject{
     }
     hitByJelly(){
         this.energy -= 5;
-        console.log('Alarm Jelly', this.energy)
+        // console.log('Alarm Jelly', this.energy)
                     if(this.energy <= 0){
                         this.energy = 0;
                         this.isDead();
@@ -85,7 +85,7 @@ class MovableObject extends DrawableObject{
 
     hitByEndboss(){
         this.energy -=20;
-        console.log('Boss attacks', this.energy);
+        // console.log('Boss attacks', this.energy);
         if(this.energy <= 0){
             this.energy = 0;
             this.isDead();
@@ -130,7 +130,7 @@ class MovableObject extends DrawableObject{
 
     hurtBossEnemy(time){
         this.lastHitAtBoss = time
-        console.log('test'+this.lastHitAtBoss);
+        // console.log('test'+this.lastHitAtBoss);
         let timepassed = new Date().getTime() - this.lastHitAtBoss;
         timepassed = timepassed/1000;
         if(timepassed < 1){

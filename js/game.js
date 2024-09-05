@@ -100,10 +100,11 @@ function gameOver(){
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = []
+
 }
 
 function gameEnds(){
-    console.log('won');
+    // console.log('won');
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
     setTimeout(()=>{
@@ -122,7 +123,7 @@ function gameEnds(){
 function start(){ 
     canvasParent = document.getElementById('canvasParent');
     canvas = document.getElementById('canvas');
-    levelRow = `level${levelNumber}`,
+    // levelRow = `level${levelNumber}`,
     selectLevel();
     world = new World(canvas, keyboard, levelRow);
     let start = document.getElementById('startPage');
@@ -137,21 +138,22 @@ function start(){
 function selectLevel(){
     let level = document.getElementById('levelButton');
     level.innerHTML ="";
+    levelRow = `level${levelNumber}`;
   if(levelRow == "level1"){
         initLevel1();
         levelRow = level1;
         level.innerHTML = `Starte Level ${levelNumber}`;
     }else if(levelRow == "level2"){
         initLevel2();
+        levelRow = level2  
         level.innerHTML = `Starte Level ${levelNumber}`;
-        levelRow = level2 
     }else if(levelRow == "level3"){
         initLevel3();
         levelRow = level3;
         level.innerHTML = `Starte Level ${levelNumber}`;
         // levelNumber = 1;
-    }
-    
+    }else levelNumber = 1,
+    level.innerHTML = `Starte Level ${levelNumber}`;
     
     
 }

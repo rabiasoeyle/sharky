@@ -129,7 +129,6 @@ class Character extends MovableObject{
             if(isMuted == false){
                this.swimmingSound.play(); 
             }
-            
             }
             if(this.world.keyboard.left && this.x > 0){
                 this.x -= this.speed*30;
@@ -172,13 +171,15 @@ class Character extends MovableObject{
             this.playAnimation(this.sharkieAttack);
             this.finAttack = true;
             
-        } else if(this.isHurtByJelly()){
+        }else 
+        if(this.isHurtByJelly()){
             if(isMuted == false){
             this.hurtSound.play();}
             this.playAnimation(this.hurtImageElectro);
             // this.finAttack = false;
             
-        }else if(this.isHurtByBoss()){
+        }else 
+        if(this.isHurtByBoss()){
             if(isMuted == false){
             this.hurtSound.play();}
             this.playAnimation(this.hurtImageElectro);
