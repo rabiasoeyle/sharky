@@ -32,7 +32,7 @@
     
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
+<body onload="selectLevel()">
     <div id = "fullscreen">
     <h1>Sharkie</h1>
     <div id="startPage" class="start-page">
@@ -44,12 +44,12 @@
                 <img class="final-enemy"src="img/Enemy/FinalEnemy/Attack/1.png">
             </div>
         </div>
-        <button class="button"onclick="start()">Start Level</button>
+        <button class="button"onclick="start()" id="levelButton">Start Level</button>
     </div>
     <div id="canvasParent"class="d-none">
         <canvas id="canvas"width="720" height="480"></canvas>
         <button class="mute-button responsive-buttons"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
-        <button class="help-button"id="helpButton" type="button" onclick="helpOverlay()">?</button>
+        
         
         <button id="leftButton" class="touch-button-left responsive-buttons" ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)">
             <img src="img/Botones/Key/arrowkeys-left.png">
@@ -70,20 +70,33 @@
             <img src="img/Botones/Key/SpaceBarkey.png" alt="space">
         </button>
     </div>
+    <button class="help-button"id="helpButton" type="button" onclick="helpOverlay()">?</button>
     <div id="wonGame" class="won-game-page d-none">
         <button class="button" onclick="start()">Play next Level</button>
+        <button class="button" onclick="goToStartpage()">Go to Startpage</button>
     </div>
     <div id="loseGame" class="lose-game-page d-none">
         <h2>Your enemies won...</h2>
         <h3>Do you want to try again?</h3>
         <button class="button" onclick="start()">Try Again</button>
+        <button class="button" onclick="goToStartpage()">Go to Startpage</button>
     </div>
     
 <div class="change-view-overlay">Please turn your device!</div>
 <div class="help-overlay"style="display: none;" id="helpOverlay">
-    <img src="img/Botones/Key/Dkey.png" alt="attack with d">
-    <img src="img/Botones/Key/arrowkeys.png" alt="swim">
-    <img src="img/Botones/Key/SpaceBarkey.png" alt="attack with space">
+    <div>
+        <img class="help-d"src="img/Botones/Key/Dkey.png" alt="attack with d">
+        <h3>You can throw poison with D</h3>
+    </div>
+    <div>
+        <img class="help-swim"src="img/Botones/Key/arrowkeys.png" alt="swim">
+        <h3>You can swim to a direction with the arrow buttons</h3>
+    </div>
+    <div>
+        <img class="help-space"src="img/Botones/Key/SpaceBarkey.png" alt="attack with space">
+        <h3>You can make your attackmove with space</h3>
+    </div>
+    
 </div>
 </div>
 </body>

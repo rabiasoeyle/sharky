@@ -81,6 +81,16 @@ function handleMute() {
     });
 }
 
+function goToStartpage(){
+    let start = document.getElementById('startPage');
+    start.classList.remove('d-none');
+    let end = document.getElementById('loseGame');
+    end.classList.add('d-none'); 
+    let won = document.getElementById('wonGame');
+    won.classList.add('d-none'); 
+    selectLevel();
+}
+
 function gameOver(){
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
@@ -102,6 +112,9 @@ function gameEnds(){
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = [];
+    if(levelNumber >3){
+        levelNumber = 0;
+    } 
     levelNumber ++;
     levelRow = `level${levelNumber}`
 }
@@ -122,17 +135,25 @@ function start(){
 }
 
 function selectLevel(){
+    let level = document.getElementById('levelButton');
+    level.innerHTML ="";
   if(levelRow == "level1"){
         initLevel1();
         levelRow = level1;
+        level.innerHTML = `Starte Level ${levelNumber}`;
     }else if(levelRow == "level2"){
         initLevel2();
+        level.innerHTML = `Starte Level ${levelNumber}`;
         levelRow = level2 
     }else if(levelRow == "level3"){
         initLevel3();
         levelRow = level3;
-        levelNumber = 1;
+        level.innerHTML = `Starte Level ${levelNumber}`;
+        // levelNumber = 1;
     }
+    
+    
+    
 }
 
 function fullscreen(){
