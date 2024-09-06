@@ -34,10 +34,10 @@
     
     <link rel="stylesheet" href="./style.css">
 </head>
-<body onload="selectLevel()">
+<body onload="init()">
     <div id = "fullscreen" class="fullscreen">
     <h1>Sharkie</h1>
-    <div id="startPage" class="start-page">
+    <div id="startPage" class="start-page page">
         <div class ="sharkie-and-enemy">
             <img class="sharkie"src="img/Sharkie/Attack/Bubble trap/op2/1.png">
             <div class="enemies-div">
@@ -52,32 +52,37 @@
         <canvas id="canvas"width="720" height="480"></canvas>
         <button class="mute-button responsive-buttons"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
         
-        
-        <button id="leftButton" class="touch-button-left responsive-buttons" ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)">
+         <!-- ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)" -->
+        <button id="leftButton" class="touch-button-left responsive-buttons">
             <img src="img/Botones/Key/arrowkeys-left.png">
         </button>
-        <button id="rightButton " class="touch-button-right responsive-buttons" ontouchstart="moveRight(true)" ontouchend="moveRight(false)">
+        <!-- ontouchstart="moveRight(true)" ontouchend="moveRight(false)" -->
+        <button id="rightButton" class="touch-button-right responsive-buttons" >
             <img src="img/Botones/Key/arrowkeys-right.png" alt="right">
         </button>
-        <button id="upButton" class="touch-button-up responsive-buttons" ontouchstart="moveUp(true)" ontouchend="moveUp(false)">
+        <!-- ontouchstart="moveUp(true)" ontouchend="moveUp(false)" -->
+        <button id="upButton" class="touch-button-up responsive-buttons" >
             <img src="img/Botones/Key/arrowkeys-up.png" alt="up">
         </button>
-        <button id="downButton" class="touch-button-down responsive-buttons" ontouchstart="moveDown(true)" ontouchend="moveDown(false)">
+        <!-- ontouchstart="moveDown(true)" ontouchend="moveDown(false)" -->
+        <button id="downButton" class="touch-button-down responsive-buttons" >
             <img src="img/Botones/Key/arrowkeys-down.png" alt="down">
         </button>
-        <button id="attackWPoisonButton" class="touch-button-poison responsive-buttons" ontouchstart="throwPoison(true)" ontouchend="throwPoison(false)">
+        <!-- ontouchstart="throwPoison(true)" ontouchend="throwPoison(false)" -->
+        <button id="attackWPoisonButton" class="touch-button-poison responsive-buttons" >
             <img src="img/Botones/Key/Dkey.png" alt="poison">
         </button>
-        <button id="spaceButton" class="touch-button-space " ontouchstart="moveSpace(true)" ontouchend="moveSpace(false)">
+        <!-- ontouchstart="moveSpace(true)" ontouchend="moveSpace(false)" -->
+        <button id="spaceButton" class="touch-button-space " >
             <img src="img/Botones/Key/SpaceBarkey.png" alt="space">
         </button>
     </div>
     <button class="help-button"id="helpButton" type="button" onclick="helpOverlay()">?</button>
-    <div id="wonGame" class="won-game-page d-none">
+    <div id="wonGame" class="won-game-page d-none page">
         <button class="button" onclick="start()">Play next Level</button>
         <button class="button" onclick="goToStartpage()">Go to Startpage</button>
     </div>
-    <div id="loseGame" class="lose-game-page d-none">
+    <div id="loseGame" class="lose-game-page d-none page">
         <h2>Your enemies won...</h2>
         <h3>Do you want to try again?</h3>
         <button class="button" onclick="start()">Try Again</button>

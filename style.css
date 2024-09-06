@@ -12,14 +12,13 @@ canvas{
 }
 h1{
     font-size: 50px;
-    text-shadow: 2px,2px,2px
+    text-align: center;
 }
 .fullscreen{
     max-width:800px;
 }
 .start-page{
-    width:720px;
-    height:480px;
+    
     background-image: url("img/Background/Light/1.png");
     background-position: center;
     background-size: cover;
@@ -28,17 +27,14 @@ h1{
     align-items: center;
     justify-content: center;
 }
+.page{
+    width:720px;
+    height:480px;
+}
 .d-none{
     display:none;
 }
-.sharkie{
-    width:150px;
-    height:200px;
-}
-.final-enemy{
-    width:350px;
-    height:250px;
-}
+
 .button{
     border-radius: 10px;
     color:bisque;
@@ -57,6 +53,14 @@ h1{
 .puffer-enemy{
     width: 50px;
     height:50px;
+}
+.sharkie{
+    width:150px;
+    height:200px;
+}
+.final-enemy{
+    width:350px;
+    height:250px;
 }
 
 .sharkie-and-enemy{
@@ -86,26 +90,25 @@ h1{
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    top: 12vh;
-    right: 26vW; 
+    top: 8vh;
+    right: 10vW; 
     background-color: rgba(0, 0, 0, 0.3); 
 }
 .help-overlay{
-    /* width:500px; */
-    /* height:450px; */
+    width: 640px;
+    height: 410px;
     position: absolute;
-    z-index: 11;  
+    z-index: 11;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    top: 14vh;
-    /* left:30VW; */
-    background-color: rgba(0, 0, 0, 0.7);
+    top: 16vh;
+    background-color: rgba(0, 0, 0, 0.8);
     display: none;
     flex-direction: column;
     justify-content: space-around;
-    padding:40px;
+    padding: 40px;
 }
 .help-d{
     width:40px;
@@ -121,14 +124,15 @@ h1{
     height:40px;
 }
 .mute-button{
-    top: 12vh;
-    right: 30vW; 
+    top: 8vh;
+    right: 15vW; 
     background-color: rgba(0, 0, 0, 0.3);
     display:block;
 }
 .touch-button-left{
+     
     top: 80vh;
-    left: 10vW;   
+    right: 16vW;    
 }
 .touch-button-right{
     top: 80vh;
@@ -136,7 +140,7 @@ h1{
 }
 .touch-button-up{
     top: 80vh;
-    right: 16vW;   
+    left: 10vW; 
 }
 .touch-button-down{
     top: 80vh;
@@ -185,9 +189,37 @@ h1{
     /* display: flex; */
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    width: 780px;
-    height: 450px;
+    justify-content: flex-end;
+    /* width: 780px;
+    height: 450px; */
+}
+.lose-game-page{
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width: 800px){
+    h1{
+        display:none;
+    }
+    .help-overlay{
+        width:320px;
+        height:205px;
+        font-size: 12px;
+    }
+    .help-d{
+        width:20px;
+        height:20px;
+    }
+    .help-swim{
+        width:80px;
+        height:50px;
+    }
+    .help-space{
+        width:150px;
+        height:20px;
+    }
 }
 @media only screen and (max-width:720px){
     canvas{
@@ -199,18 +231,70 @@ h1{
     .touch-button-space{
         display:block;
     }
+    .page{
+        width:80vW;
+    }
+    
+    .jelly-enemy{
+        width:50px;
+        height:70px;
+    }
+    .puffer-enemy{
+        width: 25px;
+        height:25px;
+    }
+    .sharkie{
+        width:75px;
+        height:100px;
+    }
+    .final-enemy{
+        width:175px;
+        height:125px;
+    }
+    .button{
+        padding:4px;
+        width:100px;
+        font-size: 10px;
+    }
 }
 @media (max-width:640px){
     .change-view-overlay{
         display:flex;
     }
 }
+@media(max-height:640px){
+    h1{
+        display: none;
+    }
+    .help-overlay{
+        width:320px;
+        height:205px;
+        font-size: 12px;
+    }
+    .help-d{
+        width:20px;
+        height:20px;
+    }
+    .help-swim{
+        width:80px;
+        height:50px;
+    }
+    .help-space{
+        width:150px;
+        height:20px;
+    }
+    .button{
+        padding:4px;
+        width:100px;
+        font-size: 10px;
+    }
+}
 @media only screen and (max-height:480px){
     canvas{
         height:95vH;
     }
-    h1{
-        display:none;
+    .page{
+        height:95vH;
     }
     .responsive-buttons{
         display: block;

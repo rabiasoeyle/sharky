@@ -51,6 +51,121 @@ document.addEventListener('keyup', (event)=>{
     }
 }
 )
+
+
+    // document.getElementById('leftButton').addEventListener('touchstart', (e)=>{
+    //     e.preventDefault();
+    //     keyboard.left = true;
+    // });
+    // document.getElementById('leftButton').addEventListener('touchend', (e)=>{
+    //     e.preventDefault();
+    //     keyboard.left = false;
+    // });
+
+    // document.getElementById('rightButton').addEventListener('touchstart', (e)=>{
+    //     e.preventDefault();
+    //     keyboard.right = true;
+    // });
+    // document.getElementById(`rightButton`).addEventListener('touchend', (e)=>{
+    //     e.preventDefault();
+    //     keyboard.right = false;
+    // });
+
+    // document.getElementById(`upButton`).addEventListener('touchstart', (e)=>{
+    //     e.preventDefault();
+    //     this.left = true;
+    // });
+    // document.getElementById(`upButton`).addEventListener('touchend', (e)=>{
+    //     e.preventDefault();
+    //     this.left = false;
+    // });
+
+    // document.getElementById(`downButton`).addEventListener('touchstart', (e)=>{
+    //     e.preventDefault();
+    //     this.left = true;
+    // });
+    // document.getElementById(`downButton`).addEventListener('touchend', (e)=>{
+    //     e.preventDefault();
+    //     this.left = false;
+    // });
+
+    // document.getElementById(`attackWPoisonButton`).addEventListener('touchstart', (e)=>{
+    //     e.preventDefault();
+    //     this.left = true;
+    // });
+    // document.getElementById(`attackWPoisonButton`).addEventListener('touchend', (e)=>{
+    //     e.preventDefault();
+    //     this.left = false;
+    // });
+
+    // document.getElementById(`spaceButton`).addEventListener('touchstart', (e)=>{
+    //     e.preventDefault();
+    //     this.left = true;
+    // });
+    // document.getElementById(`spaceButton`).addEventListener('touchend', (e)=>{
+    //     e.preventDefault();
+    //     this.left = false;
+    // });
+
+function init(){
+    selectLevel();
+    //left
+    document.getElementById('leftButton').addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        keyboard.left = true;
+    });
+    document.getElementById('leftButton').addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        keyboard.left = false;
+    });
+    //right
+    document.getElementById('rightButton').addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        keyboard.right = true;
+    });
+    document.getElementById('rightButton').addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        keyboard.right = false;
+    });
+    //up
+    document.getElementById('upButton').addEventListener('touchstart', (e)=>{
+            e.preventDefault();
+            keyboard.up = true;
+        });
+        document.getElementById('upButton').addEventListener('touchend', (e)=>{
+            e.preventDefault();
+            keyboard.up = false;
+        });
+    
+        document.getElementById('downButton').addEventListener('touchstart', (e)=>{
+            e.preventDefault();
+            keyboard.down = true;
+        });
+        document.getElementById('downButton').addEventListener('touchend', (e)=>{
+            e.preventDefault();
+            keyboard.down = false;
+        });
+    
+        document.getElementById('attackWPoisonButton').addEventListener('touchstart', (e)=>{
+            e.preventDefault();
+            keyboard.d = true;
+        });
+        document.getElementById('attackWPoisonButton').addEventListener('touchend', (e)=>{
+            e.preventDefault();
+            keyboard.d = false;
+        });
+    
+        document.getElementById('spaceButton').addEventListener('touchstart', (e)=>{
+            e.preventDefault();
+            keyboard.space = true;
+        });
+        document.getElementById('spaceButton').addEventListener('touchend', (e)=>{
+            e.preventDefault();
+            keyboard.space = false;
+        });
+
+}
+
 function helpOverlay(){
     let overlay = document.getElementById('helpOverlay');
     if (overlay.style.display == "none") {
@@ -85,9 +200,11 @@ function goToStartpage(){
     let start = document.getElementById('startPage');
     start.classList.remove('d-none');
     let end = document.getElementById('loseGame');
+    end.style.display = "none";
     end.classList.add('d-none'); 
     let won = document.getElementById('wonGame');
     won.classList.add('d-none'); 
+    won.style.display = "none";
     selectLevel();
 }
 
@@ -96,6 +213,7 @@ function gameOver(){
     let end = document.getElementById('loseGame');
     setTimeout(()=>{
        end.classList.remove('d-none'); 
+       end.style.display = "flex";
     },500)
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
@@ -104,11 +222,11 @@ function gameOver(){
 }
 
 function gameEnds(){
-    // console.log('won');
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
     setTimeout(()=>{
         end.classList.remove('d-none'); 
+        end.style.display = "flex";
      },500)
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
@@ -131,8 +249,10 @@ function start(){
     canvasParent.classList.remove('d-none');
     let end = document.getElementById('loseGame');
     end.classList.add('d-none');
+    end.style.display = "none";
     let won = document.getElementById('wonGame');
     won.classList.add('d-none');
+    won.style.display = "none";
 }
 
 function selectLevel(){
