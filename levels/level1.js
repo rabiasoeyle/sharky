@@ -1,4 +1,8 @@
 let level1;
+
+/**
+ * This function loads level1.
+ */
 function initLevel1(){
     level1 = null;
 level1 = new Level(

@@ -23,6 +23,11 @@ class ThrowableObject extends MovableObject{
         bottom:0,
     }
     
+    /**
+     * Loads images. Animates Bubbles. Throws it to a specific direction.
+     * @param {*} x 
+     * @param {*} y 
+     */
     constructor(x,y){
         super();
         this.x = x;
@@ -33,14 +38,23 @@ class ThrowableObject extends MovableObject{
         this.throw();
     }
 
+    /**
+     * Sets interval for animation.
+     */
     animate(){
         setStoppableInterval(() => this.showThrownPoison(), 100);
     }
     
+    /**
+     * Animates thrown poison.
+     */
     showThrownPoison(){
         this.playAnimation(this.poisonBubbles);
     }
 
+    /**
+     * throws poison.
+     */
     throw(){
         // this.speedY = 0;
         // this.applyGravity();

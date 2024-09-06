@@ -27,6 +27,9 @@ class Jellyfish extends MovableObject{
         bottom:15,
     }
     
+    /**
+     * Loads all images. Defines the type and livepoints.
+     */
     constructor(){
         super().loadImages(this.swimImage);
         this.loadImages(this.deadPink);
@@ -35,11 +38,18 @@ class Jellyfish extends MovableObject{
         this.livePoints = 2;
     }
 
+    /**
+     * Creates an animation intervall.
+     * Starts the moving.
+     */
     animate(){
         this.moveLeft();
         setStoppableInterval(() => this.showSwimmingJelly(), 200);
     }
     
+    /**
+     * Animates moving Jelly.
+     */
     showSwimmingJelly(){
         if(this.livePoints == 0){
             this.playAnimation(this.deadPink);

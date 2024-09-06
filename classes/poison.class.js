@@ -15,13 +15,24 @@ class CollectablePoison extends MovableObject{
         'img/Marcadores/Posión/Animada/8.png',
     ];
 
+    /**
+     * Loads images and starts animation.
+     */
     constructor(){
         super().loadImages(this.poisonImages);
         this.animate();
     }
+
+    /**
+     * Sets animationinterval.
+     */
     animate(){
         setStoppableInterval(() => this.showPoisons(), 200);
     }
+
+    /**
+     * Starts animation.
+     */
     showPoisons(){
         this.playAnimation(this.poisonImages);
     }

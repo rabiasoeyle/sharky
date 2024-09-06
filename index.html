@@ -15,10 +15,9 @@
     <script type="text/javascript" src="./classes/endboss.class.js"></script> 
     <script type="text/javascript" src="./classes/poison.class.js"></script>
     <script type="text/javascript" src="./classes/jellyFish.class.js"></script> 
-    <script type="text/javascript" src="./classes/sound.class.js"></script>
     <script type="text/javascript" src="./classes/background.class.js"></script>
     <script type="text/javascript" src="./classes/level.class.js"></script>
-  
+
     <script type="text/javascript" src="./levels/level1.js"></script>
     <script type="text/javascript" src="./levels/level2.js"></script>
     <script type="text/javascript" src="./levels/level3.js"></script>
@@ -51,35 +50,29 @@
     <div id="canvasParent"class="d-none">
         <canvas id="canvas"width="720" height="480"></canvas>
         <button class="mute-button responsive-buttons"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
-        <button class="screen-button responsive-buttons"id="fullscreenButton" type="button" onclick="changeScreen()">
-            <img src="img/sound/fullscreen.png" alt="fullscreen">
-        </button>
-         <!-- ontouchstart="moveLeft(true)" ontouchend="moveLeft(false)" -->
         <button id="leftButton" class="touch-button-left responsive-buttons">
             <img src="img/Botones/Key/arrowkeys-left.png">
         </button>
-        <!-- ontouchstart="moveRight(true)" ontouchend="moveRight(false)" -->
         <button id="rightButton" class="touch-button-right responsive-buttons" >
             <img src="img/Botones/Key/arrowkeys-right.png" alt="right">
         </button>
-        <!-- ontouchstart="moveUp(true)" ontouchend="moveUp(false)" -->
         <button id="upButton" class="touch-button-up responsive-buttons" >
             <img src="img/Botones/Key/arrowkeys-up.png" alt="up">
         </button>
-        <!-- ontouchstart="moveDown(true)" ontouchend="moveDown(false)" -->
         <button id="downButton" class="touch-button-down responsive-buttons" >
             <img src="img/Botones/Key/arrowkeys-down.png" alt="down">
         </button>
-        <!-- ontouchstart="throwPoison(true)" ontouchend="throwPoison(false)" -->
         <button id="attackWPoisonButton" class="touch-button-poison responsive-buttons" >
             <img src="img/Botones/Key/Dkey.png" alt="poison">
         </button>
-        <!-- ontouchstart="moveSpace(true)" ontouchend="moveSpace(false)" -->
         <button id="spaceButton" class="touch-button-space " >
             <img src="img/Botones/Key/SpaceBarkey.png" alt="space">
         </button>
     </div>
     <button class="help-button"id="helpButton" type="button" onclick="helpOverlay()">?</button>
+    <button class="screen-button responsive-buttons"id="fullscreenButton" type="button" onclick="changeScreen()" >
+         Fullscreen off
+    </button>
     <div id="wonGame" class="won-game-page d-none page">
         <button class="button" onclick="start()">Play next Level</button>
         <button class="button" onclick="goToStartpage()">Go to Startpage</button>

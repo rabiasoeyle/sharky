@@ -10,12 +10,21 @@ class Poison extends Statusbar{
     poisonPercentage = 0;
     y= 45;
     height=55;
+
+    /**
+     * Loads images. Sets amount of Poison.
+     */
     constructor(){
         super();
         this.loadImages(this.poisonImage);
         this.setAmountPoison();
         this.poisonPercentage = 0;
     }
+
+    /**
+     * Sets new amount of poison.
+     * @param {*} amount 
+     */
     setAmountPoison(amount){
         this.poisonPercentage += amount * 10;
         if(this.poisonPercentage >= 100){
@@ -24,6 +33,11 @@ class Poison extends Statusbar{
         let path = this.poisonImage[this.resolvePoisonImageIndex()];
         this.img = this.imageCache[path];
     }
+
+    /**
+     * Deletes poison amount, if used.
+     * @param {*} amount 
+     */
     deletePoisonAmount(amount){
         this.poisonPercentage -= amount * 10;
         if(this.poisonPercentage < 0){
@@ -33,6 +47,10 @@ class Poison extends Statusbar{
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Shows different img for different amount.
+     * @returns 
+     */
     resolvePoisonImageIndex(){
         if(this.poisonPercentage == 100){
             return 5;

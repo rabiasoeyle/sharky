@@ -8,7 +8,9 @@ let levelRow = `level${levelNumber}`
 let fullscreenState = false;
 
 
-
+/**
+ * These eventlisteners are checking, if one of these keys are pressed down.
+ */
 document.addEventListener('keydown', (event)=>{
     if(event.keyCode == 37){
         keyboard.left = true;
@@ -31,6 +33,9 @@ document.addEventListener('keydown', (event)=>{
 }
 )
 
+/**
+ * These eventlisteners are checking, if one of these keys are released.
+ */
 document.addEventListener('keyup', (event)=>{
     if(event.keyCode == 37){
         keyboard.left = false;
@@ -53,64 +58,18 @@ document.addEventListener('keyup', (event)=>{
 }
 )
 
-
-    // document.getElementById('leftButton').addEventListener('touchstart', (e)=>{
-    //     e.preventDefault();
-    //     keyboard.left = true;
-    // });
-    // document.getElementById('leftButton').addEventListener('touchend', (e)=>{
-    //     e.preventDefault();
-    //     keyboard.left = false;
-    // });
-
-    // document.getElementById('rightButton').addEventListener('touchstart', (e)=>{
-    //     e.preventDefault();
-    //     keyboard.right = true;
-    // });
-    // document.getElementById(`rightButton`).addEventListener('touchend', (e)=>{
-    //     e.preventDefault();
-    //     keyboard.right = false;
-    // });
-
-    // document.getElementById(`upButton`).addEventListener('touchstart', (e)=>{
-    //     e.preventDefault();
-    //     this.left = true;
-    // });
-    // document.getElementById(`upButton`).addEventListener('touchend', (e)=>{
-    //     e.preventDefault();
-    //     this.left = false;
-    // });
-
-    // document.getElementById(`downButton`).addEventListener('touchstart', (e)=>{
-    //     e.preventDefault();
-    //     this.left = true;
-    // });
-    // document.getElementById(`downButton`).addEventListener('touchend', (e)=>{
-    //     e.preventDefault();
-    //     this.left = false;
-    // });
-
-    // document.getElementById(`attackWPoisonButton`).addEventListener('touchstart', (e)=>{
-    //     e.preventDefault();
-    //     this.left = true;
-    // });
-    // document.getElementById(`attackWPoisonButton`).addEventListener('touchend', (e)=>{
-    //     e.preventDefault();
-    //     this.left = false;
-    // });
-
-    // document.getElementById(`spaceButton`).addEventListener('touchstart', (e)=>{
-    //     e.preventDefault();
-    //     this.left = true;
-    // });
-    // document.getElementById(`spaceButton`).addEventListener('touchend', (e)=>{
-    //     e.preventDefault();
-    //     this.left = false;
-    // });
-
+/**
+ * When the page is loaded.
+ */
 function init(){
     selectLevel();
-    //left
+    addEventListenersToMoveButtons();
+}
+/**
+ * Adds eventListeners to the move and attack Buttons.
+ */
+function addEventListenersToMoveButtons(){
+     //left
     document.getElementById('leftButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.left = true;
@@ -130,43 +89,45 @@ function init(){
     });
     //up
     document.getElementById('upButton').addEventListener('touchstart', (e)=>{
-            e.preventDefault();
-            keyboard.up = true;
-        });
-        document.getElementById('upButton').addEventListener('touchend', (e)=>{
-            e.preventDefault();
-            keyboard.up = false;
-        });
+        e.preventDefault();
+        keyboard.up = true;
+    });
+    document.getElementById('upButton').addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        keyboard.up = false;
+    });
     
-        document.getElementById('downButton').addEventListener('touchstart', (e)=>{
-            e.preventDefault();
-            keyboard.down = true;
-        });
-        document.getElementById('downButton').addEventListener('touchend', (e)=>{
-            e.preventDefault();
-            keyboard.down = false;
-        });
+    document.getElementById('downButton').addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        keyboard.down = true;
+    });
+    document.getElementById('downButton').addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        keyboard.down = false;
+    });
     
-        document.getElementById('attackWPoisonButton').addEventListener('touchstart', (e)=>{
-            e.preventDefault();
-            keyboard.d = true;
-        });
-        document.getElementById('attackWPoisonButton').addEventListener('touchend', (e)=>{
-            e.preventDefault();
-            keyboard.d = false;
-        });
+    document.getElementById('attackWPoisonButton').addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        keyboard.d = true;
+    });
+    document.getElementById('attackWPoisonButton').addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        keyboard.d = false;
+    });
     
-        document.getElementById('spaceButton').addEventListener('touchstart', (e)=>{
-            e.preventDefault();
-            keyboard.space = true;
-        });
-        document.getElementById('spaceButton').addEventListener('touchend', (e)=>{
-            e.preventDefault();
-            keyboard.space = false;
-        });
-
+    document.getElementById('spaceButton').addEventListener('touchstart', (e)=>{
+        e.preventDefault();
+        keyboard.space = true;
+    });
+    document.getElementById('spaceButton').addEventListener('touchend', (e)=>{
+        e.preventDefault();
+        keyboard.space = false;
+    });
 }
 
+/**
+ * Toggle the help overlay.
+ */
 function helpOverlay(){
     let overlay = document.getElementById('helpOverlay');
     if (overlay.style.display == "none") {
@@ -175,6 +136,10 @@ function helpOverlay(){
         overlay.style.display = "none";
       }
 }
+
+/**
+ * Mute all Sounds.
+ */
 function muteSound(){
     isMuted = !isMuted;
     let muteButton = document.getElementById('muteButton');
@@ -182,6 +147,9 @@ function muteSound(){
     handleMute();
 }
 
+/**
+ * Save Sounds in an Array and then stop them.
+ */
 function handleMute() {
     let allSounds = [
         world.throwSound,
@@ -191,12 +159,17 @@ function handleMute() {
         world.character.swimmingSound,
         world.character.looseSound,
         world.level.enemies[0].winSound,
+        world.level.enemies[0].finalAttack,
+        world.level.enemies[0].seeSound,
     ];
     allSounds.forEach(sound => {
         sound.muted = isMuted;
     });
 }
 
+/**
+ * Sends the user back to Start.
+ */
 function goToStartpage(){
     let start = document.getElementById('startPage');
     start.classList.remove('d-none');
@@ -209,6 +182,9 @@ function goToStartpage(){
     selectLevel();
 }
 
+/**
+ * Shows the GameOver div.
+ */
 function gameOver(){
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
@@ -222,6 +198,9 @@ function gameOver(){
 
 }
 
+/**
+ * Shows the Won div.
+ */
 function gameEnds(){
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
@@ -239,6 +218,9 @@ function gameEnds(){
     levelRow = `level${levelNumber}`
 }
 
+/**
+ * Starts the Game.
+ */
 function start(){ 
     canvasParent = document.getElementById('canvasParent');
     canvas = document.getElementById('canvas');
@@ -256,6 +238,9 @@ function start(){
     won.style.display = "none";
 }
 
+/**
+ * Selects the current Level.
+ */
 function selectLevel(){
     let level = document.getElementById('levelButton');
     level.innerHTML ="";
@@ -274,10 +259,12 @@ function selectLevel(){
         level.innerHTML = `Starte Level ${levelNumber}`;
         // levelNumber = 1;
     }else levelNumber = 1,
-    level.innerHTML = `Starte Level ${levelNumber}`;
-    
-    
+    level.innerHTML = `Starte Level ${levelNumber}`;   
 }
+
+/**
+ * Changes fullscreen on and off.
+ */
 function changeScreen(){
     fullscreenState = !fullscreenState;
     if(fullscreenState == true){
@@ -287,11 +274,21 @@ function changeScreen(){
     }
 }
 
+/**
+ * Opens Fullscreen.
+ */
 function fullscreen(){
-    let fullscreen = document.getElementById('fullscreen');
-    enterFullscreen(fullscreen);
+    // let fullscreen = document.getElementById('fullscreen');
+    let fullscreenButton = document.getElementById('fullscreenButton');
+    fullscreenButton.innerText="Fullscreen on";
+    let fullscreenV = document.body;
+    enterFullscreen(fullscreenV);
 }
 
+/**
+ * Enters Fullscreen.
+ * @param {body} element 
+ */
 function enterFullscreen(element) {
     if(element.requestFullscreen) {
       element.requestFullscreen();
@@ -302,35 +299,15 @@ function enterFullscreen(element) {
     }
   }
 
+/**
+ * Exits Fullscreen.
+ */
 function exitFullscreen() {
     if(document.exitFullscreen) {
       document.exitFullscreen();
     } else if(document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-}
-
-
-function moveLeft(isPressed) {
-    keyboard.left = isPressed;
-}
-
-function moveRight(isPressed) {
-    keyboard.right = isPressed;
-}
-
-function moveUp(isPressed) {
-    keyboard.up = isPressed;
-}
-
-function moveDown(isPressed) {
-    keyboard.down = isPressed;
-}
-
-function throwPoison(isPressed) {
-    keyboard.d = isPressed;
-}
-
-function moveSpace(isPressed) {
-    keyboard.space = isPressed;
+    let fullscreenButton = document.getElementById('fullscreenButton');
+    fullscreenButton.innerText="Fullscreen off";
 }

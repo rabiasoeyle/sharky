@@ -24,6 +24,9 @@ class Pufferfish extends MovableObject{
         bottom:15,
     }
     
+    /**
+     * Loads images. Sets type of enemy. Starts swimanimation.
+     */
     constructor(){
         super().loadImages(this.swimImages);
         this.loadImages(this.deadPoison);
@@ -32,11 +35,19 @@ class Pufferfish extends MovableObject{
         this.type = "pufferfish"
         this.livePoints = 1;
     }
+
+    /**
+     * Starts moving left.
+     * Sets interval for swimanimation.
+     */
     animateSwim(){
         this.moveLeft();
         setStoppableInterval(() => this.showSwimmingFish(), 200);
     }
 
+    /**
+     * Animation for swim and dead.
+     */
     showSwimmingFish(){
         if(this.livePoints == 0){
             this.playAnimation(this.deadPoison);

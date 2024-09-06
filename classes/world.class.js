@@ -12,9 +12,6 @@ class World{
     coinSound = new Audio('audio/coin-earned.mp3');
     poisonSound = new Audio('audio/poison-earned.mp3');
     id;
-    // soundSymbol = new Sound();
-
-
 
     constructor(canvas, keyboard, levelRow){
         this.ctx = canvas.getContext('2d');
@@ -49,8 +46,17 @@ class World{
         this.checkCollisionsWPoisonAndEnemy();
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
-            setTimeout(gameOver,2000)
+           this.deleteSound();
+            setTimeout(gameOver,2000);
         }
+    }
+
+    deleteSound(){
+        setTimeout(()=>{
+            this.finalAttackSound = this.level.enemies[0].finalAttack,
+            this.finalAttackSound.muted = true;
+        },2000)
+         
     }
 
     checkLivingCharacter(){

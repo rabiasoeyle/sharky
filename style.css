@@ -5,6 +5,7 @@ body{
     justify-content: center;
     background-image: url("img/Background/Layers/Water/D1.png");
     font-family:'Luckiest', Arial, Helvetica, sans-serif;
+    color:white;
 }
 canvas{
     background-color:black;
@@ -241,7 +242,7 @@ h1{
         display:block;
     }
     .page{
-        width:80vW;
+        width:100vW;
     }
     
     .jelly-enemy{

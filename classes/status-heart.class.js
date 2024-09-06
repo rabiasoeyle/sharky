@@ -9,6 +9,9 @@ class Heart extends Statusbar{
     ];
     heartPercentage;
 
+    /**
+     * Loads images. Set percentage.
+     */
     constructor(){
         super().loadImages(this.heartImage);
         this.setPercentage();
@@ -17,12 +20,20 @@ class Heart extends Statusbar{
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Sets percentage of actual energy.
+     * @param {*} energy 
+     */
     setPercentage(energy){
         this.heartPercentage = energy;
         let path = this.heartImage[this.resolveHeartImageIndex()];
         this.img = this.imageCache[path];
     } 
 
+    /**
+     * Shows different img for different energy.
+     * @returns 
+     */
     resolveHeartImageIndex(){
         if(this.heartPercentage == 100){
             return 5;

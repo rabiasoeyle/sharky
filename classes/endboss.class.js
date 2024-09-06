@@ -55,12 +55,18 @@ class Endboss extends MovableObject{
     type;
     livePoints = 3;
     winSound=new Audio ('audio/win.mp3');
+    seeSound = new Audio('audio/finalEnemy.mp3');
+    finalAttack = new Audio('audio/finalEnemyAttack.mp3');
     offset={
         right:0,
         left:50,
-        top:250,
-        bottom:100,
+        top:0,
+        bottom:0,
     }
+
+    /**
+     * Load all images and describes the type of the enemy.
+     */
     constructor(){
         super().loadImages(this.introduceEndboss);
         this.loadImages(this.floating);
@@ -71,10 +77,14 @@ class Endboss extends MovableObject{
         this.type = "endboss";
         this.livePoints=3;
     }
+
+    /**
+     * Animates the endboss.
+     */
     animateIntro(){
         let i = 0;
         this.endBoss = setInterval(() =>{
-            if(i<7){
+            if(i<9){
                 this.playAnimation(this.introduceEndboss);
             }else 
             if(this.livePoints == 0){
@@ -86,15 +96,21 @@ class Endboss extends MovableObject{
             }else if(this.hadFirstContact && i>=50){
                 this.playAnimation(this.attackBoss);
                 this.moveLeft();
+                if(isMuted == false){
+                    this.finalAttack.play();}
             }else{
                 this.playAnimation(this.floating)
-         }
-        //  if(this.world.character.x > 2260 && !this.hadFirstContact){
-        //      i=0;
-        //      this.hadFirstContact=true
-        //     }
+            }
+            if(this.world.character.x > 2260 && !this.hadFirstContact){
+                i=0;
+                this.hadFirstContact=true
+                setTimeout(()=>{
+                    if(isMuted == false){
+                    this.seeSound.play();}
+                },400)
+            }
             i++;
-        },200)
+            },200)
         intervalIds.push(this.endBoss);
     }
 }

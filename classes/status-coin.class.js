@@ -9,12 +9,21 @@ class Coins extends Statusbar{
     ]
     coinsAmount = 0;
     y=90;
+
+    /**
+     * Loads images. Sets amount of Coins.
+     */
     constructor(){
         super();
         this.loadImages(this.coinsImage); 
         this.setAmountCoins();
         this.coinsAmount = 0;
     }
+
+    /**
+     * Sets the new amount of coins.
+     * @param {*} amount 
+     */
     setAmountCoins(amount){
         this.coinsAmount += amount * 10;
         if(this.coinsAmount >= 100){
@@ -24,6 +33,10 @@ class Coins extends Statusbar{
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Shows differents images for different coin amounts.
+     * @returns 
+     */
     resolveCoinsImageIndex(){
         if(this.coinsAmount == 100){
             return 5;

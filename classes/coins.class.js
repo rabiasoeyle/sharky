@@ -19,20 +19,26 @@ class CollectableCoins extends MovableObject{
         bottom:0,
     }
     
+    /**
+     * Send images to loadImages().
+     * Start Animation.
+     */
     constructor(){
         super().loadImages(this.coinImages);
         this.animate();
     }
+
+    /**
+     * Set Animation interval.
+     */
     animate(){
         setStoppableInterval(() => this.showCoins(), 200);
     }
+
+    /**
+     * Play Animation.
+     */
     showCoins(){
         this.playAnimation(this.coinImages);
     }
-    // animate(){
-    //     setInterval(() =>{
-    //         this.playAnimation(this.coinImages);
-    //     },200)
-    // }
-    
 }

@@ -100,6 +100,10 @@ class Character extends MovableObject{
     }
     finAttack = false;// dies ist eine Idee um die atacke auch als Atacke aufnehmen zu lassen
 
+    /**
+     * Loads all images, with sending it to the function.
+     * Starts Characteranimation.
+     */
     constructor(){
         super().loadImages(this.idleImages);
         this.loadImages(this.moveRightImages); 
@@ -113,17 +117,34 @@ class Character extends MovableObject{
         this.animate();
     }
 
+    /**
+     * Animates swimming and different Situations.
+     */
     animate(){
         setStoppableInterval(() => this.animateSwimmingSound(), 1000/60);
         setStoppableInterval(() => this.animateSituation(), 100);
     }
+
+    /**
+     * Animates different swimming situations.
+     */
     animateSwimmingSound(){
-        // Stoppe den Sound nur, wenn keine Bewegung erfolgt
         if (!this.world.keyboard.right && !this.world.keyboard.left && !this.world.keyboard.up && !this.world.keyboard.down) {
             this.swimmingSound.pause();
         }
         if(this.world.keyboard.right || this.world.keyboard.left){
-            if(this.world.keyboard.right && this.x < this.world.level.levelEnd_x){
+            this.swimmingRightAndLeft(); 
+        }
+        if(this.world.keyboard.up || this.world.keyboard.down){
+            this.swimmingUpAndDown();
+        }
+    }
+
+    /**
+     * Animates swimming right and left.
+     */
+    swimmingRightAndLeft(){
+        if(this.world.keyboard.right && this.x < this.world.level.levelEnd_x){
             this.x += this.speed*30;
             this.otherDirection = false;
             if(isMuted == false){
@@ -137,66 +158,76 @@ class Character extends MovableObject{
                 this.swimmingSound.play();}
             }
             this.world.camera_x = 0 - this.x +50
+    }
+
+    /**
+     * Animates swimming up and down.
+     */
+    swimmingUpAndDown(){
+        if(this.world.keyboard.up && this.y > 0){
+            this.y -= this.speed*30;
+            this.otherDirection = false;
+            if(isMuted == false){
+            this.swimmingSound.play();}
         }
-        if(this.world.keyboard.up || this.world.keyboard.down){
-            if(this.world.keyboard.up && this.y > 0){
-                this.y -= this.speed*30;
-                this.otherDirection = false;
-                if(isMuted == false){
-                this.swimmingSound.play();}
-            }
-            if(this.world.keyboard.down && this.y < 380){
-                this.y += this.speed *30;
-                this.otherDirection = false;
-                if(isMuted == false){
-                this.swimmingSound.play();}
-            }
+        if(this.world.keyboard.down && this.y < 380){
+            this.y += this.speed *30;
+            this.otherDirection = false;
+            if(isMuted == false){
+            this.swimmingSound.play();}
         }
     }
 
+    /**
+     * Animation when:
+     * -dead
+     * -hurt
+     * -bulbattack
+     * -attack
+     */
     animateSituation(){
         if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
             this.otherDirection = false;
             this.playAnimation(this.bulbAttack);
-            // this.finAttack = false;
         }else
         if(this.isHurt()){
             if(isMuted == false){
             this.hurtSound.play();}
             this.playAnimation(this.hurtImagesPoison);
-            // this.finAttack = false;
-            
         }else
         if(this.world.keyboard.space){
             this.playAnimation(this.sharkieAttack);
             this.finAttack = true;
-            
         }else 
         if(this.isHurtByJelly()){
             if(isMuted == false){
             this.hurtSound.play();}
             this.playAnimation(this.hurtImageElectro);
-            // this.finAttack = false;
-            
-        }else 
+        }else   
+        this.animateSituationSecondPart();
+    }
+
+    /**
+     * Animation when:
+     * -dead
+     * -hurt
+     * -bulbattack
+     * -attack
+     */
+    animateSituationSecondPart(){
         if(this.isHurtByBoss()){
             if(isMuted == false){
             this.hurtSound.play();}
             this.playAnimation(this.hurtImageElectro);
-            // this.finAttack = false;
-            
         }else
         if(this.isDead()){
             this.playAnimation(this.deadImagesPoisioned);
             if(isMuted == false){
             this.looseSound.play();}
-            // this.finAttack = false;
         }else
         if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
             this.playAnimation(this.moveRightImages)
-            // this.finAttack = false;
-        }
-        else{
+        }else{
             this.playAnimation(this.idleImages)
             this.finAttack = false;
         }
