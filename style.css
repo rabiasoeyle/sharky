@@ -129,8 +129,17 @@ h1{
     background-color: rgba(0, 0, 0, 0.3);
     display:block;
 }
+.screen-button{
+    top: 8vh;
+    right: 22vW; 
+    background-color: rgba(0, 0, 0, 0.3);
+    display:block;
+}
+.screen-button img{
+    width:10px;
+    height:10px;
+}
 .touch-button-left{
-     
     top: 80vh;
     right: 16vW;    
 }

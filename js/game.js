@@ -5,6 +5,7 @@ let isMuted = false;
 let attack = false;
 let levelNumber = 1;
 let levelRow = `level${levelNumber}`
+let fullscreenState = false;
 
 
 
@@ -276,6 +277,14 @@ function selectLevel(){
     level.innerHTML = `Starte Level ${levelNumber}`;
     
     
+}
+function changeScreen(){
+    fullscreenState = !fullscreenState;
+    if(fullscreenState == true){
+        fullscreen();
+    }else{
+        exitFullscreen();
+    }
 }
 
 function fullscreen(){
