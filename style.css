@@ -16,6 +16,13 @@ h1{
 h3{
     margin:4px;
 }
+.svg-button{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:30px;
+    height:30px;
+}
 canvas{
     background-color:black;
     display:block;
