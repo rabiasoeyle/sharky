@@ -6,7 +6,8 @@ let attack = false;
 let levelNumber = 1;
 let levelRow = `level${levelNumber}`
 let fullscreenState = false;
-let gameStarted = false
+let gameStarted = false;
+let menuOpen = false;
 
 
 /**
@@ -124,6 +125,20 @@ function addEventListenersToMoveButtons(){
         e.preventDefault();
         keyboard.space = false;
     });
+}
+
+/**
+ * Toggle menu for display none and flex.
+ */
+function toggleMenu(){
+    let menu = document.getElementById('menuForPages');
+    if(menuOpen){
+        menu.style.display="none"
+        menuOpen = false;
+    }else{
+        menu.style.display= "flex";
+        menuOpen = true;
+    }
 }
 
 /**
