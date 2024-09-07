@@ -6,6 +6,7 @@ let attack = false;
 let levelNumber = 1;
 let levelRow = `level${levelNumber}`
 let fullscreenState = false;
+let gameStarted = false
 
 
 /**
@@ -194,7 +195,8 @@ function gameOver(){
     },500)
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
-    intervalIds = []
+    intervalIds = [],
+    gameStarted = false;
 
 }
 
@@ -216,6 +218,7 @@ function gameEnds(){
     } 
     levelNumber ++;
     levelRow = `level${levelNumber}`
+    gameStarted = false;
 }
 
 /**
@@ -226,6 +229,7 @@ function start(){
     canvas = document.getElementById('canvas');
     // levelRow = `level${levelNumber}`,
     selectLevel();
+    gameStarted= true;
     world = new World(canvas, keyboard, levelRow);
     let start = document.getElementById('startPage');
     start.classList.add('d-none');

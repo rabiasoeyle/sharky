@@ -1,6 +1,6 @@
 
 class World{
-    character;
+    character = new Character();
     level;
     ctx;//context
     canvas;
@@ -13,17 +13,30 @@ class World{
     poisonSound = new Audio('audio/poison-earned.mp3');
     id;
 
+    /**
+     * Defines ctx.
+     * Creates a new Character.
+     * Starts draw() for drawing the Characters.
+     * Sets World.
+     * Starts checking Funktion.
+     * @param {*} canvas 
+     * @param {*} keyboard 
+     * @param {*} levelRow 
+     */
     constructor(canvas, keyboard, levelRow){
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.level = levelRow
-        this.character = new Character();
+        
         this.draw();
         this.setWorld();
         this.checkAll();
     }
 
+    /**
+     * Sets the world for some Classes which need to use world.
+     */
     setWorld(){
         this.character.world = this; 
         //damit der charakter auf die variablen, die in der game.js der world übergeben werden zugreifen kann, z.B. keypress
@@ -35,10 +48,16 @@ class World{
         this.throwable.world = this;
     }
 
+    /**
+     * Creates an interval for checking some Situations all 100ms.
+     */
     checkAll(){
         setStoppableInterval(() => this.checkAllAnimation(), 100);
     }
 
+    /**
+     * Checks all animations.
+     */
     checkAllAnimation(){
         this.checkCollisions();
         this.checkCollisionsWCoins();
@@ -51,18 +70,27 @@ class World{
         }
     }
 
+    /**
+     * Deletes boss attack sound, when character is dead.
+     */
     deleteSound(){
         setTimeout(()=>{
             this.finalAttackSound = this.level.enemies[0].finalAttack,
             this.finalAttackSound.muted = true;
         },2000)
-         
     }
 
+    /**
+     * Checks if character is living.
+     * @returns  true or false
+     */
     checkLivingCharacter(){
         return this.character.energy <= 0
     }
     
+    /**
+     * Checks if throwable Object is available.
+     */
     checkThrowableObject(){
         if(this.keyboard.d == true && this.statusbar[2].poisonPercentage > 0){
             let poisonBulb = new ThrowableObject(this.character.x +60 , this.character.y +40)
@@ -77,52 +105,67 @@ class World{
                 this.throwable.splice(index, 1);  // Giftbirne aus dem Array entfernen
             }})
     }
-   
+
+    /**
+     * Checks if poison collides with enemy.
+     */
     checkCollisionsWPoisonAndEnemy() {
         this.throwable.forEach((poison, poisonIndex) => {
             this.level.enemies.forEach((enemy, enemyIndex) => {
                 if(poison.isColliding(enemy)){
                     if(enemy.livePoints > 0) {
-                        if(enemy.type == "endboss"){
-                            enemy.livePoints -= 1;
-                            this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
-                            this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
-                        }else if(enemy.type == "jellyfish"){
-                            enemy.livePoints -= 1;
-                        }else if(enemy.type == "pufferfish"){
-                            enemy.livePoints -= 1;
-                        }
-                        this.throwable.splice(poisonIndex, 1); 
-                    }
-                    
-                    
-                    if(enemy.livePoints == 0){
-                        if(enemy.type == "jellyfish"){
-                            // this.level.enemies[enemyIndex].jellyIsDead()
-                            setTimeout(() => {
-                                this.level.enemies.splice(enemyIndex, 1);
-                            }, 2000); 
-                        }else if(enemy.type == "pufferfish"){
-                                // this.level.enemies[enemyIndex].pufferIsDead()
-                            setTimeout(() => {
-                                this.level.enemies.splice(enemyIndex, 1);
-                            }, 2000); 
-                        }else if(enemy.type == "endboss"){
-                                this.level.enemies[enemyIndex].endBossIsDead();
-                            this.levelNumber ++;    
-                            setTimeout(gameEnds,500)
-                        }
+                        this.poisonCollidesWLivingEnemy(enemy, enemyIndex)
+                    }if(enemy.livePoints == 0){
+                        this.poisonCollidesWDeadEnemy(enemy, enemyIndex)
                     }
                 this.throwable.splice(poisonIndex, 1);
     }})})};
-   
+
+    /**
+     * Poison collides with living enemy.
+     * @param {*} enemy 
+     * @param {*} enemyIndex 
+     */
+    poisonCollidesWLivingEnemy(enemy, enemyIndex){
+        if(enemy.type == "endboss"){
+            enemy.livePoints -= 1;
+            this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
+            this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
+        }else if(enemy.type == "jellyfish"){
+            enemy.livePoints -= 1;
+        }else if(enemy.type == "pufferfish"){
+             enemy.livePoints -= 1;
+        }
+    }
+
+    /**
+     * Poison collides with dead enemy.
+     * @param {*} enemy 
+     * @param {*} enemyIndex 
+     */
+    poisonCollidesWDeadEnemy(enemy, enemyIndex){
+        if(enemy.type == "jellyfish"){
+            setTimeout(() => {
+                this.level.enemies.splice(enemyIndex, 1);
+            }, 2000); 
+        }else if(enemy.type == "pufferfish"){
+            setTimeout(() => {
+                this.level.enemies.splice(enemyIndex, 1);
+            }, 2000); 
+        }else if(enemy.type == "endboss"){
+            this.level.enemies[enemyIndex].endBossIsDead();
+            this.levelNumber ++;    
+            setTimeout(gameEnds,500)
+        }
+    }
+
+    /**
+     * Checks Collisions with main character.
+     */
     checkCollisions(){
             this.level.enemies.forEach((enemy, enemyIndex)=>{
                 if(enemy.type == "pufferfish"){ 
                     if(this.character.isColliding(enemy) && this.character.finAttack){
-                        //diese if abfragen funktionieren noch nicht ganz, aber der Ansatz soll sein,
-                        //dass wenn auf space gesdrückt und der Gegner attackiert wird,
-                        // der Gegner verletzt ist.
                         enemy.livePoints -= 1;
                         this.checkIfDead(enemy, enemyIndex);
                     }else
@@ -130,7 +173,6 @@ class World{
                     this.character.hit();
                     this.statusbar[0].setPercentage(this.character.energy);
                     }
-                   
                 }else if(enemy.type == "jellyfish"){
                     if(this.character.isColliding(enemy) && this.character.finAttack){
                         enemy.livePoints -= 1;
@@ -153,6 +195,12 @@ class World{
             }
         })
     }
+
+    /**
+     * Checks if enemy is dead.
+     * @param {*} enemy 
+     * @param {*} enemyIndex 
+     */
     checkIfDead(enemy, enemyIndex){
         if(enemy.livePoints == 0){
             if(enemy.type == "jellyfish"){
@@ -172,6 +220,10 @@ class World{
                 
             }}
     }
+
+    /**
+     * Checks collisions with coins.
+     */
     checkCollisionsWCoins(){
         this.level.coins.forEach((coin, index)=>{
             if(this.character.isColliding(coin)){
@@ -181,26 +233,41 @@ class World{
                 this.deleteCoinFromMap(index);
             }
         })
-}
+    }
 
-checkCollisionsWPoison(){
-    this.level.poisons.forEach((poison, index)=>{
-        if(this.character.isColliding(poison)){
-            this.statusbar[2].setAmountPoison(1);
-            if(isMuted == false){
-            this.poisonSound.play();}
-            this.deletePoisonFromMap(index);
-        }
-    })
-}
+    /**
+     * Checks collisions with poison.
+     */
+    checkCollisionsWPoison(){
+        this.level.poisons.forEach((poison, index)=>{
+            if(this.character.isColliding(poison)){
+                this.statusbar[2].setAmountPoison(1);
+                if(isMuted == false){
+                this.poisonSound.play();}
+                this.deletePoisonFromMap(index);
+            }
+        })
+    }
 
-deleteCoinFromMap(index) {
-    this.level.coins.splice(index, 1); // Entfernt die Münze aus dem Array
-}
-deletePoisonFromMap(index) {
-    this.level.poisons.splice(index, 1); // Entfernt die Münze aus dem Array
-}
+    /**
+     * Deletes Coins when they are collected.
+     * @param {*} index 
+     */
+    deleteCoinFromMap(index) {
+        this.level.coins.splice(index, 1); // Entfernt die Münze aus dem Array
+    }
 
+    /**
+     * Deletes Poison when they are collected.
+     * @param {*} index 
+     */
+    deletePoisonFromMap(index) {
+        this.level.poisons.splice(index, 1); // Entfernt die Münze aus dem Array
+    }
+
+    /**
+     * Draw all Elements on the canvas.
+     */
     draw(){
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height); 
         this.ctx.translate(this.camera_x, 0);
@@ -211,21 +278,28 @@ deletePoisonFromMap(index) {
         this.addObjectToMap(this.level.coins);
         this.ctx.translate(-this.camera_x, 0);//stop camera before statusbar
         this.addObjectToMap(this.statusbar);
-        // this.addToMap(this.soundSymbol);
         this.ctx.translate(this.camera_x, 0);//start camera after statusbar
         this.addObjectToMap(this.throwable);
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function (){
-            self.draw();//draw() wird immer wieder aufgerufen
+            self.draw();
         })
     }
 
+    /**
+     * Adds all objects to map.
+     * @param {*} object 
+     */
     addObjectToMap(object){
         object.forEach(o =>{this.addToMap(o)});
     }
 
+    /**
+     * Add all objects to map.
+     * @param {*} mo 
+     */
     addToMap(mo){
         if(mo.img && mo.img.complete){
             if(mo.otherDirection){
@@ -239,6 +313,10 @@ deletePoisonFromMap(index) {
         }
     }
 
+    /**
+     * Flip the image when swimming left.
+     * @param {*} mo 
+     */
     flipImage(mo){
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -248,6 +326,10 @@ deletePoisonFromMap(index) {
         //um dies anzupassen wird * -1 gerechnet
     }
 
+    /**
+     * Flip image back, when turk right.
+     * @param {*} mo 
+     */
     flipImageBack(mo){
         this.ctx.restore();
         mo.x = mo.x * -1

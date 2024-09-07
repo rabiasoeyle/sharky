@@ -1,0 +1,8 @@
+Sounds:
+finalEnemy : 
+https://freesound.org/people/x235/sounds/388233/, braaaam 1_lim.wav;
+
+finalEnemyAttack:
+https://freesound.org/people/Infinita08/sounds/672004/ , Infinita08;
+
+
