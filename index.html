@@ -30,7 +30,8 @@
     <script type="text/javascript" src="./classes/status-coin.class.js"></script>
     <script type="text/javascript" src="./classes/status-heart.class.js"></script>
     <script type="text/javascript" src="./classes/status-poison.class.js"></script>
-    
+
+    <link rel="stylesheet" href="./font.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body onload="init()">
@@ -50,6 +51,7 @@
     <div id="canvasParent"class="d-none">
         <canvas id="canvas"width="720" height="480"></canvas>
         <button class="mute-button responsive-buttons"id="muteButton" type="button" value="Stop All Audio" onclick="muteSound()">Mute</button>
+        <button class="level-button responsive-buttons"id="levelButtonCanvas" type="button" disabled>Level</button>
         <button id="leftButton" class="touch-button-left responsive-buttons">
             <img src="img/Botones/Key/arrowkeys-left.png">
         </button>
@@ -100,6 +102,11 @@
     </div>
     
 </div>
-</div>
+    </div>
+    <footer class="footerOfPage"> 
+        <a href="./index.html">Start</a>
+        <a href="./datenschutz.html">Datenschutz</a>
+        <a href="./impressum.html">Impressum</a>
+    </footer>
 </body>
 </html>

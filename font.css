@@ -3,6 +3,6 @@
     font-family: "Luckiest";
     font-style: normal;
     font-weight: 100;
-    src: url("img/Font/Luckiest_Guy.zip")
+    src: url("font/Luckiest_Guy/LuckiestGuy-Regular.ttf")
       format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }

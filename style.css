@@ -3,20 +3,41 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url("img/Background/Layers/Water/D1.png");
-    font-family:'Luckiest', Arial, Helvetica, sans-serif;
+    background-image: url("img/Background/Legacy/Layers/5. Water/L2.png");
+    font-family: Arial, Helvetica, sans-serif;
     color:white;
+    background-size: cover;
+}
+h1{
+    font-family:'Luckiest', Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-align: center;
+}
+.footerOfPage{
+    background-image: url("img/Background/Legacy/Layers/3.Fondo 1/D1.png");
+    padding: 0px 0px 16px 0px;
+}
+a{
+    color:white;
+    cursor: pointer;
+    text-decoration: none;
+    padding:0 8px;
+}
+a:hover{
+    color:bisque;
+    text-decoration: underline;
 }
 canvas{
     background-color:black;
     display:block;
 }
-h1{
-    font-size: 50px;
-    text-align: center;
-}
 .fullscreen{
     max-width:800px;
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .start-page{
     
@@ -123,6 +144,12 @@ h1{
 .help-space{
     width:300px;
     height:40px;
+}
+.level-button{
+    right: 38vW;
+    top: 8vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    display:block;
 }
 .mute-button{
     top: 8vh;

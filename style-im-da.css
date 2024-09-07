@@ -1,0 +1,68 @@
+body{
+    margin:0;
+    padding:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url("img/Background/Legacy/Layers/5. Water/L2.png");
+    color:white;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    font-family:'Luckiest', Arial, Helvetica, sans-serif;
+    font-size: 50px;
+    text-align: center;
+    color:white;
+}
+.footerOfPage{
+    background-image:url("img/Background/Legacy/Layers/3.Fondo 1/D1.png")!important;
+    padding-bottom:40px;
+    z-index:12;
+}
+.footerOfPage a{
+    text-decoration: none;
+    padding: 0 8px;
+}
+.footerOfPage a:hover{
+    text-decoration: underline;
+}
+
+a{
+    color:white;
+    cursor: pointer;
+}
+a:hover{
+    color:bisque;
+}
+.sounds{
+    display: flex;
+    flex-direction: column;
+}
+.contentImpressum{
+    padding:40px;
+    min-height: 90vh;
+    max-width:1820px;
+}
+.contentDsgvo{
+    padding:40px;
+    max-width:1820px;
+}
+.quellen{
+    background-color: white !important;
+}
+header{
+    text-align: center;
+}
+
+@media(max-width:500px){
+    .contentImpressum{
+        padding:12px;
+    }
+    .contentDsgvo{
+        padding:12px;
+    }
+    h1{
+        font-size: 35px;
+    }
+}

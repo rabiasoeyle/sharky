@@ -213,12 +213,13 @@ function gameEnds(){
     canvas.classList.add('d-none');
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = [];
-    if(levelNumber >3){
-        levelNumber = 0;
-    } 
     levelNumber ++;
+    if(levelNumber > 3){
+        levelNumber = 1;
+    }
     levelRow = `level${levelNumber}`
     gameStarted = false;
+    selectLevel();
 }
 
 /**
@@ -231,6 +232,8 @@ function start(){
     selectLevel();
     gameStarted= true;
     world = new World(canvas, keyboard, levelRow);
+    let levelButton = document.getElementById('levelButtonCanvas');
+    levelButton.innerText = `Level ${levelNumber}`
     let start = document.getElementById('startPage');
     start.classList.add('d-none');
     canvasParent.classList.remove('d-none');

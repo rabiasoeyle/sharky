@@ -9,8 +9,8 @@ class World{
     statusbar = [new Heart(), new Coins(), new Poison()];
     throwable = [];
     throwSound = new Audio('audio/shot.mp3');
-    coinSound = new Audio('audio/coin-earned.mp3');
-    poisonSound = new Audio('audio/poison-earned.mp3');
+    coinSound = new Audio('audio/coin-recieved.mp3');
+    poisonSound = new Audio('audio/poison-recieved.mp3');
     id;
 
     /**
@@ -52,7 +52,7 @@ class World{
      * Creates an interval for checking some Situations all 100ms.
      */
     checkAll(){
-        setStoppableInterval(() => this.checkAllAnimation(), 100);
+        setStoppableInterval(() => this.checkAllAnimation(), 200);
     }
 
     /**
@@ -116,7 +116,9 @@ class World{
                     if(enemy.livePoints > 0) {
                         this.poisonCollidesWLivingEnemy(enemy, enemyIndex)
                     }if(enemy.livePoints == 0){
-                        this.poisonCollidesWDeadEnemy(enemy, enemyIndex)
+                        // this.poisonCollidesWDeadEnemy(enemy, enemyIndex)
+                        
+                        this.checkIfDead(enemy, enemyIndex)
                     }
                 this.throwable.splice(poisonIndex, 1);
     }})})};
@@ -138,26 +140,26 @@ class World{
         }
     }
 
-    /**
-     * Poison collides with dead enemy.
-     * @param {*} enemy 
-     * @param {*} enemyIndex 
-     */
-    poisonCollidesWDeadEnemy(enemy, enemyIndex){
-        if(enemy.type == "jellyfish"){
-            setTimeout(() => {
-                this.level.enemies.splice(enemyIndex, 1);
-            }, 2000); 
-        }else if(enemy.type == "pufferfish"){
-            setTimeout(() => {
-                this.level.enemies.splice(enemyIndex, 1);
-            }, 2000); 
-        }else if(enemy.type == "endboss"){
-            this.level.enemies[enemyIndex].endBossIsDead();
-            this.levelNumber ++;    
-            setTimeout(gameEnds,500)
-        }
-    }
+    // /**
+    //  * Poison collides with dead enemy.
+    //  * @param {*} enemy 
+    //  * @param {*} enemyIndex 
+    //  */
+    // poisonCollidesWDeadEnemy(enemy, enemyIndex){
+    //     if(enemy.type == "jellyfish"){
+    //         setTimeout(() => {
+    //             this.level.enemies.splice(enemyIndex, 1);
+    //         }, 2000); 
+    //     }else if(enemy.type == "pufferfish"){
+    //         setTimeout(() => {
+    //             this.level.enemies.splice(enemyIndex, 1);
+    //         }, 2000); 
+    //     }else if(enemy.type == "endboss"){
+    //         this.level.enemies[enemyIndex].endBossIsDead();
+    //         // this.levelNumber ++;    
+    //         setTimeout(gameEnds,500)
+    //     }
+    // }
 
     /**
      * Checks Collisions with main character.
@@ -215,7 +217,7 @@ class World{
                     }, 2000); 
             }else if(enemy.type == "endboss"){
                     this.level.enemies[enemyIndex].endBossIsDead();
-                setTimeout(gameEnds,500)
+                    setTimeout(gameEnds,500)
             }else{
                 
             }}
