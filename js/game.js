@@ -8,6 +8,7 @@ let levelRow = `level${levelNumber}`
 let fullscreenState = false;
 let gameStarted = false;
 let menuOpen = false;
+let overlayIsOpen = false;
 
 
 /**
@@ -59,6 +60,30 @@ document.addEventListener('keyup', (event)=>{
     }
 }
 )
+
+/**
+ * Handles clicks outside the menu and the button.
+ */
+document.addEventListener('click', function (event) {
+    let menu = document.getElementById('menuForPages');
+    let button = document.getElementById('menuButton');
+    // If the menu is open and the click is outside the menu or the button, close the menu
+    if (menuOpen && !menu.contains(event.target) && !button.contains(event.target)) {
+        closeMenu();
+    }
+});
+
+/**
+ * Handles clicks outside the info and the ? button.
+ */
+document.addEventListener('click', function (event) {
+    let overlay = document.getElementById('helpOverlay');
+    let button = document.getElementById('helpButton');
+    // If the menu is open and the click is outside the menu or the button, close the menu
+    if (overlayIsOpen && !overlay.contains(event.target) && !button.contains(event.target)) {
+        closeOverlay();
+    }
+});
 
 /**
  * When the page is loaded.
@@ -133,12 +158,17 @@ function addEventListenersToMoveButtons(){
 function toggleMenu(){
     let menu = document.getElementById('menuForPages');
     if(menuOpen){
-        menu.style.display="none"
-        menuOpen = false;
+       closeMenu();
     }else{
         menu.style.display= "flex";
         menuOpen = true;
     }
+}
+
+function closeMenu(){
+    let menu = document.getElementById('menuForPages');
+     menu.style.display="none"
+        menuOpen = false;
 }
 
 /**
@@ -148,9 +178,16 @@ function helpOverlay(){
     let overlay = document.getElementById('helpOverlay');
     if (overlay.style.display == "none") {
         overlay.style.display = "flex";
+        overlayIsOpen = true;
       } else {
-        overlay.style.display = "none";
+        closeOverlay();
       }
+}
+
+function closeOverlay(){
+    let overlay = document.getElementById('helpOverlay');
+    overlay.style.display = "none";
+    overlayIsOpen = false;
 }
 
 /**
@@ -158,8 +195,24 @@ function helpOverlay(){
  */
 function muteSound(){
     isMuted = !isMuted;
-    let muteButton = document.getElementById('muteButton');
-    muteButton.innerText = isMuted ? 'Unmute' : 'Mute';
+    // let muteButton = document.getElementById('muteButton');
+    // muteButton.innerText = isMuted ? 'Unmute' : 'Mute';
+    let muteIcon = document.getElementById('muteIcon');
+    // fullscreenButton.innerText="Fullscreen off";
+    if(isMuted){
+        muteIcon.outerHTML = `
+    <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
+        <path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/>
+    </svg>
+    ` 
+    }else{
+        muteIcon.outerHTML = `
+            <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
+                <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
+            </svg>
+        ` 
+    }
+   
     handleMute();
 }
 
@@ -301,8 +354,13 @@ function changeScreen(){
  */
 function fullscreen(){
     // let fullscreen = document.getElementById('fullscreen');
-    let fullscreenButton = document.getElementById('fullscreenButton');
-    fullscreenButton.innerText="Fullscreen on";
+    // let fullscreenButton = document.getElementById('fullscreenButton');
+    let fullscreenIcon = document.getElementById('fullscreenIcon');
+    // fullscreenButton.innerText="Fullscreen off";
+    fullscreenIcon.outerHTML = `
+    <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#5f6368">
+        <path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z"/>
+    </svg>`;
     let fullscreenV = document.body;
     enterFullscreen(fullscreenV);
 }
@@ -330,6 +388,12 @@ function exitFullscreen() {
     } else if(document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-    let fullscreenButton = document.getElementById('fullscreenButton');
-    fullscreenButton.innerText="Fullscreen off";
+    // let fullscreenButton = document.getElementById('fullscreenButton');
+    // fullscreenButton.innerText="Fullscreen on";
+    let fullscreenIcon = document.getElementById('fullscreenIcon');
+    fullscreenIcon.outerHTML = `
+        <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
+            <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z"/>
+        </svg>
+    `
 }
