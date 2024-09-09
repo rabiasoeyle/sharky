@@ -1,6 +1,4 @@
 class ThrowableObject extends MovableObject{
-    // x = 220 + Math.random()*2000;
-    // y = 370;
     width= 40;
     height = 40;
     poisonImages = [

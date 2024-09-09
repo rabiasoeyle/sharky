@@ -89,9 +89,9 @@ class Character extends MovableObject{
     x = 50;
     y = 480 - (this.height +50);
     world; 
-    swimmingSound = new Audio ('audio/idle.mp3');
-    looseSound=new Audio('audio/loose.mp3');
-    hurtSound = new Audio('audio/hurt.mp3');
+    // swimmingSound = new Audio ('audio/idle.mp3');
+    // looseSound=new Audio('audio/loose.mp3');
+    // hurtSound = new Audio('audio/hurt.mp3');
     offset={
         right:10,
         left:10,
@@ -130,7 +130,7 @@ class Character extends MovableObject{
      */
     animateSwimmingSound(){
         if (!this.world.keyboard.right && !this.world.keyboard.left && !this.world.keyboard.up && !this.world.keyboard.down) {
-            this.swimmingSound.pause();
+            allSounds[0].pause();
         }
         if(this.world.keyboard.right || this.world.keyboard.left){
             this.swimmingRightAndLeft(); 
@@ -148,14 +148,14 @@ class Character extends MovableObject{
             this.x += this.speed*30;
             this.otherDirection = false;
             if(isMuted == false){
-               this.swimmingSound.play(); 
+               allSounds[0].play(); //swimming sound
             }
             }
             if(this.world.keyboard.left && this.x > 0){
                 this.x -= this.speed*30;
                 this.otherDirection = true;
                 if(isMuted == false){
-                this.swimmingSound.play();}
+                allSounds[0].play();} //swimming sound
             }
             this.world.camera_x = 0 - this.x +50
     }
@@ -168,13 +168,13 @@ class Character extends MovableObject{
             this.y -= this.speed*30;
             this.otherDirection = false;
             if(isMuted == false){
-            this.swimmingSound.play();}
+            allSounds[0].play();}
         }
         if(this.world.keyboard.down && this.y < 380){
             this.y += this.speed *30;
             this.otherDirection = false;
             if(isMuted == false){
-            this.swimmingSound.play();}
+            allSounds[0].play();}
         }
     }
 
@@ -192,7 +192,7 @@ class Character extends MovableObject{
         }else
         if(this.isHurt()){
             if(isMuted == false){
-            this.hurtSound.play();}
+            allSounds[2].play();}
             this.playAnimation(this.hurtImagesPoison);
         }else
         if(this.world.keyboard.space){
@@ -201,7 +201,7 @@ class Character extends MovableObject{
         }else 
         if(this.isHurtByJelly()){
             if(isMuted == false){
-            this.hurtSound.play();}
+            allSounds[2].play();}
             this.playAnimation(this.hurtImageElectro);
         }else   
         this.animateSituationSecondPart();
@@ -217,13 +217,13 @@ class Character extends MovableObject{
     animateSituationSecondPart(){
         if(this.isHurtByBoss()){
             if(isMuted == false){
-            this.hurtSound.play();}
+            allSounds[2].play();}//hurt sound
             this.playAnimation(this.hurtImageElectro);
         }else
         if(this.isDead()){
             this.playAnimation(this.deadImagesPoisioned);
             if(isMuted == false){
-            this.looseSound.play();}
+            allSounds[1].play();}//lose sound
         }else
         if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
             this.playAnimation(this.moveRightImages)

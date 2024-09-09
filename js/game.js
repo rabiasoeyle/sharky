@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let isMuted = false;
+let isMuted = true;
 let attack = false;
 let levelNumber = 1;
 let levelRow = `level${levelNumber}`
@@ -9,6 +9,17 @@ let fullscreenState = false;
 let gameStarted = false;
 let menuOpen = false;
 let overlayIsOpen = false;
+let allSounds = [
+    new Audio('audio/idle.mp3'),
+    new Audio('audio/loose.mp3'),
+    new Audio('audio/hurt.mp3'),
+    new Audio('audio/win.mp3'),
+    new Audio('audio/finalEnemy.mp3'),
+    new Audio('audio/finalEnemyAttack_1.mp3'),
+    new Audio('audio/shot.mp3'),
+    new Audio('audio/coin-recieved.mp3'),
+    new Audio('audio/poison-recieved.mp3'),
+]
 
 
 /**
@@ -195,21 +206,18 @@ function closeOverlay(){
  */
 function muteSound(){
     isMuted = !isMuted;
-    // let muteButton = document.getElementById('muteButton');
-    // muteButton.innerText = isMuted ? 'Unmute' : 'Mute';
     let muteIcon = document.getElementById('muteIcon');
-    // fullscreenButton.innerText="Fullscreen off";
     if(isMuted){
         muteIcon.outerHTML = `
-    <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
-        <path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/>
-    </svg>
-    ` 
+        <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
+            <path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Zm-80 238v-94l-72-72H200v80h114l86 86Zm-36-130Z"/>
+        </svg>
+        ` 
     }else{
         muteIcon.outerHTML = `
-            <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
-                <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
-            </svg>
+        <svg id="muteIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
+            <path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320ZM400-606l-86 86H200v80h114l86 86v-252ZM300-480Z"/>
+        </svg>
         ` 
     }
    
@@ -220,17 +228,17 @@ function muteSound(){
  * Save Sounds in an Array and then stop them.
  */
 function handleMute() {
-    let allSounds = [
-        world.throwSound,
-        world.coinSound,
-        world.poisonSound,
-        world.character.hurtSound,
-        world.character.swimmingSound,
-        world.character.looseSound,
-        world.level.enemies[0].winSound,
-        world.level.enemies[0].finalAttack,
-        world.level.enemies[0].seeSound,
-    ];
+    // let allSounds = [
+    //     world.throwSound,
+    //     world.coinSound,
+    //     world.poisonSound,
+    //     world.character.hurtSound,
+    //     world.character.swimmingSound,
+    //     world.character.looseSound,
+    //     world.level.enemies[0].winSound,
+    //     world.level.enemies[0].finalAttack,
+    //     world.level.enemies[0].seeSound,
+    // ];
     allSounds.forEach(sound => {
         sound.muted = isMuted;
     });
@@ -255,6 +263,9 @@ function goToStartpage(){
  * Shows the GameOver div.
  */
 function gameOver(){
+    if(!isMuted){
+        muteSound();
+    }
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
     setTimeout(()=>{
@@ -272,6 +283,9 @@ function gameOver(){
  * Shows the Won div.
  */
 function gameEnds(){
+    if(!isMuted){
+        muteSound();
+    }
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
     setTimeout(()=>{

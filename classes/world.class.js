@@ -12,6 +12,7 @@ class World{
     coinSound = new Audio('audio/coin-recieved.mp3');
     poisonSound = new Audio('audio/poison-recieved.mp3');
     id;
+    myReq;
 
     /**
      * Defines ctx.
@@ -65,20 +66,21 @@ class World{
         this.checkCollisionsWPoisonAndEnemy();
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
-           this.deleteSound();
+        //    this.deleteSound();
             setTimeout(gameOver,2000);
+            cancelAnimationFrame(this.myReq);
         }
     }
 
     /**
      * Deletes boss attack sound, when character is dead.
      */
-    deleteSound(){
-        setTimeout(()=>{
-            this.finalAttackSound = this.level.enemies[0].finalAttack,
-            this.finalAttackSound.muted = true;
-        },2000)
-    }
+    // deleteSound(){
+    //     setTimeout(()=>{
+    //         this.finalAttackSound = this.level.enemies[0].finalAttack,
+    //         this.finalAttackSound.muted = true;
+    //     },2000)
+    // }
 
     /**
      * Checks if character is living.
@@ -97,7 +99,7 @@ class World{
             poisonBulb.startX = poisonBulb.x;
             this.throwable.push(poisonBulb);
             if(isMuted == false){
-            this.throwSound.play();}
+            allSounds[6].play();}
             this.statusbar[2].deletePoisonAmount(1);
         }
         this.throwable.forEach((poisonBulb, index) => {
@@ -117,7 +119,6 @@ class World{
                         this.poisonCollidesWLivingEnemy(enemy, enemyIndex)
                     }if(enemy.livePoints == 0){
                         // this.poisonCollidesWDeadEnemy(enemy, enemyIndex)
-                        
                         this.checkIfDead(enemy, enemyIndex)
                     }
                 this.throwable.splice(poisonIndex, 1);
@@ -217,7 +218,12 @@ class World{
                     }, 2000); 
             }else if(enemy.type == "endboss"){
                     this.level.enemies[enemyIndex].endBossIsDead();
-                    setTimeout(gameEnds,500)
+                    setTimeout(() => {
+                        this.level.enemies.splice(enemyIndex, 1);
+                    }, 2000);
+                    // this.deleteSound();
+                    setTimeout(gameEnds,2000)
+                    cancelAnimationFrame(this.myReq);
             }else{
                 
             }}
@@ -231,7 +237,7 @@ class World{
             if(this.character.isColliding(coin)){
                 this.statusbar[1].setAmountCoins(1);
                 if(isMuted == false){
-                this.coinSound.play();}
+                allSounds[7].play();}
                 this.deleteCoinFromMap(index);
             }
         })
@@ -245,7 +251,7 @@ class World{
             if(this.character.isColliding(poison)){
                 this.statusbar[2].setAmountPoison(1);
                 if(isMuted == false){
-                this.poisonSound.play();}
+                allSounds[8].play();}
                 this.deletePoisonFromMap(index);
             }
         })
@@ -285,7 +291,7 @@ class World{
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
-        requestAnimationFrame(function (){
+        this.myReq = requestAnimationFrame(function (){
             self.draw();
         })
     }

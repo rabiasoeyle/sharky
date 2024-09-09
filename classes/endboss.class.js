@@ -56,7 +56,7 @@ class Endboss extends MovableObject{
     livePoints = 3;
     winSound=new Audio ('audio/win.mp3');
     seeSound = new Audio('audio/finalEnemy.mp3');
-    finalAttack = new Audio('audio/finalEnemyAttack.mp3');
+    finalAttack = new Audio('audio/finalEnemyAttack_1.mp3');
     offset={
         right:0,
         left:50,
@@ -90,14 +90,14 @@ class Endboss extends MovableObject{
             }else 
             if(this.livePoints == 0){
                 this.playAnimation(this.deadBoss);
-                this.finalAttack.pause();
+                // this.finalAttack.pause();
                 if(isMuted == false){
-                this.winSound.play();}
+                allSounds[3].play();} //win sound
             }else if(this.setLivePointsHurtedEnemy()){
                 this.playAnimation(this.hurtBoss);
             }else if(this.hadFirstContact && i>=40){
                 if(isMuted == false){
-                    this.finalAttack.play();}
+                    allSounds[5].play();} //attack
                 this.playAnimation(this.attackBoss);
                 this.moveLeft();
             }else{
@@ -108,7 +108,7 @@ class Endboss extends MovableObject{
                 this.hadFirstContact=true
                 setTimeout(()=>{
                     if(isMuted == false){
-                    this.seeSound.play();}
+                    allSounds[4].play();}
                 },400)
             }
             i++;
