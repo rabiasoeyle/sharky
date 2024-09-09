@@ -1,6 +1,6 @@
 class Character extends MovableObject{
     world;
-    height= 100;
+    height= 200;
     width=150;
     idleImages=[
         'img/Sharkie/IDLE/1.png',
@@ -90,10 +90,10 @@ class Character extends MovableObject{
     y = 480 - (this.height +50);
     world; 
     offset={
-        right:10,
-        left:10,
-        top:20,
-        bottom:10,
+        right:30,
+        left:40,
+        top:100,
+        bottom:50,
     }
     finAttack = false;// dies ist eine Idee um die atacke auch als Atacke aufnehmen zu lassen
 
@@ -161,13 +161,13 @@ class Character extends MovableObject{
      * Animates swimming up and down.
      */
     swimmingUpAndDown(){
-        if(this.world.keyboard.up && this.y > 0){
+        if(this.world.keyboard.up && this.y > -80){
             this.y -= this.speed*30;
             this.otherDirection = false;
             if(isMuted == false){
             allSounds[0].play();}
         }
-        if(this.world.keyboard.down && this.y < 380){
+        if(this.world.keyboard.down && this.y < 300){
             this.y += this.speed *30;
             this.otherDirection = false;
             if(isMuted == false){
