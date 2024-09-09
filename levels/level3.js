@@ -13,6 +13,12 @@ level3 = new Level(
         new Jellyfish(),
         new Jellyfish(),
         new Jellyfish(),
+        new Pufferfish(),
+        new Pufferfish(),
+        new Pufferfish(),
+        new Jellyfish(),
+        new Jellyfish(),
+        new Jellyfish(),
         
     ],
     [

@@ -54,9 +54,6 @@ class Endboss extends MovableObject{
     hadFirstContact = false;
     type;
     livePoints = 3;
-    winSound=new Audio ('audio/win.mp3');
-    seeSound = new Audio('audio/finalEnemy.mp3');
-    finalAttack = new Audio('audio/finalEnemyAttack_1.mp3');
     offset={
         right:0,
         left:50,

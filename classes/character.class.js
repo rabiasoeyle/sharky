@@ -89,9 +89,6 @@ class Character extends MovableObject{
     x = 50;
     y = 480 - (this.height +50);
     world; 
-    // swimmingSound = new Audio ('audio/idle.mp3');
-    // looseSound=new Audio('audio/loose.mp3');
-    // hurtSound = new Audio('audio/hurt.mp3');
     offset={
         right:10,
         left:10,

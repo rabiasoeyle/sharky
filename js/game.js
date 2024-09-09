@@ -220,7 +220,6 @@ function muteSound(){
         </svg>
         ` 
     }
-   
     handleMute();
 }
 
@@ -228,19 +227,9 @@ function muteSound(){
  * Save Sounds in an Array and then stop them.
  */
 function handleMute() {
-    // let allSounds = [
-    //     world.throwSound,
-    //     world.coinSound,
-    //     world.poisonSound,
-    //     world.character.hurtSound,
-    //     world.character.swimmingSound,
-    //     world.character.looseSound,
-    //     world.level.enemies[0].winSound,
-    //     world.level.enemies[0].finalAttack,
-    //     world.level.enemies[0].seeSound,
-    // ];
     allSounds.forEach(sound => {
         sound.muted = isMuted;
+        // sound.pause();
     });
 }
 
@@ -263,9 +252,10 @@ function goToStartpage(){
  * Shows the GameOver div.
  */
 function gameOver(){
-    if(!isMuted){
-        muteSound();
-    }
+    // if(!isMuted){
+    //     muteSound();
+    // }
+    allSounds[5].pause();
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
     setTimeout(()=>{
@@ -283,9 +273,10 @@ function gameOver(){
  * Shows the Won div.
  */
 function gameEnds(){
-    if(!isMuted){
-        muteSound();
-    }
+    // if(!isMuted){
+    //     muteSound();
+    // }
+    allSounds[5].pause();
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
     setTimeout(()=>{
@@ -367,10 +358,7 @@ function changeScreen(){
  * Opens Fullscreen.
  */
 function fullscreen(){
-    // let fullscreen = document.getElementById('fullscreen');
-    // let fullscreenButton = document.getElementById('fullscreenButton');
     let fullscreenIcon = document.getElementById('fullscreenIcon');
-    // fullscreenButton.innerText="Fullscreen off";
     fullscreenIcon.outerHTML = `
     <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#5f6368">
         <path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z"/>
@@ -402,8 +390,6 @@ function exitFullscreen() {
     } else if(document.webkitExitFullscreen) {
       document.webkitExitFullscreen();
     }
-    // let fullscreenButton = document.getElementById('fullscreenButton');
-    // fullscreenButton.innerText="Fullscreen on";
     let fullscreenIcon = document.getElementById('fullscreenIcon');
     fullscreenIcon.outerHTML = `
         <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">

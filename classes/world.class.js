@@ -8,9 +8,6 @@ class World{
     camera_x = 0;
     statusbar = [new Heart(), new Coins(), new Poison()];
     throwable = [];
-    throwSound = new Audio('audio/shot.mp3');
-    coinSound = new Audio('audio/coin-recieved.mp3');
-    poisonSound = new Audio('audio/poison-recieved.mp3');
     id;
     myReq;
 
@@ -67,20 +64,10 @@ class World{
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
         //    this.deleteSound();
-            setTimeout(gameOver,2000);
+            setTimeout(gameOver,1000);
             cancelAnimationFrame(this.myReq);
         }
     }
-
-    /**
-     * Deletes boss attack sound, when character is dead.
-     */
-    // deleteSound(){
-    //     setTimeout(()=>{
-    //         this.finalAttackSound = this.level.enemies[0].finalAttack,
-    //         this.finalAttackSound.muted = true;
-    //     },2000)
-    // }
 
     /**
      * Checks if character is living.
@@ -140,27 +127,6 @@ class World{
              enemy.livePoints -= 1;
         }
     }
-
-    // /**
-    //  * Poison collides with dead enemy.
-    //  * @param {*} enemy 
-    //  * @param {*} enemyIndex 
-    //  */
-    // poisonCollidesWDeadEnemy(enemy, enemyIndex){
-    //     if(enemy.type == "jellyfish"){
-    //         setTimeout(() => {
-    //             this.level.enemies.splice(enemyIndex, 1);
-    //         }, 2000); 
-    //     }else if(enemy.type == "pufferfish"){
-    //         setTimeout(() => {
-    //             this.level.enemies.splice(enemyIndex, 1);
-    //         }, 2000); 
-    //     }else if(enemy.type == "endboss"){
-    //         this.level.enemies[enemyIndex].endBossIsDead();
-    //         // this.levelNumber ++;    
-    //         setTimeout(gameEnds,500)
-    //     }
-    // }
 
     /**
      * Checks Collisions with main character.
@@ -222,7 +188,7 @@ class World{
                         this.level.enemies.splice(enemyIndex, 1);
                     }, 2000);
                     // this.deleteSound();
-                    setTimeout(gameEnds,2000)
+                    setTimeout(gameEnds,50)
                     cancelAnimationFrame(this.myReq);
             }else{
                 
