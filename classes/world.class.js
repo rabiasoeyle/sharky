@@ -6,7 +6,7 @@ class World{
     canvas;
     keyboard;
     camera_x = 0;
-    statusbar = [new Heart(), new Coins(), new Poison()];
+    statusbar = [new Heart(), new Coins(), new Poison(), new HeartBoss()];
     throwable = [];
     id;
     myReq;
@@ -63,8 +63,7 @@ class World{
         this.checkCollisionsWPoisonAndEnemy();
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
-        //    this.deleteSound();
-            setTimeout(gameOver,1000);
+            setTimeout(gameOver,50);
             cancelAnimationFrame(this.myReq);
         }
     }
@@ -105,7 +104,6 @@ class World{
                     if(enemy.livePoints > 0) {
                         this.poisonCollidesWLivingEnemy(enemy, enemyIndex)
                     }if(enemy.livePoints == 0){
-                        // this.poisonCollidesWDeadEnemy(enemy, enemyIndex)
                         this.checkIfDead(enemy, enemyIndex)
                     }
                 this.throwable.splice(poisonIndex, 1);
@@ -120,6 +118,7 @@ class World{
         if(enemy.type == "endboss"){
             enemy.livePoints -= 1;
             this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
+            this.statusbar[3].setPercentage(enemy.livePoints)
             this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
         }else if(enemy.type == "jellyfish"){
             enemy.livePoints -= 1;
