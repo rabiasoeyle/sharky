@@ -184,26 +184,20 @@ class Character extends MovableObject{
      */
     animateSituation(){
         if(this.world.keyboard.d && this.world.statusbar[2].poisonPercentage > 0){
-            this.otherDirection = false;
-            this.playAnimation(this.bulbAttack);
+            this.animateBulbAttack();
         }else
         if(this.isHurt()){
-            if(isMuted == false){
-            allSounds[2].play();}
-            this.playAnimation(this.hurtImagesPoison);
+            this.animateHurtPoison();
         }else
         if(this.world.keyboard.space){
-            this.playAnimation(this.sharkieAttack);
-            this.finAttack = true;
+           this.animateSharkieAttack();
         }else 
         if(this.isHurtByJelly()){
-            if(isMuted == false){
-            allSounds[2].play();}
-            this.playAnimation(this.hurtImageElectro);
+            this.animateHurtElectro();
         }else   
         this.animateSituationSecondPart();
     }
-
+    
     /**
      * Animation when:
      * -dead
@@ -213,14 +207,10 @@ class Character extends MovableObject{
      */
     animateSituationSecondPart(){
         if(this.isHurtByBoss()){
-            if(isMuted == false){
-            allSounds[2].play();}//hurt sound
-            this.playAnimation(this.hurtImageElectro);
+           this.animateHurtByEndboss();
         }else
         if(this.isDead()){
-            this.playAnimation(this.deadImagesPoisioned);
-            if(isMuted == false){
-            allSounds[1].play();}//lose sound
+            this.animateIsDead();
         }else
         if(this.world.keyboard.right||this.world.keyboard.left||this.world.keyboard.up ||this.world.keyboard.down){
             this.playAnimation(this.moveRightImages)
@@ -229,4 +219,57 @@ class Character extends MovableObject{
             this.finAttack = false;
         }
     }
+
+    /**
+     * animates Bulb attack
+     */
+    animateBulbAttack(){
+        this.otherDirection = false;
+        this.playAnimation(this.bulbAttack);
+    }
+
+    /**
+     * animates hurt by poison
+     */
+    animateHurtPoison(){
+        if(isMuted == false){
+        allSounds[2].play();}
+        this.playAnimation(this.hurtImagesPoison);
+    }
+
+    /**
+     * animates sharkie Attack
+     */
+    animateSharkieAttack(){
+        this.playAnimation(this.sharkieAttack);
+        this.finAttack = true;
+    }
+
+    /**
+     * animates hurt by electro
+     */
+    animateHurtElectro(){
+        if(isMuted == false){
+            allSounds[2].play();}
+            this.playAnimation(this.hurtImageElectro);
+    }
+
+    /**
+     * animates hurt by endboss
+     */
+    animateHurtByEndboss(){
+        if(isMuted == false){
+        allSounds[2].play();}//hurt sound
+        this.playAnimation(this.hurtImageElectro);
+    }
+
+    /**
+     * animates dead
+     */
+    animateIsDead(){
+        this.playAnimation(this.deadImagesPoisioned);
+        if(isMuted == false){
+        allSounds[1].play();}//lose sound
+    }
+
 }

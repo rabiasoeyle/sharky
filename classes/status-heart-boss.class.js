@@ -2,13 +2,11 @@ class HeartBoss extends Statusbar{
     heartImage =[
         'img/Marcadores/orange/0_heart.png',
         'img/Marcadores/orange/20_heart.png',
-        // 'img/Marcadores/orange/40_heart.png',
         'img/Marcadores/orange/60_heart.png',
-        // 'img/Marcadores/orange/80_heart.png',
         'img/Marcadores/orange/100_heart.png',
     ];
     heartPercentage;
-    x= 500;
+    x= 550;
 
     /**
      * Loads images. Set percentage.
@@ -19,6 +17,19 @@ class HeartBoss extends Statusbar{
         this.heartPercentage = 100;
         let path = this.heartImage[this.resolveHeartImageIndex()];
         this.img = this.imageCache[path];
+        setStoppableInterval(() => this.setPositionOnYAxis(), 200);
+    }
+
+    /**
+     * sets different y, when the mediaHeight matches.
+     */
+    setPositionOnYAxis(){
+        if(mediaHeight.matches){
+            this.y = 45;
+        }
+        else{
+            this.y = 10;
+        }
     }
 
     /**

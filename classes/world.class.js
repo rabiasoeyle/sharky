@@ -37,11 +37,9 @@ class World{
      */
     setWorld(){
         this.character.world = this; 
-        //damit der charakter auf die variablen, die in der game.js der world übergeben werden zugreifen kann, z.B. keypress
         this.level.enemies.forEach(enemy => {
             enemy.world = this;
         });
-        // Für CollectableCoins
         this.level.coins.forEach(coin => {coin.world = this;});
         this.throwable.world = this;
     }
@@ -131,37 +129,63 @@ class World{
      * Checks Collisions with main character.
      */
     checkCollisions(){
-            this.level.enemies.forEach((enemy, enemyIndex)=>{
-                if(enemy.type == "pufferfish"){ 
-                    if(this.character.isColliding(enemy) && this.character.finAttack){
-                        enemy.livePoints -= 1;
-                        this.checkIfDead(enemy, enemyIndex);
-                    }else
-                    if(this.character.isColliding(enemy)){
-                    this.character.hit();
-                    this.statusbar[0].setPercentage(this.character.energy);
-                    }
-                }else if(enemy.type == "jellyfish"){
-                    if(this.character.isColliding(enemy) && this.character.finAttack){
-                        enemy.livePoints -= 1;
-                        this.checkIfDead(enemy, enemyIndex);
-                    }else
-                    if(this.character.isColliding(enemy)){
-                        this.character.hitByJelly();
-                        this.statusbar[0].setPercentage(this.character.energy);
-                    }
-                }else if(enemy.type == "endboss"){
-                    if(this.character.isColliding(enemy) && this.character.finAttack){
-                        enemy.livePoints -= 1;
-                        this.checkIfDead(enemy, enemyIndex);
-                    }else
-                    if(this.character.isColliding(enemy)){
-                        this.character.hitByEndboss();
-                        this.statusbar[0].setPercentage(this.character.energy);
-                    }
-                
+        this.level.enemies.forEach((enemy, enemyIndex)=>{
+            if(enemy.type == "pufferfish"){ 
+                this.pufferIsCollidingWCharacter(enemy, enemyIndex)
+            }else if(enemy.type == "jellyfish"){
+                this.jellyIsCollidingWithCharacter(enemy, enemyIndex);
+            }else if(enemy.type == "endboss"){
+                this.endbossIsCollidingWithCharacter(enemy, enemyIndex);
             }
         })
+    }
+
+    /**
+     * endboss collides width character
+     * @param {*} enemy 
+     * @param {*} enemyIndex 
+     */
+    endbossIsCollidingWithCharacter(enemy, enemyIndex){
+        if(this.character.isColliding(enemy) && this.character.finAttack){
+            enemy.livePoints -= 1;
+            this.checkIfDead(enemy, enemyIndex);
+        }else
+        if(this.character.isColliding(enemy)){
+            this.character.hitByEndboss();
+            this.statusbar[0].setPercentage(this.character.energy);
+        }
+    }
+
+    /**
+     * jelly is colliding with character
+     * @param {*} enemy 
+     * @param {*} enemyIndex 
+     */
+    jellyIsCollidingWithCharacter(enemy, enemyIndex){
+        if(this.character.isColliding(enemy) && this.character.finAttack){
+            enemy.livePoints -= 1;
+            this.checkIfDead(enemy, enemyIndex);
+        }else
+        if(this.character.isColliding(enemy)){
+            this.character.hitByJelly();
+            this.statusbar[0].setPercentage(this.character.energy);
+        }
+    }
+
+    /**
+     * Puffer is colliding with character
+     * @param {*} enemy 
+     * @param {*} enemyIndex 
+     */
+    pufferIsCollidingWCharacter(enemy, enemyIndex){
+        if(this.character.isColliding(enemy) && this.character.finAttack){
+            enemy.livePoints -= 1;
+            this.checkIfDead(enemy, enemyIndex);
+        }else
+        if(this.character.isColliding(enemy)){
+            this.character.hit();
+            this.statusbar[0].setPercentage(this.character.energy);
+        }
     }
 
     /**
@@ -172,26 +196,15 @@ class World{
     checkIfDead(enemy, enemyIndex){
         if(enemy.livePoints == 0){
             if(enemy.type == "jellyfish"){
-                this.level.enemies[enemyIndex].jellyIsDead()
-                setTimeout(() => {
-                    this.level.enemies.splice(enemyIndex, 1);
-                }, 2000); 
+                setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000); 
             }else if(enemy.type == "pufferfish"){
-                    this.level.enemies[enemyIndex].pufferIsDead()
-                    setTimeout(() => {
-                        this.level.enemies.splice(enemyIndex, 1);
-                    }, 2000); 
+                setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000); 
             }else if(enemy.type == "endboss"){
-                    this.level.enemies[enemyIndex].endBossIsDead();
-                    setTimeout(() => {
-                        this.level.enemies.splice(enemyIndex, 1);
-                    }, 2000);
-                    // this.deleteSound();
-                    setTimeout(gameEnds,50)
-                    cancelAnimationFrame(this.myReq);
-            }else{
-                
-            }}
+                setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000);
+                setTimeout(gameEnds,50)
+                cancelAnimationFrame(this.myReq);
+            }
+        }
     }
 
     /**
@@ -216,7 +229,8 @@ class World{
             if(this.character.isColliding(poison)){
                 this.statusbar[2].setAmountPoison(1);
                 if(isMuted == false){
-                allSounds[8].play();}
+                    allSounds[8].play();
+                }
                 this.deletePoisonFromMap(index);
             }
         })
@@ -288,6 +302,8 @@ class World{
 
     /**
      * Flip the image when swimming left.
+     * With translate is turns to the other direction
+     * But the startvalue of the x-axis changes too, so we added *-1
      * @param {*} mo 
      */
     flipImage(mo){
@@ -295,8 +311,6 @@ class World{
         this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1,1);
         mo.x = mo.x * -1; 
-        //mit translate wird das bild umgedreht, aber auch der startwert der x-achse wechselt seiten,
-        //um dies anzupassen wird * -1 gerechnet
     }
 
     /**

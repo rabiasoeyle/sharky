@@ -203,7 +203,6 @@ class MovableObject extends DrawableObject{
      */
     hurtBossEnemy(time){
         this.lastHitAtBoss = time
-        // console.log('test'+this.lastHitAtBoss);
         let timepassed = new Date().getTime() - this.lastHitAtBoss;
         timepassed = timepassed/1000;
         if(timepassed < 1){

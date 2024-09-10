@@ -20,7 +20,8 @@ let allSounds = [
     new Audio('audio/coin-recieved.mp3'),
     new Audio('audio/poison-recieved.mp3'),
 ]
-
+let mediaWidth = window.matchMedia("screen and (max-width:720px)");
+let mediaHeight = window.matchMedia("screen and (max-height:480px)");
 
 /**
  * These eventlisteners are checking, if one of these keys are pressed down.
@@ -103,11 +104,23 @@ function init(){
     selectLevel();
     addEventListenersToMoveButtons();
 }
+
 /**
- * Adds eventListeners to the move and attack Buttons.
+ * Adds eventListeners to Buttons.
  */
 function addEventListenersToMoveButtons(){
-     //left
+    leftButtonEvent();
+    rightButtonEvent();
+    upButtonEvent();
+    downButtonEvent();
+    throwButtonEvent();
+    spaceButtonEvent();
+}
+
+/**
+ * Adds event to the left touchbuttons.
+ */
+function leftButtonEvent(){
     document.getElementById('leftButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.left = true;
@@ -116,7 +129,12 @@ function addEventListenersToMoveButtons(){
         e.preventDefault();
         keyboard.left = false;
     });
-    //right
+}
+
+/**
+ * Adds event to the right touchbuttons.
+ */
+function rightButtonEvent(){
     document.getElementById('rightButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.right = true;
@@ -125,7 +143,12 @@ function addEventListenersToMoveButtons(){
         e.preventDefault();
         keyboard.right = false;
     });
-    //up
+}
+
+/**
+ * Adds event to the up touchbuttons.
+ */
+function upButtonEvent(){
     document.getElementById('upButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.up = true;
@@ -134,7 +157,12 @@ function addEventListenersToMoveButtons(){
         e.preventDefault();
         keyboard.up = false;
     });
-    
+}
+
+/**
+ * Adds event to the down touchbuttons.
+ */
+function downButtonEvent(){
     document.getElementById('downButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.down = true;
@@ -143,7 +171,12 @@ function addEventListenersToMoveButtons(){
         e.preventDefault();
         keyboard.down = false;
     });
-    
+}
+
+/**
+ * Adds event to the d touchbuttons.
+ */
+function throwButtonEvent(){
     document.getElementById('attackWPoisonButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.d = true;
@@ -152,7 +185,12 @@ function addEventListenersToMoveButtons(){
         e.preventDefault();
         keyboard.d = false;
     });
-    
+}
+
+/**
+ * Adds event to the space touchbuttons.
+ */
+function spaceButtonEvent(){
     document.getElementById('spaceButton').addEventListener('touchstart', (e)=>{
         e.preventDefault();
         keyboard.space = true;
@@ -195,6 +233,9 @@ function helpOverlay(){
       }
 }
 
+/**
+ * Closes the help overlay
+ */
 function closeOverlay(){
     let overlay = document.getElementById('helpOverlay');
     overlay.style.display = "none";
@@ -252,9 +293,9 @@ function goToStartpage(){
  * Shows the GameOver div.
  */
 function gameOver(){
-    // if(!isMuted){
-    //     muteSound();
-    // }
+    if(!isMuted){ 
+        allSounds[1].play();
+    }
     allSounds[5].pause();
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
@@ -273,9 +314,9 @@ function gameOver(){
  * Shows the Won div.
  */
 function gameEnds(){
-    // if(!isMuted){
-    //     muteSound();
-    // }
+    if(!isMuted){
+        allSounds[3].play();
+    }
     allSounds[5].pause();
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
@@ -284,15 +325,29 @@ function gameEnds(){
         end.style.display = "flex";
      },500)
     canvas.classList.add('d-none');
+    clearIntervalFunc();
+    setNewLevel();
+    gameStarted = false;
+    selectLevel();
+}
+
+/**
+ * Clears all intervals
+ */
+function clearIntervalFunc(){
     intervalIds.forEach((id)=>clearInterval(id));
     intervalIds = [];
+}
+
+/**
+ * Sets new level after winning.
+ */
+function setNewLevel(){
     levelNumber ++;
     if(levelNumber > 3){
         levelNumber = 1;
     }
     levelRow = `level${levelNumber}`
-    gameStarted = false;
-    selectLevel();
 }
 
 /**
@@ -301,12 +356,18 @@ function gameEnds(){
 function start(){ 
     canvasParent = document.getElementById('canvasParent');
     canvas = document.getElementById('canvas');
-    // levelRow = `level${levelNumber}`,
     selectLevel();
     gameStarted= true;
     world = new World(canvas, keyboard, levelRow);
     let levelButton = document.getElementById('levelButtonCanvas');
     levelButton.innerText = `Level ${levelNumber}`
+    addAndRemoveDNoneStart();  
+}
+
+/**
+ * Adds and removes d-none 
+ */
+function addAndRemoveDNoneStart(){
     let start = document.getElementById('startPage');
     start.classList.add('d-none');
     canvasParent.classList.remove('d-none');
@@ -325,21 +386,41 @@ function selectLevel(){
     let level = document.getElementById('levelButton');
     level.innerHTML ="";
     levelRow = `level${levelNumber}`;
-  if(levelRow == "level1"){
-        initLevel1();
-        levelRow = level1;
-        level.innerHTML = `Starte Level ${levelNumber}`;
+    if(levelRow == "level1"){
+        levelOne(level)
     }else if(levelRow == "level2"){
-        initLevel2();
-        levelRow = level2  
-        level.innerHTML = `Starte Level ${levelNumber}`;
+        levelTwo(level)
     }else if(levelRow == "level3"){
-        initLevel3();
-        levelRow = level3;
-        level.innerHTML = `Starte Level ${levelNumber}`;
-        // levelNumber = 1;
+        levelThree(level)
     }else levelNumber = 1,
     level.innerHTML = `Starte Level ${levelNumber}`;   
+}
+
+/**
+ * Level one loading
+ */
+function levelOne(level){
+    initLevel1();
+    levelRow = level1;
+    level.innerHTML = `Starte Level ${levelNumber}`;
+}
+
+/**
+ * Level two loading
+ */
+function levelTwo(level){
+    initLevel2();
+    levelRow = level2  
+    level.innerHTML = `Starte Level ${levelNumber}`;
+}
+
+/**
+ * Level three loading
+ */
+function levelThree(level){
+    initLevel3();
+    levelRow = level3;
+    level.innerHTML = `Starte Level ${levelNumber}`;
 }
 
 /**
@@ -360,11 +441,27 @@ function changeScreen(){
 function fullscreen(){
     let fullscreenIcon = document.getElementById('fullscreenIcon');
     fullscreenIcon.outerHTML = `
-    <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#5f6368">
+    <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
         <path d="M240-120v-120H120v-80h200v200h-80Zm400 0v-200h200v80H720v120h-80ZM120-640v-80h120v-120h80v200H120Zm520 0v-200h80v120h120v80H640Z"/>
     </svg>`;
-    let fullscreenV = document.body;
+    let fullscreenV = document.getElementById('fullscreen');
     enterFullscreen(fullscreenV);
+    changeWidthAndHeightFullscreen();
+}
+
+/**
+ * Changes width and height for the pages which are not canvas, if fullscreen is on.
+ */
+function changeWidthAndHeightFullscreen(){
+    let startPage = document.getElementById('startPage');
+    startPage.style.width = "100vW";
+    startPage.style.height = "100vH";
+    let wonPage = document.getElementById('wonGame');
+    wonPage.style.width = "100vW";
+    wonPage.style.height = "100vH";
+    let losePage = document.getElementById('loseGame');
+    losePage.style.width = "100vW";
+    losePage.style.height = "100vH";
 }
 
 /**
@@ -372,28 +469,56 @@ function fullscreen(){
  * @param {body} element 
  */
 function enterFullscreen(element) {
-    if(element.requestFullscreen) {
-      element.requestFullscreen();
-    } else if(element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-      element.msRequestFullscreen();
-    } else if(element.webkitRequestFullscreen) {  // iOS Safari
-      element.webkitRequestFullscreen();
+    if (element.requestFullscreen) {
+        element.requestFullscreen();
+    } else if (element.msRequestFullscreen) {  // IE11
+        element.msRequestFullscreen();
+    } else if (element.webkitRequestFullscreen) {  // Safari
+        element.webkitRequestFullscreen();
+    } else if (element.mozRequestFullScreen) {  // Firefox
+        element.mozRequestFullScreen();
     }
-  }
+}
 
 /**
  * Exits Fullscreen.
  */
 function exitFullscreen() {
-    if(document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if(document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {  // Safari
+        document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {  // Firefox
+        document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {  // IE11
+        document.msExitFullscreen();
     }
     let fullscreenIcon = document.getElementById('fullscreenIcon');
     fullscreenIcon.outerHTML = `
         <svg id="fullscreenIcon" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="white">
             <path d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z"/>
-        </svg>
-    `
+        </svg>`
+    changeWidthAndHeightFullscreenExit();
+}
+
+/**
+ * Changes width and height for the pages which are not canvas, if fullscreen is off.
+ */
+function changeWidthAndHeightFullscreenExit(){
+    let startPage = document.getElementById('startPage');
+    let wonPage = document.getElementById('wonGame');
+    let losePage = document.getElementById('loseGame');
+    if(mediaHeight.matches){
+        startPage.style.height = "95vH";
+        wonPage.style.height = "95vH";
+        losePage.style.height = "95vH";
+    }else{    
+        startPage.style.height = "480px";
+        losePage.style.height = "480px";
+    }if(mediaWidth.matches){
+    }else{
+        startPage.style.width = "720px"; 
+        wonPage.style.width = "720px";
+        losePage.style.width = "720px";
+    }
 }

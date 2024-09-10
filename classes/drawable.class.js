@@ -12,7 +12,7 @@ class DrawableObject{
      * @param {*} path 
      */
     loadImage(path){
-        this.img = new Image();//new Image ist bereits vordefiniert und beschreibt einen image Tag <img>
+        this.img = new Image();//first a new img tag will be created
         this.img.src = path;
     }
 
@@ -22,7 +22,7 @@ class DrawableObject{
      */
     drawP(ctx){
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-        //zuerst wird das img eingefügt, dann die position auf x und y achse und dann höhe und breite.
+        //first img which should be decribed, then the position on x and y and finally he width and height.
     }
     
     /**
@@ -43,18 +43,6 @@ class DrawableObject{
      */
     drawBorder(ctx){
         if(this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish || this instanceof Endboss || this instanceof CollectablePoison || this instanceof CollectableCoins || this instanceof ThrowableObject){
-            //es werden nur die border für sharkie und die fische gezeichnet
-            // ctx.beginPath();
-            // ctx.lineWidth = "2";
-            // ctx.strokeStyle = "blue";
-            // ctx.rect(
-            //     (this.x + this.offset.left)
-            //     , (this.y + this.offset.top)
-            //     , (this.width -(this.offset.left + this.offset.right))
-            //     , (this.height -(this.offset.top + this.offset.bottom))
-            // );
-            // // ctx.rect(this.x, this.y, this.width, this.height);
-            // ctx.stroke();
         } 
     }
 }

@@ -60,6 +60,7 @@ class Endboss extends MovableObject{
         top:0,
         bottom:0,
     }
+    i = 0;
 
     /**
      * Load all images and describes the type of the enemy.
@@ -79,37 +80,58 @@ class Endboss extends MovableObject{
      * Animates the endboss.
      */
     animateIntro(){
-        let i = 0;
-        this.endBoss = setInterval(() =>{
-            if(gameStarted){
-                if(i<9){
+        setStoppableInterval(() => this.animationInterval(), 200);
+    }
+
+    /**
+     * animate endboss in different situations
+     */
+    animationInterval(){
+        if(gameStarted){
+                if(this.i<9){
                 this.playAnimation(this.introduceEndboss);
             }else 
             if(this.livePoints == 0){
-                this.playAnimation(this.deadBoss);
-                // this.finalAttack.pause();
-                if(isMuted == false){
-                allSounds[3].play();} //win sound
-            }else if(this.setLivePointsHurtedEnemy()){
-                this.playAnimation(this.hurtBoss);
-            }else if(this.hadFirstContact && i>=40){
-                if(isMuted == false){
-                    allSounds[5].play();} //attack
-                this.playAnimation(this.attackBoss);
-                this.moveLeft();
+                this.livePointsZero();
+            }else if(this.hadFirstContact && this.i>=40){
+                this.firstContactOccured()
             }else{
                 this.playAnimation(this.floating)
             }
             if(world.character.x > 2260 && !this.hadFirstContact){
-                i=0;
-                this.hadFirstContact=true
-                setTimeout(()=>{
-                    if(isMuted == false){
-                    allSounds[4].play();}
-                },400)
+                this.i=0;
+                this.firstContactNotOccured();
             }
-            i++;
-            }},200)
-        intervalIds.push(this.endBoss);
-            }
+            this.i++;}
+    }
+
+    /**
+     * animate when dead
+     */
+    livePointsZero(){
+        this.playAnimation(this.deadBoss);
+        if(isMuted == false){
+        allSounds[3].play();} //win sound
+    }
+
+    /**
+     * animate when firstContact already happend
+     */
+    firstContactOccured(){
+        if(isMuted == false){
+        allSounds[5].play();} //attack
+        this.playAnimation(this.attackBoss);
+        this.moveLeft();
+    }
+
+    /**
+     * animate when first contact occures new
+     */
+    firstContactNotOccured(){
+        this.hadFirstContact=true
+        setTimeout(()=>{
+            if(isMuted == false){
+            allSounds[4].play();}
+        },400)
+    }
 }

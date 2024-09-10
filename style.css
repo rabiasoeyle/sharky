@@ -409,3 +409,8 @@ canvas{
         right:2vW;
     }
 }
+ /* Fullscreen Styles */
+ :fullscreen #canvas {
+    width: 100vw;
+    height: 100vh;
+  }
