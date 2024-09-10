@@ -61,8 +61,8 @@ class World{
         this.checkCollisionsWPoisonAndEnemy();
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
-            gameOver();
-            cancelAnimationFrame(this.myReq);
+            gameOver() 
+            cancelAnimationFrame(myReq);
         }
     }
 
@@ -200,7 +200,7 @@ class World{
             }else if(enemy.type == "pufferfish"){
                 setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000); 
             }else if(enemy.type == "endboss"){
-                setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000);
+                setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 1000);
                 setTimeout(()=>{gameEnds()},500)
                 // cancelAnimationFrame(myReq);
             }

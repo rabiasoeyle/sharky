@@ -88,7 +88,7 @@ class Endboss extends MovableObject{
      */
     animationInterval(){
         if(gameStarted){
-            if(this.i<9){
+            if(this.i<=9){
                 this.playAnimation(this.introduceEndboss);
             }else 
             if(this.livePoints == 0){
@@ -96,15 +96,18 @@ class Endboss extends MovableObject{
             }else if(this.hadFirstContact && this.i>=40){
                 this.firstContactOccured()
                 this.checkIfHurtedBoss();
-            }else{
+            }else if(this.i>=10){
                 this.playAnimation(this.floating)
                 this.checkIfHurtedBoss()
+            }else{
             }
-            if(world.character.x > 2260 && !this.hadFirstContact){
+            if(world.character.x > 2100 && !this.hadFirstContact){
                 this.i=0;
                 this.firstContactNotOccured();
             }
-            this.i++;}
+            this.i++;
+        }
+            
     }
 
     /**
@@ -113,7 +116,8 @@ class Endboss extends MovableObject{
     checkIfHurtedBoss(){
         if(this.hurtBossEnemy()){
             this.playAnimation(this.hurtBoss);
-            allSounds[2].play();
+            if(isMuted == false){
+                allSounds[2].play();}
         }
     }
 
