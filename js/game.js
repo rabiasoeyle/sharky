@@ -22,6 +22,8 @@ let allSounds = [
 ]
 let mediaWidth = window.matchMedia("screen and (max-width:720px)");
 let mediaHeight = window.matchMedia("screen and (max-height:480px)");
+let enemyHurted = false;
+let myReq;
 
 /**
  * These eventlisteners are checking, if one of these keys are pressed down.
@@ -214,6 +216,9 @@ function toggleMenu(){
     }
 }
 
+/**
+ * For closing the toggle menu
+ */
 function closeMenu(){
     let menu = document.getElementById('menuForPages');
      menu.style.display="none"
@@ -297,6 +302,7 @@ function gameOver(){
         allSounds[1].play();
     }
     allSounds[5].pause();
+    allSounds[0].pause();
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('loseGame');
     setTimeout(()=>{
@@ -318,6 +324,7 @@ function gameEnds(){
         allSounds[3].play();
     }
     allSounds[5].pause();
+    allSounds[0].pause();
     canvas = document.getElementById('canvasParent');
     let end = document.getElementById('wonGame');
     setTimeout(()=>{
@@ -325,6 +332,7 @@ function gameEnds(){
         end.style.display = "flex";
      },500)
     canvas.classList.add('d-none');
+    cancelAnimationFrame(myReq);
     clearIntervalFunc();
     setNewLevel();
     gameStarted = false;

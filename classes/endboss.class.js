@@ -88,21 +88,33 @@ class Endboss extends MovableObject{
      */
     animationInterval(){
         if(gameStarted){
-                if(this.i<9){
+            if(this.i<9){
                 this.playAnimation(this.introduceEndboss);
             }else 
             if(this.livePoints == 0){
                 this.livePointsZero();
             }else if(this.hadFirstContact && this.i>=40){
                 this.firstContactOccured()
+                this.checkIfHurtedBoss();
             }else{
                 this.playAnimation(this.floating)
+                this.checkIfHurtedBoss()
             }
             if(world.character.x > 2260 && !this.hadFirstContact){
                 this.i=0;
                 this.firstContactNotOccured();
             }
             this.i++;}
+    }
+
+    /**
+     * checks if enemy is hurted
+     */
+    checkIfHurtedBoss(){
+        if(this.hurtBossEnemy()){
+            this.playAnimation(this.hurtBoss);
+            allSounds[2].play();
+        }
     }
 
     /**

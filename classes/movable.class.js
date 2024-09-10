@@ -15,7 +15,7 @@ class MovableObject extends DrawableObject{
     }
     lastHitAtBoss=0;
     livePointsBoss = 3;
-    enemyHurted = false;
+    // enemyHurted = false;
     lassHitFromBoss=0;
     
     /**
@@ -201,21 +201,12 @@ class MovableObject extends DrawableObject{
      * Saves Time when Boss was hurted.
      * @param {*} time 
      */
-    hurtBossEnemy(time){
-        this.lastHitAtBoss = time
+    hurtBossEnemy(){
         let timepassed = new Date().getTime() - this.lastHitAtBoss;
         timepassed = timepassed/1000;
         if(timepassed < 1){
-            this.setLivePointsHurtedEnemy()
+            return enemyHurted;
         }
-    }
-
-    /**
-     * Shows if enemy is hurted or not.
-     * @returns 
-     */
-    setLivePointsHurtedEnemy(){
-        return this.enemyHurted;
     }
 
 }

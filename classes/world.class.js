@@ -61,7 +61,7 @@ class World{
         this.checkCollisionsWPoisonAndEnemy();
         this.checkThrowableObject();
         if (this.checkLivingCharacter()) {
-            setTimeout(gameOver,50);
+            gameOver();
             cancelAnimationFrame(this.myReq);
         }
     }
@@ -117,7 +117,7 @@ class World{
             enemy.livePoints -= 1;
             this.level.enemies[enemyIndex].lastHitAtBoss = new Date().getTime();
             this.statusbar[3].setPercentage(enemy.livePoints)
-            this.level.enemies[enemyIndex].hurtBossEnemy(this.level.enemies[enemyIndex].lastHitAtBoss);
+            enemyHurted = true;
         }else if(enemy.type == "jellyfish"){
             enemy.livePoints -= 1;
         }else if(enemy.type == "pufferfish"){
@@ -201,8 +201,8 @@ class World{
                 setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000); 
             }else if(enemy.type == "endboss"){
                 setTimeout(() => {this.level.enemies.splice(enemyIndex, 1);}, 2000);
-                setTimeout(gameEnds,50)
-                cancelAnimationFrame(this.myReq);
+                setTimeout(()=>{gameEnds()},500)
+                // cancelAnimationFrame(myReq);
             }
         }
     }
@@ -270,7 +270,7 @@ class World{
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
-        this.myReq = requestAnimationFrame(function (){
+        myReq = requestAnimationFrame(function (){
             self.draw();
         })
     }
