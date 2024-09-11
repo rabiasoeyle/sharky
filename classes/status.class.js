@@ -1,7 +1,7 @@
         class Statusbar extends DrawableObject{
-            heart;
-            coins;
-            poison; 
+            // heart;
+            // coins;
+            // poison; 
             x = 40;
             y = 10;
             width = 140;

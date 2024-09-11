@@ -96,7 +96,7 @@ class Endboss extends MovableObject{
             }else if(this.hadFirstContact && this.i>=40){
                 this.firstContactOccured()
                 this.checkIfHurtedBoss();
-            }else if(this.i>=10){
+            }else if(this.hadFirstContact && this.i>=10){
                 this.playAnimation(this.floating)
                 this.checkIfHurtedBoss()
             }else{

@@ -304,12 +304,12 @@ function gameOver(){
         allSounds[0].pause();
         canvas = document.getElementById('canvasParent');
         let end = document.getElementById('loseGame');
-        // setTimeout(()=>{
+        intervalIds.forEach((id)=>clearInterval(id));
+        setTimeout(()=>{
         end.classList.remove('d-none'); 
         end.style.display = "flex";
-        // },1000)
         canvas.classList.add('d-none');
-        intervalIds.forEach((id)=>clearInterval(id));
+        },800)
         intervalIds = [],
         gameStarted = false;
     }
@@ -334,10 +334,10 @@ function gameEnds(){
         end.classList.remove('d-none'); 
         end.style.display = "flex";
         canvas.classList.add('d-none');
-        setNewLevel();
-        selectLevel();
-        gameStarted = false;
-     },500)
+    },800)
+    setNewLevel();
+    selectLevel();
+    gameStarted = false;
      
 }
 
