@@ -45,4 +45,5 @@ class DrawableObject{
         if(this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish || this instanceof Endboss || this instanceof CollectablePoison || this instanceof CollectableCoins || this instanceof ThrowableObject){
         } 
     }
+    
 }

@@ -1,6 +1,6 @@
 class Water extends MovableObject{
     y= 0;
-    speed = 0.25;
+    speed = 0.5;
     
     /**
      * Loads images. Animates.

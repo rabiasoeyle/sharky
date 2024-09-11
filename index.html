@@ -7,6 +7,7 @@
     <title>Sharkie</title>
     <script type="text/javascript" src="./js/interval.js"></script>
     <script type="text/javascript" src="./classes/drawable.class.js"></script>
+    <script type="text/javascript" src="./classes/not-movable.class.js"></script>
     <script type="text/javascript" src="./classes/movable.class.js"></script> 
     <script type="text/javascript" src="./classes/water.class.js"></script>
     <script type="text/javascript" src="./classes/pufferFish.class.js"></script> 
@@ -45,7 +46,9 @@
         <button class="button"onclick="start()" id="levelButton">Start Level</button>
     </div>
     <div id="canvasParent"class="d-none">
-        <canvas id="canvas"width="720" height="480"></canvas>
+        <canvas id="canvas"width="720" height="480">
+           
+        </canvas> 
         <button id="leftButton" class="touch-button-left responsive-buttons">
             <img src="img/Botones/Key/arrowkeys-left.png">
         </button>

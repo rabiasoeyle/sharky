@@ -23,6 +23,11 @@ level1 = new Level(
         new Water('img/Background/Layers/Water/L1.png',718*3),
         new Water('img/Background/Layers/Water/L1.png',718*4),
         new Water('img/Background/Layers/Water/L1.png',718*5),
+        new Water('img/Background/Layers/Water/L1.png',718*6),
+        new Water('img/Background/Layers/Water/L1.png',718*7),
+        new Water('img/Background/Layers/Water/L1.png',718*8),
+        new Water('img/Background/Layers/Water/L1.png',718*9),
+        new Water('img/Background/Layers/Water/L1.png',718*10),
     ],
     [
         new BackgroundObjects('img/Background/Layers/Fondo1/L2.png', -720),
